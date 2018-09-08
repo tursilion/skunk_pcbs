@@ -1,0 +1,144 @@
+Courtyard madness:
+	The outlines in my silk screen tend to match courtyard or assembly drawings
+	C0603s in particular have fatter lines than the underlying courtyard
+
+Mounting holes:
+	We have 100 mil mounting holes, so a #3 self-tapping screw (.1" diameter) is appropriate
+		#2 is another common size (.086" diameter)
+
+Check out SupplyFrame.com for BOM savings?
+
+Aluminum cap size:
+	EMVA100ADA151MF55G is an 'F55', which makes it:
+		5.2-5.7 mm high
+		6.6mm x 6.6mm (A+B)
+		7.2 mm from outer pins (C)
+
+		The positive pad is marked with inward edges on the footprint
+
+	There is no guide on pad size...
+		The CY's are 1.5 mm wide -- which makes sense with pins up to 0.8mm -- leaving +/- .35
+		The CY's probably extend 0.8 mm beyond the end of the cap, or .5mm beyond the edge of the pin
+		The pads are about 2.2mm apart on the inside
+
+	So that makes us go with 1.5 mm width and 3 mm length, spaced 2.6mm apart
+
+	The CY's USB power traces are 'only' 30 mils	
+
+	RECHECKED 7/7/7 -- these seem like good assumptions	
+
+Decoupling cap size:
+	EIA size code 603 = Metric code 1608
+	Our part is C1608X7R1C104KT -- there's the 1608 
+
+-> USE SMN7351 library ('Nominal' library) -- the SMM 'Most' or SML 'Least' libraries give bad info
+
+EZ-HOST layout:
+	The user guide references JEDEC MS-026 compliance but does not list the exact model (probably BED)
+	First attempt:  .30mm x 1.6mm, 15.4mm center
+	PCB libraries recommends 15.4mm center with .30mm x 1.5mm pads -- I'm close enough
+
+	I copied my 1.6mm pad from the CY4640 ref design, so it should work!
+	The key is that the center points match... that .05mm on either side of the pad is harmless
+
+	Assembly guide:  14x14 = (Center 6x6) = -1-13, -1-13
+
+VQ64 layout:
+	The package document says this is JEDEC MS-026ACD
+	First attempt:	.30mm x 1.6mm, -2.75 thru 10.25 = 13mm edge, 11.4mm center to center, 9.8mm inside 
+	PCB libraries recommends 11.4mm center to center with .30mm x 1.5mm pads -- I was very close!
+	I have no clue how I got this right (even on the first time), but I'm leaving it...
+
+	Assembly guide:  10x10 = (Center 3.75x3.75) = -1.25-8.75x-1.25x8.75
+
+TSOP48 layout:
+	The user guide says this is JEDEC MO-142DD -- which is listed in PCB Libraries
+	First attempt:  .30mm x 1.6mm, 21mm edge, 19.4mm center to center, 17.8 inside
+	PCB libraries (maximal) recommends 19.9mm center to center with .30mm x 1.45mm pads -- that's 21.35mm edge
+	That's a huge fuck up on my part...  Now fixed, after much struggling
+	Awesome -- that was two fuck-ups in a row -- I used the maximal layout by accident -- too late now
+
+	Assembly guide:  18.5x12.1 = 0.65-19.15 X -.3-11.8
+
+MSOP8 layout:
+	The user guide says this is JEDEC MO-187 -- probably AA-T
+	MINIMAL PCB libraries recommends .45 x 1.15 pads, 4.2 pad space, .65 pitch -- AGH!
+	Nominal PCB libraries recommends .45 x 1.4 pads, 4.4 pad space
+
+	I'm shrinking the PowerPad to 1.85x1.85 to simplify solder masking (.975x2.2 center)
+	My thermals will suck but less so than the alternative...
+
+	Assembly guide:  3.0x3.0 = (Center: .975 x 2.2) = -0.525-2.475 x -.7-3.7
+
+Crystal dimensions:
+	Pads are 2.0x5.5 with 9.5 RECOMMENDED center spacing
+	I actually used 8.5 center spacing when aping CY4640 -- fixed now
+	Assembly guide:  4.8x11.4 = (Center: 0 x 4.75) = -2.4-2.4x-0.95-10.45
+
+Jag cart edge pins:
+   Width:
+	0.059 inch typical spacing (3.186 total, or 3.127 for 53)
+	0.287 center start, 3.414 center end (aka 3.127 for 53 again)
+	0.237 board start, 3.465 edge end
+   Recalculated start (from behind):
+	0 board start, 3.228 end (EXACTLY 82mm)
+	0.050 center of first pin, 3.177 center of last pin (-0.051 from edge)
+	Notch at .787 (2.441) is 0.383 high and 0.067 wide
+		Start at .821 (2.407), end at .753 (2.475)
+		The bit ends at 0.383 - 0.034 = 0.349
+   Height:
+	0.047 power fingers start (.303 high), 0.110 signals start (.240 high)
+	0.350 signals end
+
+Jag cart edge connector:
+	Widens at 0.350 (widen to 3.702)
+	Notch at 2.678 is 0.383 high and 0.067 wide
+
+	C:\jag\docs\AtariHQ CD\Drawings\Jag_cart\jag_cartrdige.pdf
+
+USB A pinout (87520):
+	Holes are .92mm according to datasheet, .91mm by the CY4640 drill file
+	Pads are 1.5mm (according to CY4640 design)
+	That gives us .29mm pad radius -- is that legal?
+
+	Mounting holes are 2.3mm (by datasheet and CY4640)
+		On CY4640, mounting holes are attached to a copper fill that bridges all devices
+		The schematic calls this 'shield ground' and it is _not_ attached to real ground
+		They have optional (no load) resistors to let you do this if you wanna... we don't wanna
+		The pads are 3.3mm (.5mm pad radius)
+
+	All 6 pins are plated!
+
+	Poly line:
+		With no backshield, we extend 3.75 mm past the mounting hole
+			This is 1.04mm behind the center of the pins
+		We extend 10.3mm beyond past the mounting hole
+			This is 13mm beyond the center of the pins
+		We extend 13.1 to either side -- i.e., 6.6 (with no back shield)
+		The front extends 7 to either side
+
+USB B pinout (61729):
+	Same as A for the most part
+	10.3 mm 'tall' past the origin, 5.7mm before the origin
+	6.1 mm wide to either side (12.2 total)
+
+USB mini-B pinout:
+	The CY4640 has two little holes drilled beneath it, maybe for ease of removal?
+		I noticed that they did the same thing on the TQ100.
+
+	The traces are 0.8 apart and 0.5 wide
+	The outline is 9mm 'high', from .75 to -0.825
+	The outline is 10mm 'wide', from -5 to 5
+
+Pinouts for XC9572:
+
+	Power:	(Int) 3, 37 (IO) 26, 55
+	GND:	14, 21, 41, 54
+
+	JTAG:	TCK=30, TDI=28, TDO=53, TMS=29
+
+	Everything else is IO (64-12=52)
+
+MSOP08:
+
+	

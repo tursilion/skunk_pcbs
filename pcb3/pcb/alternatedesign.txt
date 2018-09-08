@@ -1,0 +1,38 @@
+Can a 144 macrocell CPLD do more?  The cost is a bit higher (5.25/100), but it has 81 I/Os in the 100 pin package.
+
+One fun idea is to use straight SDRAM.  We have enough spare I/Os for that...
+	We're using 52 today, so we can add 29 more -- that's enough to capture the whole address bus plus!
+
+The advantage of straight SDRAM is performance and expandability.
+
+Naw, too ugly.  You'd need a serial ROM somewhere.
+
+The Spartan XL is really the only way to go with 100 pins and 77 I/Os
+	You pay for the serial ROM but you can also pack a CPU in there
+	It's about $6.50, but you save money in a much cheaper, 3.3V, combo host/slave USB chip
+	Configuration is much faster than one second -- and the device can put the 68K to sleep after config
+	You need a 60MHz oscillator too -- since no clock is provided
+	
+Spartan II doesn't have enough pins -- the block memory is nice but unneeded
+
+100-pin VQ FPGA + 64-pin VQ ISP1161 (2 host + 1 device) w/integrated PS + 8MB SDRAM + 1MB serial ROM
+
+The ISP1161 is only 4.75/100 and runs off a 6MHz clock
+We probably need a 60MHz crystal or so for the FPGA to keep performance high
+
+Same chipcount, same pin count, similar part cost, better performance -- tons more design effort!
+
+77 I/Os still won't get you a 32-bit bus, but it's nicer:
+	SDRAM controller plus ISP1161 controller is 24 pins
+		2 chip selects
+		16 D lines + 6 control lines for ISP1161
+		12 A + 4 D + 4 control lines for SDRAM
+	Jaguar bus is 36 pins
+		20 A lines + 16 D lines
+	Leftovers are 17 pins
+		10 pins Jag expansion (4 I2S, 2 E2, 1 RESET, 2 UART)
+		3 pins clock I/O
+		4 pins Jag bus control (ROM1, RW, and...?)
+
+Can you really duplex an SDRAM's A and D lines?  I always wondered...
+	Not if you want to write anything...  Although if you scratch the first word of each line you are fine

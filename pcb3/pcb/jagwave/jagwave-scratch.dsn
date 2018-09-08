@@ -1,0 +1,4119 @@
+(PCB "jagwave"
+    (parser
+        (string_quote ")
+        (space_in_quoted_tokens on)
+        (host_cad "FreePCB Ver 1.331")
+        (host_version "translated by: FpcROUTE Ver 1.204R")
+        (case_sensitive on)
+    )
+    (resolution mil 100)
+    (structure
+        (boundary
+            (rect pcb 0.00 0.00 3228.35 1496.06)
+        )
+        (boundary
+            (path signal 0
+                0.00  0.00
+                3228.35  0.00
+                3228.35  1496.06
+                0.00  1496.06
+            )
+        )
+        (snap_angle
+            fortyfive_degree
+        )
+        (via
+            DefVia
+            Via119
+        )
+        (control
+            (via_at_smd off)
+        )
+        (rule
+            (width 8.0)
+            (clear 10.0)
+            (clear 10.0 (type pad_to_turn_gap))
+            (clear 10.0 (type smd_to_turn_gap))
+            (clear 10.0 (type default_area))
+            (clear 10.0 (type via_via))
+            (clear 10.0 (type via_smd))
+            (clear 10.0 (type via_pin))
+            (clear 10.0 (type pin_pin))
+            (clear 10.0 (type smd_pin))
+            (clear 10.0 (type smd_smd))
+            (clear 25.0 (type default_Outlines))
+            (clear 25.0 (type area_Outlines))
+            (clear 25.0 (type via_Outlines))
+            (clear 25.0 (type smd_Outlines))
+            (clear 25.0 (type pin_Outlines))
+            (clear 0.00 (type Outlines_Outlines))
+        )
+        (layer Top
+            (type signal)
+            (direction horizontal)
+        )
+        (layer Inner_1
+            (type signal)
+            (direction horizontal)
+        )
+        (layer Inner_2
+            (type signal)
+            (direction vertical)
+        )
+        (layer Bottom
+            (type signal)
+            (direction vertical)
+        )
+    )
+    (placement
+        (place_control
+            (flip_style mirror_first)
+        )
+        (component "TSOP48"
+            (place "U3" 255.91 885.83 front 270)
+        )
+        (component "TSOP100"
+            (place "U1" 2716.54 551.18 front 90)
+        )
+        (component "6X1HDR-100"
+            (place "J9" 1929.13 1299.21 front 0)
+        )
+        (component "C0603"
+            (place "C11" 2500.00 1181.10 front 0)
+            (place "C12" 2874.02 944.88 front 0
+                (lock_type position)
+            )
+            (place "C13" 2874.02 846.46 front 0)
+            (place "C14" 2401.57 393.70 front 0)
+            (place "C15" 2007.87 777.56 front 0)
+            (place "C21" 1535.43 1082.68 front 0)
+            (place "C22" 1988.19 629.92 front 0)
+            (place "C23" 1515.75 433.07 front 0)
+            (place "C24" 1259.84 856.30 front 0)
+            (place "C31" 1003.94 964.57 front 0)
+            (place "C33" 137.80 570.87 front 90)
+            (place "C32" 1122.05 649.61 front 0)
+            (place "C81" 2874.02 669.29 front 0)
+            (place "C82" 2874.02 551.18 front 0)
+            (place "R11" 2795.28 1122.05 front 0)
+            (place "C41" 1062.99 1279.53 front 0)
+            (place "C42" 885.83 1279.53 front 0)
+            (place "R12" 1998.03 511.81 front 0)
+        )
+        (component "CSM-7-DN"
+            (place "X8" 3070.87 905.51 front 180)
+        )
+        (component "J1"
+            (place "J1" 3177.17 228.35 back 0
+                (lock_type position)
+            )
+        )
+        (component "TANT_D"
+            (place "C43" 511.81 1003.94 front 0)
+            (place "C44" 511.81 1161.42 front 0)
+        )
+        (component "C0805"
+            (place "L5" 177.17 964.57 front 0)
+            (place "L6" 2992.13 1141.73 front 0)
+        )
+        (component "USBA"
+            (place "J5" 354.33 1259.84 front 180)
+            (place "J6" 2874.02 1259.84 front 180)
+        )
+        (component "VQ-64"
+            (place "U2" 1791.34 610.24 front 90)
+        )
+        (component "MSOP8"
+            (place "U4" 984.25 1200.79 front 270)
+        )
+        (component "USBMINI"
+            (place "J7" 1614.17 1181.10 front 180)
+        )
+    )
+    (library
+        (image "TSOP48"
+            (side front)
+            (pin Pad101 (rotate 90) "1" 0.00 0.00)
+            (pin Pad101 (rotate 90) "2" 19.69 0.00)
+            (pin Pad101 (rotate 90) "3" 39.37 0.00)
+            (pin Pad101 (rotate 90) "4" 59.06 0.00)
+            (pin Pad101 (rotate 90) "5" 78.74 0.00)
+            (pin Pad101 (rotate 90) "6" 98.43 0.00)
+            (pin Pad101 (rotate 90) "7" 118.11 0.00)
+            (pin Pad101 (rotate 90) "8" 137.80 0.00)
+            (pin Pad101 (rotate 90) "9" 157.48 0.00)
+            (pin Pad101 (rotate 90) "10" 177.17 0.00)
+            (pin Pad101 (rotate 90) "11" 196.85 0.00)
+            (pin Pad101 (rotate 90) "12" 216.54 0.00)
+            (pin Pad101 (rotate 90) "13" 236.22 0.00)
+            (pin Pad101 (rotate 90) "14" 255.91 0.00)
+            (pin Pad101 (rotate 90) "15" 275.59 0.00)
+            (pin Pad101 (rotate 90) "16" 295.28 0.00)
+            (pin Pad101 (rotate 90) "17" 314.96 0.00)
+            (pin Pad101 (rotate 90) "18" 334.65 0.00)
+            (pin Pad101 (rotate 90) "19" 354.33 0.00)
+            (pin Pad101 (rotate 90) "20" 374.02 0.00)
+            (pin Pad101 (rotate 90) "21" 393.70 0.00)
+            (pin Pad101 (rotate 90) "22" 413.39 0.00)
+            (pin Pad101 (rotate 90) "23" 433.07 0.00)
+            (pin Pad101 (rotate 90) "24" 452.76 0.00)
+            (pin Pad101 (rotate 270) "25" 452.76 763.78)
+            (pin Pad101 (rotate 270) "26" 433.07 763.78)
+            (pin Pad101 (rotate 270) "27" 413.39 763.78)
+            (pin Pad101 (rotate 270) "28" 393.70 763.78)
+            (pin Pad101 (rotate 270) "29" 374.02 763.78)
+            (pin Pad101 (rotate 270) "30" 354.33 763.78)
+            (pin Pad101 (rotate 270) "31" 334.65 763.78)
+            (pin Pad101 (rotate 270) "32" 314.96 763.78)
+            (pin Pad101 (rotate 270) "33" 295.28 763.78)
+            (pin Pad101 (rotate 270) "34" 275.59 763.78)
+            (pin Pad101 (rotate 270) "35" 255.91 763.78)
+            (pin Pad101 (rotate 270) "36" 236.22 763.78)
+            (pin Pad101 (rotate 270) "37" 216.54 763.78)
+            (pin Pad101 (rotate 270) "38" 196.85 763.78)
+            (pin Pad101 (rotate 270) "39" 177.17 763.78)
+            (pin Pad101 (rotate 270) "40" 157.48 763.78)
+            (pin Pad101 (rotate 270) "41" 137.80 763.78)
+            (pin Pad101 (rotate 270) "42" 118.11 763.78)
+            (pin Pad101 (rotate 270) "43" 98.43 763.78)
+            (pin Pad101 (rotate 270) "44" 78.74 763.78)
+            (pin Pad101 (rotate 270) "45" 59.06 763.78)
+            (pin Pad101 (rotate 270) "46" 39.37 763.78)
+            (pin Pad101 (rotate 270) "47" 19.69 763.78)
+            (pin Pad101 (rotate 270) "48" 0.00 763.78)
+            (outline
+                (rect signal -15.91 -41.50 468.66 805.28)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  95.14
+                    452.76  95.14
+                    452.76  668.64
+                    0.00  668.64
+                    0.00  445.54
+                    4.92  445.54
+                    4.92  318.24
+                    0.00  318.24
+                )
+            )
+        )
+        (image "TSOP100"
+            (side front)
+            (pin Pad101 (rotate 90) "1" 0.00 -66.93)
+            (pin Pad101 (rotate 90) "2" 19.69 -66.93)
+            (pin Pad101 (rotate 90) "3" 39.37 -66.93)
+            (pin Pad101 (rotate 90) "4" 59.06 -66.93)
+            (pin Pad101 (rotate 90) "5" 78.74 -66.93)
+            (pin Pad101 (rotate 90) "6" 98.43 -66.93)
+            (pin Pad101 (rotate 90) "7" 118.11 -66.93)
+            (pin Pad101 (rotate 90) "8" 137.80 -66.93)
+            (pin Pad101 (rotate 90) "9" 157.48 -66.93)
+            (pin Pad101 (rotate 90) "10" 177.17 -66.93)
+            (pin Pad101 (rotate 90) "11" 196.85 -66.93)
+            (pin Pad101 (rotate 90) "12" 216.54 -66.93)
+            (pin Pad101 (rotate 90) "13" 236.22 -66.93)
+            (pin Pad101 (rotate 90) "14" 255.91 -66.93)
+            (pin Pad101 (rotate 90) "15" 275.59 -66.93)
+            (pin Pad101 (rotate 90) "16" 295.28 -66.93)
+            (pin Pad101 (rotate 90) "17" 314.96 -66.93)
+            (pin Pad101 (rotate 90) "18" 334.65 -66.93)
+            (pin Pad101 (rotate 90) "19" 354.33 -66.93)
+            (pin Pad101 (rotate 90) "20" 374.02 -66.93)
+            (pin Pad101 (rotate 90) "21" 393.70 -66.93)
+            (pin Pad101 (rotate 90) "22" 413.39 -66.93)
+            (pin Pad101 (rotate 90) "23" 433.07 -66.93)
+            (pin Pad101 (rotate 90) "24" 452.76 -66.93)
+            (pin Pad101 (rotate 90) "25" 472.44 -66.93)
+            (pin Pad101 (rotate 180) "26" 539.37 0.00)
+            (pin Pad101 (rotate 180) "27" 539.37 19.69)
+            (pin Pad101 (rotate 180) "28" 539.37 39.37)
+            (pin Pad101 (rotate 180) "29" 539.37 59.06)
+            (pin Pad101 (rotate 180) "30" 539.37 78.74)
+            (pin Pad101 (rotate 180) "31" 539.37 98.43)
+            (pin Pad101 (rotate 180) "32" 539.37 118.11)
+            (pin Pad101 (rotate 180) "33" 539.37 137.80)
+            (pin Pad101 (rotate 180) "34" 539.37 157.48)
+            (pin Pad101 (rotate 180) "35" 539.37 177.17)
+            (pin Pad101 (rotate 180) "36" 539.37 196.85)
+            (pin Pad101 (rotate 180) "37" 539.37 216.54)
+            (pin Pad101 (rotate 180) "38" 539.37 236.22)
+            (pin Pad101 (rotate 180) "39" 539.37 255.91)
+            (pin Pad101 (rotate 180) "40" 539.37 275.59)
+            (pin Pad101 (rotate 180) "41" 539.37 295.28)
+            (pin Pad101 (rotate 180) "42" 539.37 314.96)
+            (pin Pad101 (rotate 180) "43" 539.37 334.65)
+            (pin Pad101 (rotate 180) "44" 539.37 354.33)
+            (pin Pad101 (rotate 180) "45" 539.37 374.02)
+            (pin Pad101 (rotate 180) "46" 539.37 393.70)
+            (pin Pad101 (rotate 180) "47" 539.37 413.39)
+            (pin Pad101 (rotate 180) "48" 539.37 433.07)
+            (pin Pad101 (rotate 180) "49" 539.37 452.76)
+            (pin Pad101 (rotate 180) "50" 539.37 472.44)
+            (pin Pad101 (rotate 270) "51" 472.44 539.37)
+            (pin Pad101 (rotate 270) "52" 452.76 539.37)
+            (pin Pad101 (rotate 270) "53" 433.07 539.37)
+            (pin Pad101 (rotate 270) "54" 413.39 539.37)
+            (pin Pad101 (rotate 270) "55" 393.70 539.37)
+            (pin Pad101 (rotate 270) "56" 374.02 539.37)
+            (pin Pad101 (rotate 270) "57" 354.33 539.37)
+            (pin Pad101 (rotate 270) "58" 334.65 539.37)
+            (pin Pad101 (rotate 270) "59" 314.96 539.37)
+            (pin Pad101 (rotate 270) "60" 295.28 539.37)
+            (pin Pad101 (rotate 270) "61" 275.59 539.37)
+            (pin Pad101 (rotate 270) "62" 255.91 539.37)
+            (pin Pad101 (rotate 270) "63" 236.22 539.37)
+            (pin Pad101 (rotate 270) "64" 216.54 539.37)
+            (pin Pad101 (rotate 270) "65" 196.85 539.37)
+            (pin Pad101 (rotate 270) "66" 177.17 539.37)
+            (pin Pad101 (rotate 270) "67" 157.48 539.37)
+            (pin Pad101 (rotate 270) "68" 137.80 539.37)
+            (pin Pad101 (rotate 270) "69" 118.11 539.37)
+            (pin Pad101 (rotate 270) "70" 98.43 539.37)
+            (pin Pad101 (rotate 270) "71" 78.74 539.37)
+            (pin Pad101 (rotate 270) "72" 59.06 539.37)
+            (pin Pad101 (rotate 270) "73" 39.37 539.37)
+            (pin Pad101 (rotate 270) "74" 19.69 539.37)
+            (pin Pad101 (rotate 270) "75" 0.00 539.37)
+            (pin Pad101 (rotate 0) "76" -66.93 472.44)
+            (pin Pad101 (rotate 0) "77" -66.93 452.76)
+            (pin Pad101 (rotate 0) "78" -66.93 433.07)
+            (pin Pad101 (rotate 0) "79" -66.93 413.39)
+            (pin Pad101 (rotate 0) "80" -66.93 393.70)
+            (pin Pad101 (rotate 0) "81" -66.93 374.02)
+            (pin Pad101 (rotate 0) "82" -66.93 354.33)
+            (pin Pad101 (rotate 0) "83" -66.93 334.65)
+            (pin Pad101 (rotate 0) "84" -66.93 314.96)
+            (pin Pad101 (rotate 0) "85" -66.93 295.28)
+            (pin Pad101 (rotate 0) "86" -66.93 275.59)
+            (pin Pad101 (rotate 0) "87" -66.93 255.91)
+            (pin Pad101 (rotate 0) "88" -66.93 236.22)
+            (pin Pad101 (rotate 0) "89" -66.93 216.54)
+            (pin Pad101 (rotate 0) "90" -66.93 196.85)
+            (pin Pad101 (rotate 0) "91" -66.93 177.17)
+            (pin Pad101 (rotate 0) "92" -66.93 157.48)
+            (pin Pad101 (rotate 0) "93" -66.93 137.80)
+            (pin Pad101 (rotate 0) "94" -66.93 118.11)
+            (pin Pad101 (rotate 0) "95" -66.93 98.43)
+            (pin Pad101 (rotate 0) "96" -66.93 78.74)
+            (pin Pad101 (rotate 0) "97" -66.93 59.06)
+            (pin Pad101 (rotate 0) "98" -66.93 39.37)
+            (pin Pad101 (rotate 0) "99" -66.93 19.69)
+            (pin Pad101 (rotate 0) "100" -66.93 0.00)
+            (outline
+                (rect signal -108.43 -108.43 580.87 580.87)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  19.69
+                    19.69  0.00
+                    472.44  0.00
+                    472.44  472.44
+                    0.00  472.44
+                )
+            )
+        )
+        (image "6X1HDR-100"
+            (side front)
+            (pin Pad102 (rotate 0) "1" 0.00 0.00)
+            (pin Pad103 (rotate 0) "2" 100.00 0.00)
+            (pin Pad103 (rotate 0) "3" 200.00 0.00)
+            (pin Pad103 (rotate 0) "4" 300.00 0.00)
+            (pin Pad103 (rotate 0) "5" 400.00 0.00)
+            (pin Pad103 (rotate 0) "6" 500.00 0.00)
+            (outline
+                (rect signal -35.00 -35.00 535.00 35.00)
+            )
+            (outline
+                (circle  signal 28.00 0.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 100.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 200.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 300.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 400.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 500.00 0.00)
+            )
+        )
+        (image "C0603"
+            (side front)
+            (pin Pad104 (rotate 0) "1" 0.00 0.00)
+            (pin Pad104 (rotate 0) "2" 66.93 0.00)
+            (outline
+                (rect signal -41.46 -43.43 108.39 43.43)
+            )
+            (outline
+                (polygon signal 0
+                    -33.46  35.43
+                    100.39  35.43
+                    100.39  -35.43
+                    -33.46  -35.43
+                )
+            )
+        )
+        (image "CSM-7-DN"
+            (side front)
+            (pin Pad105 (rotate 90) "1" 0.00 0.00)
+            (pin Pad105 (rotate 270) "2" 0.00 334.65)
+            (outline
+                (rect signal -49.37 -118.27 49.37 452.91)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  136.15
+                    0.00  136.15
+                    0.00  198.49
+                    0.00  198.49
+                    0.00  195.21
+                    0.00  195.21
+                    0.00  139.44
+                    0.00  139.44
+                )
+            )
+        )
+        (image "J1"
+            (side front)
+            (pin Pad106 (rotate 270) "B54" 0.00 -31.00)
+            (pin Pad106 (rotate 270) "B53" 59.00 -31.00)
+            (pin Pad107 (rotate 270) "B52" 118.00 0.00)
+            (pin Pad106 (rotate 270) "B51" 177.00 -31.00)
+            (pin Pad107 (rotate 270) "B50" 236.00 0.00)
+            (pin Pad107 (rotate 270) "B49" 295.00 0.00)
+            (pin Pad107 (rotate 270) "B48" 354.00 0.00)
+            (pin Pad107 (rotate 270) "B47" 413.00 0.00)
+            (pin Pad107 (rotate 270) "B46" 472.00 0.00)
+            (pin Pad107 (rotate 270) "B45" 531.00 0.00)
+            (pin Pad107 (rotate 270) "B44" 590.00 0.00)
+            (pin Pad107 (rotate 270) "B43" 649.00 0.00)
+            (pin Pad107 (rotate 270) "B42" 708.00 0.00)
+            (pin Pad107 (rotate 270) "B41" 767.00 0.00)
+            (pin Pad107 (rotate 270) "B40" 826.00 0.00)
+            (pin Pad107 (rotate 270) "B39" 885.00 0.00)
+            (pin Pad107 (rotate 270) "B38" 944.00 0.00)
+            (pin Pad106 (rotate 270) "B37" 1003.00 -31.00)
+            (pin Pad106 (rotate 270) "B36" 1062.00 -31.00)
+            (pin Pad106 (rotate 270) "B35" 1121.00 -31.00)
+            (pin Pad106 (rotate 270) "B34" 1180.00 -31.00)
+            (pin Pad107 (rotate 270) "B33" 1239.00 0.00)
+            (pin Pad106 (rotate 270) "B32" 1298.00 -31.00)
+            (pin Pad107 (rotate 270) "B31" 1357.00 0.00)
+            (pin Pad107 (rotate 270) "B30" 1416.00 0.00)
+            (pin Pad106 (rotate 270) "B29" 1475.00 -31.00)
+            (pin Pad107 (rotate 270) "B28" 1534.00 0.00)
+            (pin Pad107 (rotate 270) "B27" 1593.00 0.00)
+            (pin Pad107 (rotate 270) "B26" 1652.00 0.00)
+            (pin Pad107 (rotate 270) "B25" 1711.00 0.00)
+            (pin Pad106 (rotate 270) "B24" 1770.00 -31.00)
+            (pin Pad107 (rotate 270) "B23" 1829.00 0.00)
+            (pin Pad107 (rotate 270) "B22" 1888.00 0.00)
+            (pin Pad107 (rotate 270) "B21" 1947.00 0.00)
+            (pin Pad107 (rotate 270) "B20" 2006.00 0.00)
+            (pin Pad107 (rotate 270) "B19" 2065.00 0.00)
+            (pin Pad107 (rotate 270) "B18" 2124.00 0.00)
+            (pin Pad107 (rotate 270) "B17" 2183.00 0.00)
+            (pin Pad107 (rotate 270) "B16" 2242.00 0.00)
+            (pin Pad107 (rotate 270) "B15" 2301.00 0.00)
+            (pin Pad106 (rotate 270) "B12" 2478.00 -31.00)
+            (pin Pad107 (rotate 270) "B11" 2537.00 0.00)
+            (pin Pad106 (rotate 270) "B10" 2596.00 -31.00)
+            (pin Pad107 (rotate 270) "B9" 2655.00 0.00)
+            (pin Pad106 (rotate 270) "B8" 2714.00 -31.00)
+            (pin Pad107 (rotate 270) "B7" 2773.00 0.00)
+            (pin Pad107 (rotate 270) "B6" 2832.00 0.00)
+            (pin Pad107 (rotate 270) "B5" 2891.00 0.00)
+            (pin Pad107 (rotate 270) "B4" 2950.00 0.00)
+            (pin Pad107 (rotate 270) "B3" 3009.00 0.00)
+            (pin Pad106 (rotate 270) "B2" 3068.00 -31.00)
+            (pin Pad106 (rotate 270) "B1" 3127.00 -31.00)
+            (pin Pad108 (rotate 270) "A1" 3127.00 0.00)
+            (pin Pad108 (rotate 270) "A2" 3068.00 0.00)
+            (pin Pad108 (rotate 270) "A3" 3009.00 0.00)
+            (pin Pad108 (rotate 270) "A4" 2950.00 0.00)
+            (pin Pad108 (rotate 270) "A5" 2891.00 0.00)
+            (pin Pad108 (rotate 270) "A6" 2832.00 0.00)
+            (pin Pad108 (rotate 270) "A7" 2773.00 0.00)
+            (pin Pad108 (rotate 270) "A8" 2714.00 0.00)
+            (pin Pad108 (rotate 270) "A9" 2655.00 0.00)
+            (pin Pad108 (rotate 270) "A10" 2596.00 0.00)
+            (pin Pad108 (rotate 270) "A11" 2537.00 0.00)
+            (pin Pad108 (rotate 270) "A12" 2478.00 0.00)
+            (pin Pad108 (rotate 270) "A15" 2301.00 0.00)
+            (pin Pad108 (rotate 270) "A16" 2242.00 0.00)
+            (pin Pad108 (rotate 270) "A17" 2183.00 0.00)
+            (pin Pad108 (rotate 270) "A18" 2124.00 0.00)
+            (pin Pad108 (rotate 270) "A19" 2065.00 0.00)
+            (pin Pad108 (rotate 270) "A20" 2006.00 0.00)
+            (pin Pad109 (rotate 270) "A21" 1947.00 -31.00)
+            (pin Pad108 (rotate 270) "A22" 1888.00 0.00)
+            (pin Pad108 (rotate 270) "A23" 1829.00 0.00)
+            (pin Pad108 (rotate 270) "A24" 1770.00 0.00)
+            (pin Pad108 (rotate 270) "A25" 1711.00 0.00)
+            (pin Pad108 (rotate 270) "A26" 1652.00 0.00)
+            (pin Pad108 (rotate 270) "A27" 1593.00 0.00)
+            (pin Pad108 (rotate 270) "A28" 1534.00 0.00)
+            (pin Pad108 (rotate 270) "A29" 1475.00 0.00)
+            (pin Pad108 (rotate 270) "A30" 1416.00 0.00)
+            (pin Pad108 (rotate 270) "A31" 1357.00 0.00)
+            (pin Pad108 (rotate 270) "A32" 1298.00 0.00)
+            (pin Pad108 (rotate 270) "A33" 1239.00 0.00)
+            (pin Pad108 (rotate 270) "A34" 1180.00 0.00)
+            (pin Pad108 (rotate 270) "A35" 1121.00 0.00)
+            (pin Pad108 (rotate 270) "A36" 1062.00 0.00)
+            (pin Pad108 (rotate 270) "A37" 1003.00 0.00)
+            (pin Pad109 (rotate 270) "A38" 944.00 -31.00)
+            (pin Pad108 (rotate 270) "A39" 885.00 0.00)
+            (pin Pad108 (rotate 270) "A40" 826.00 0.00)
+            (pin Pad108 (rotate 270) "A41" 767.00 0.00)
+            (pin Pad108 (rotate 270) "A42" 708.00 0.00)
+            (pin Pad108 (rotate 270) "A43" 649.00 0.00)
+            (pin Pad108 (rotate 270) "A44" 590.00 0.00)
+            (pin Pad108 (rotate 270) "A45" 531.00 0.00)
+            (pin Pad108 (rotate 270) "A46" 472.00 0.00)
+            (pin Pad108 (rotate 270) "A47" 413.00 0.00)
+            (pin Pad108 (rotate 270) "A48" 354.00 0.00)
+            (pin Pad108 (rotate 270) "A49" 295.00 0.00)
+            (pin Pad108 (rotate 270) "A50" 236.00 0.00)
+            (pin Pad108 (rotate 270) "A51" 177.00 0.00)
+            (pin Pad108 (rotate 270) "A52" 118.00 0.00)
+            (pin Pad108 (rotate 270) "A53" 59.00 0.00)
+            (pin Pad108 (rotate 270) "A54" 0.00 0.00)
+            (outline
+                (rect signal -25.00 -192.00 3152.00 130.00)
+            )
+        )
+        (image "TANT_D"
+            (side front)
+            (pin Pad110 (rotate 0) "1" 0.00 0.00)
+            (pin Pad110 (rotate 0) "2" 276.00 0.00)
+            (outline
+                (rect signal -145.00 -77.00 346.00 77.00)
+            )
+            (outline
+                (polygon signal 0
+                    -57.00  64.00
+                    333.00  64.00
+                    333.00  -64.00
+                    -57.00  -64.00
+                )
+            )
+            (outline
+                (path signal 0
+                    -100.00  60.00
+                    -100.00  0.00
+                )
+            )
+            (outline
+                (path signal 0
+                    -130.00  30.00
+                    -70.00  30.00
+                )
+            )
+        )
+        (image "C0805"
+            (side front)
+            (pin Pad111 (rotate 0) "1" 0.00 0.00)
+            (pin Pad111 (rotate 0) "2" 74.80 0.00)
+            (outline
+                (rect signal -45.40 -51.31 120.20 51.31)
+            )
+            (outline
+                (polygon signal 0
+                    -37.40  43.31
+                    112.20  43.31
+                    112.20  -43.31
+                    -37.40  -43.31
+                )
+            )
+        )
+        (image "USBA"
+            (side front)
+            (pin Pad112 (rotate 0) "1" -137.80 0.00)
+            (pin Pad113 (rotate 0) "2" -39.37 0.00)
+            (pin Pad113 (rotate 0) "3" 39.37 0.00)
+            (pin Pad113 (rotate 0) "4" 137.80 0.00)
+            (pin Pad114 (rotate 0) "5" -258.66 -106.69)
+            (pin Pad114 (rotate 0) "6" 258.66 -106.69)
+            (keepout (circle Inner_1 46.22 -137.80 0.00))
+            (keepout (circle Inner_2 46.22 -137.80 0.00))
+            (keepout (circle Inner_1 46.22 -39.37 0.00))
+            (keepout (circle Inner_2 46.22 -39.37 0.00))
+            (keepout (circle Inner_1 46.22 39.37 0.00))
+            (keepout (circle Inner_2 46.22 39.37 0.00))
+            (keepout (circle Inner_1 46.22 137.80 0.00))
+            (keepout (circle Inner_2 46.22 137.80 0.00))
+            (keepout (circle Inner_1 100.55 -258.66 -106.69))
+            (keepout (circle Inner_2 100.55 -258.66 -106.69))
+            (keepout (circle Inner_1 100.55 258.66 -106.69))
+            (keepout (circle Inner_2 100.55 258.66 -106.69))
+            (outline
+                (rect signal -333.62 -530.75 333.62 58.31)
+            )
+            (outline
+                (polygon signal 0
+                    -259.84  43.31
+                    259.84  43.31
+                    259.84  -515.75
+                    -259.84  -515.75
+                )
+            )
+            (outline
+                (circle  signal 36.22 -137.80 0.00)
+            )
+            (outline
+                (circle  signal 36.22 -39.37 0.00)
+            )
+            (outline
+                (circle  signal 36.22 39.37 0.00)
+            )
+            (outline
+                (circle  signal 36.22 137.80 0.00)
+            )
+            (outline
+                (circle  signal 90.55 -258.66 -106.69)
+            )
+            (outline
+                (circle  signal 90.55 258.66 -106.69)
+            )
+        )
+        (image "VQ-64"
+            (side front)
+            (pin Pad101 (rotate 90) "1" 0.00 -76.77)
+            (pin Pad101 (rotate 90) "2" 19.69 -76.77)
+            (pin Pad101 (rotate 90) "3" 39.37 -76.77)
+            (pin Pad101 (rotate 90) "4" 59.06 -76.77)
+            (pin Pad101 (rotate 90) "5" 78.74 -76.77)
+            (pin Pad101 (rotate 90) "6" 98.43 -76.77)
+            (pin Pad101 (rotate 90) "7" 118.11 -76.77)
+            (pin Pad101 (rotate 90) "8" 137.80 -76.77)
+            (pin Pad101 (rotate 90) "9" 157.48 -76.77)
+            (pin Pad101 (rotate 90) "10" 177.17 -76.77)
+            (pin Pad101 (rotate 90) "11" 196.85 -76.77)
+            (pin Pad101 (rotate 90) "12" 216.54 -76.77)
+            (pin Pad101 (rotate 90) "13" 236.22 -76.77)
+            (pin Pad101 (rotate 90) "14" 255.91 -76.77)
+            (pin Pad101 (rotate 90) "15" 275.59 -76.77)
+            (pin Pad101 (rotate 90) "16" 295.28 -76.77)
+            (pin Pad101 (rotate 180) "17" 372.05 0.00)
+            (pin Pad101 (rotate 180) "18" 372.05 19.69)
+            (pin Pad101 (rotate 180) "19" 372.05 39.37)
+            (pin Pad101 (rotate 180) "20" 372.05 59.06)
+            (pin Pad101 (rotate 180) "21" 372.05 78.74)
+            (pin Pad101 (rotate 180) "22" 372.05 98.43)
+            (pin Pad101 (rotate 180) "23" 372.05 118.11)
+            (pin Pad101 (rotate 180) "24" 372.05 137.80)
+            (pin Pad101 (rotate 180) "25" 372.05 157.48)
+            (pin Pad101 (rotate 180) "26" 372.05 177.17)
+            (pin Pad101 (rotate 180) "27" 372.05 196.85)
+            (pin Pad101 (rotate 180) "28" 372.05 216.54)
+            (pin Pad101 (rotate 180) "29" 372.05 236.22)
+            (pin Pad101 (rotate 180) "30" 372.05 255.91)
+            (pin Pad101 (rotate 180) "31" 372.05 275.59)
+            (pin Pad101 (rotate 180) "32" 372.05 295.28)
+            (pin Pad101 (rotate 270) "33" 295.28 372.05)
+            (pin Pad101 (rotate 270) "34" 275.59 372.05)
+            (pin Pad101 (rotate 270) "35" 255.91 372.05)
+            (pin Pad101 (rotate 270) "36" 236.22 372.05)
+            (pin Pad101 (rotate 270) "37" 216.54 372.05)
+            (pin Pad101 (rotate 270) "38" 196.85 372.05)
+            (pin Pad101 (rotate 270) "39" 177.17 372.05)
+            (pin Pad101 (rotate 270) "40" 157.48 372.05)
+            (pin Pad101 (rotate 270) "41" 137.80 372.05)
+            (pin Pad101 (rotate 270) "42" 118.11 372.05)
+            (pin Pad101 (rotate 270) "43" 98.43 372.05)
+            (pin Pad101 (rotate 270) "44" 78.74 372.05)
+            (pin Pad101 (rotate 270) "45" 59.06 372.05)
+            (pin Pad101 (rotate 270) "46" 39.37 372.05)
+            (pin Pad101 (rotate 270) "47" 19.69 372.05)
+            (pin Pad101 (rotate 270) "48" 0.00 372.05)
+            (pin Pad101 (rotate 0) "49" -76.77 295.28)
+            (pin Pad101 (rotate 0) "50" -76.77 275.59)
+            (pin Pad101 (rotate 0) "51" -76.77 255.91)
+            (pin Pad101 (rotate 0) "52" -76.77 236.22)
+            (pin Pad101 (rotate 0) "53" -76.77 216.54)
+            (pin Pad101 (rotate 0) "54" -76.77 196.85)
+            (pin Pad101 (rotate 0) "55" -76.77 177.17)
+            (pin Pad101 (rotate 0) "56" -76.77 157.48)
+            (pin Pad101 (rotate 0) "57" -76.77 137.80)
+            (pin Pad101 (rotate 0) "58" -76.77 118.11)
+            (pin Pad101 (rotate 0) "59" -76.77 98.43)
+            (pin Pad101 (rotate 0) "60" -76.77 78.74)
+            (pin Pad101 (rotate 0) "61" -76.77 59.06)
+            (pin Pad101 (rotate 0) "62" -76.77 39.37)
+            (pin Pad101 (rotate 0) "63" -76.77 19.69)
+            (pin Pad101 (rotate 0) "64" -76.77 0.00)
+            (outline
+                (rect signal -118.27 -118.27 413.54 413.54)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  19.69
+                    19.69  0.00
+                    295.28  0.00
+                    295.28  295.28
+                    0.00  295.28
+                )
+            )
+        )
+        (image "MSOP8"
+            (side front)
+            (pin Pad115 (rotate 90) "1" 0.00 0.00)
+            (pin Pad115 (rotate 90) "2" 25.59 0.00)
+            (pin Pad115 (rotate 90) "3" 51.18 0.00)
+            (pin Pad115 (rotate 90) "4" 76.77 0.00)
+            (pin Pad115 (rotate 270) "5" 76.77 135.83)
+            (pin Pad115 (rotate 270) "6" 51.18 135.83)
+            (pin Pad115 (rotate 270) "7" 25.59 135.83)
+            (pin Pad115 (rotate 270) "8" 0.00 135.83)
+            (outline
+                (rect signal -16.89 -40.51 93.66 176.34)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  41.83
+                    76.77  41.83
+                    76.77  94.00
+                    0.00  94.00
+                    0.00  79.23
+                    6.40  79.23
+                    6.40  56.59
+                    0.00  56.59
+                )
+            )
+        )
+        (image "USBMINI"
+            (side front)
+            (pin Pad116 (rotate 270) "1" -62.99 0.00)
+            (pin Pad116 (rotate 270) "2" -31.50 0.00)
+            (pin Pad116 (rotate 270) "3" 0.00 0.00)
+            (pin Pad116 (rotate 270) "4" 31.50 0.00)
+            (pin Pad116 (rotate 270) "5" 62.99 0.00)
+            (pin Pad117 (rotate 270) "6" -193.90 0.00)
+            (pin Pad117 (rotate 270) "7" 193.90 0.00)
+            (pin Pad118 (rotate 270) "8" -193.90 -167.32)
+            (pin Pad118 (rotate 270) "9" 193.90 -167.32)
+            (outline
+                (rect signal -244.25 -341.77 244.25 78.90)
+            )
+            (outline
+                (polygon signal 0
+                    -196.85  31.50
+                    196.85  31.50
+                    196.85  -326.77
+                    -196.85  -326.77
+                )
+            )
+        )
+        (padstack DefVia
+            (shape (circle signal 28.00))
+        )
+        (padstack Pad101
+            (shape (rect Top -31.50 -5.91 31.50 5.91))
+        )
+        (padstack Pad102
+            (shape (rect Top -25.00 -25.00 25.00 25.00))
+            (shape (circle Inner_1 50.00))
+            (shape (circle Inner_2 50.00))
+            (shape (rect Bottom -25.00 -25.00 25.00 25.00))
+        )
+        (padstack Pad103
+            (shape (circle signal 50.00))
+        )
+        (padstack Pad104
+            (shape (rect Top -21.65 -23.62 21.65 23.62))
+        )
+        (padstack Pad105
+            (shape (rect Top -108.27 -39.37 108.27 39.37))
+        )
+        (padstack Pad106
+            (shape (rect Top -151.00 -15.00 151.00 15.00))
+        )
+        (padstack Pad107
+            (shape (rect Top -120.00 -15.00 120.00 15.00))
+        )
+        (padstack Pad108
+            (shape (rect Bottom -120.00 -15.00 120.00 15.00))
+        )
+        (padstack Pad109
+            (shape (rect Bottom -151.00 -15.00 151.00 15.00))
+        )
+        (padstack Pad110
+            (shape (rect Top -39.00 -59.50 39.00 59.50))
+        )
+        (padstack Pad111
+            (shape (rect Top -25.59 -31.50 25.59 31.50))
+        )
+        (padstack Pad112
+            (shape (rect Top -29.53 -29.53 29.53 29.53))
+            (shape (rect Bottom -29.53 -29.53 29.53 29.53))
+        )
+        (padstack Pad113
+            (shape (circle Top 59.06))
+            (shape (circle Bottom 59.06))
+        )
+        (padstack Pad114
+            (shape (circle Top 129.92))
+            (shape (circle Bottom 129.92))
+        )
+        (padstack Pad115
+            (shape (rect Top -30.51 -6.89 30.51 6.89))
+        )
+        (padstack Pad116
+            (shape (rect Top -44.29 -9.84 44.29 9.84))
+        )
+        (padstack Pad117
+            (shape (rect Top -68.90 -40.35 68.90 40.35))
+        )
+        (padstack Pad118
+            (shape (rect Top -78.74 -40.35 78.74 40.35))
+        )
+        (padstack Via119
+            (shape (circle signal 28.00))
+        )
+    )
+    (network
+        (net "GPIO1"
+            (pins
+                "J1"-"B43"
+                "U1"-"45"
+            )
+        )
+        (net "D3"
+            (pins
+                "U2"-"40"
+                "U3"-"39"
+                "U1"-"91"
+            )
+        )
+        (net "ED12"
+            (pins
+                "J1"-"A34"
+                "U2"-"64"
+            )
+        )
+        (net "ED2"
+            (pins
+                "J1"-"A31"
+                "U2"-"61"
+            )
+        )
+        (net "EA15"
+            (pins
+                "J1"-"A11"
+                "U3"-"2"
+            )
+        )
+        (net "D11"
+            (pins
+                "U1"-"60"
+                "U2"-"11"
+                "U3"-"36"
+            )
+        )
+        (net "FWE"
+            (pins
+                "U3"-"11"
+                "U2"-"35"
+            )
+        )
+        (net "EZRESET"
+            (pins
+                "U2"-"2"
+                "U1"-"85"
+                "R12"-"1"
+            )
+        )
+        (net "EZ30"
+            (pins
+                "U1"-"40"
+                "U2"-"20"
+            )
+        )
+        (net "D4"
+            (pins
+                "U3"-"32"
+                "U2"-"42"
+                "U1"-"90"
+            )
+        )
+        (net "ED3"
+            (pins
+                "J1"-"A35"
+                "U2"-"60"
+            )
+        )
+        (net "ED13"
+            (pins
+                "J1"-"A30"
+                "U2"-"59"
+            )
+        )
+        (net "EA16"
+            (pins
+                "J1"-"A15"
+                "U3"-"1"
+            )
+        )
+        (net "VCC5"
+            (pins
+                "J1"-"B36"
+                "J1"-"B37"
+                "J1"-"A38"
+                "C41"-"2"
+                "C42"-"2"
+            )
+        )
+        (net "D12"
+            (pins
+                "U1"-"59"
+                "U2"-"12"
+                "U3"-"38"
+            )
+        )
+        (net "EZ31"
+            (pins
+                "U1"-"39"
+                "U2"-"22"
+            )
+        )
+        (net "PWM"
+            (pins
+                "U1"-"53"
+                "U2"-"24"
+            )
+        )
+        (net "D5"
+            (pins
+                "U3"-"31"
+                "U2"-"43"
+                "U1"-"89"
+            )
+        )
+        (net "ED4"
+            (pins
+                "J1"-"A36"
+                "U2"-"4"
+            )
+        )
+        (net "ED14"
+            (pins
+                "J1"-"A26"
+                "U2"-"50"
+            )
+        )
+        (net "EA17"
+            (pins
+                "J1"-"A17"
+                "U3"-"17"
+            )
+        )
+        (net "EA1"
+            (pins
+                "J1"-"B15"
+                "U3"-"25"
+            )
+        )
+        (net "D13"
+            (pins
+                "U1"-"58"
+                "U2"-"13"
+                "U3"-"43"
+            )
+        )
+        (net "D6"
+            (pins
+                "U3"-"30"
+                "U2"-"44"
+                "U1"-"87"
+            )
+        )
+        (net "ED5"
+            (pins
+                "J1"-"A32"
+                "U2"-"62"
+            )
+        )
+        (net "ED15"
+            (pins
+                "J1"-"A22"
+                "U2"-"48"
+            )
+        )
+        (net "ROM1"
+            (pins
+                "J1"-"A20"
+                "U2"-"47"
+            )
+        )
+        (net "EA18"
+            (pins
+                "J1"-"A19"
+                "U3"-"48"
+            )
+        )
+        (net "EA2"
+            (pins
+                "J1"-"A18"
+                "U3"-"8"
+            )
+        )
+        (net "D14"
+            (pins
+                "U1"-"57"
+                "U2"-"15"
+                "U3"-"44"
+            )
+        )
+        (net "RESETIL"
+            (pins
+                "J1"-"B33"
+                "U1"-"54"
+            )
+        )
+        (net "EINT0"
+            (pins
+                "J1"-"B25"
+                "U2"-"32"
+            )
+        )
+        (net "TDI"
+            (pins
+                "J9"-"2"
+                "U2"-"28"
+                "U1"-"42"
+            )
+        )
+        (net "EZA0"
+            (pins
+                "U1"-"52"
+                "U2"-"23"
+            )
+        )
+        (net "D7"
+            (pins
+                "U3"-"29"
+                "U2"-"45"
+                "U1"-"86"
+            )
+        )
+        (net "ED6"
+            (pins
+                "J1"-"A28"
+                "U2"-"57"
+            )
+        )
+        (net "EA19"
+            (pins
+                "J1"-"B7"
+                "U3"-"10"
+            )
+        )
+        (net "EA3"
+            (pins
+                "J1"-"A16"
+                "U3"-"19"
+            )
+        )
+        (net "D15"
+            (pins
+                "U1"-"56"
+                "U2"-"16"
+                "U3"-"45"
+            )
+        )
+        (net "TMS"
+            (pins
+                "J9"-"1"
+                "U2"-"29"
+                "U1"-"41"
+            )
+        )
+        (net "EZA1"
+            (pins
+                "U1"-"50"
+                "U2"-"17"
+            )
+        )
+        (net "ED7"
+            (pins
+                "J1"-"A24"
+                "U2"-"51"
+            )
+        )
+        (net "EA4"
+            (pins
+                "J1"-"A12"
+                "U3"-"20"
+            )
+        )
+        (net "VCC9"
+            (pins
+                "J1"-"B27"
+                "U3"-"13"
+                "C33"-"2"
+            )
+        )
+        (net "D8"
+            (pins
+                "U1"-"66"
+                "U3"-"33"
+                "U2"-"6"
+            )
+        )
+        (net "SCK"
+            (pins
+                "J1"-"B47"
+                "U2"-"25"
+            )
+        )
+        (net "UARTI"
+            (pins
+                "J1"-"B30"
+                "U1"-"70"
+            )
+        )
+        (net "ERW"
+            (pins
+                "J1"-"B21"
+                "U2"-"34"
+            )
+        )
+        (net "ED8"
+            (pins
+                "J1"-"A25"
+                "U2"-"49"
+            )
+        )
+        (net "EA5"
+            (pins
+                "J1"-"A10"
+                "U3"-"21"
+            )
+        )
+        (net "D9"
+            (pins
+                "U1"-"65"
+                "U3"-"34"
+                "U2"-"7"
+            )
+        )
+        (net "JE2RXD"
+            (pins
+                "J1"-"B40"
+                "J1"-"B50"
+                "U2"-"31"
+            )
+        )
+        (net "TCK"
+            (pins
+                "J9"-"4"
+                "U2"-"30"
+                "U1"-"44"
+            )
+        )
+        (net "EZRD"
+            (pins
+                "U1"-"47"
+                "U2"-"19"
+            )
+        )
+        (net "ED9"
+            (pins
+                "J1"-"A29"
+                "U2"-"58"
+            )
+        )
+        (net "EA6"
+            (pins
+                "J1"-"A8"
+                "U3"-"22"
+            )
+        )
+        (net "EA7"
+            (pins
+                "J1"-"A6"
+                "U3"-"23"
+            )
+        )
+        (net "JCLK"
+            (pins
+                "J1"-"B52"
+                "U2"-"9"
+            )
+        )
+        (net "EA8"
+            (pins
+                "J1"-"A4"
+                "U3"-"18"
+            )
+        )
+        (net "TDO"
+            (pins
+                "J9"-"3"
+                "U2"-"53"
+                "U1"-"43"
+            )
+        )
+        (net "EA9"
+            (pins
+                "J1"-"A2"
+                "U3"-"6"
+            )
+        )
+        (net "GND"
+            (pins
+                "J1"-"B54"
+                "J1"-"B53"
+                "J1"-"B51"
+                "J1"-"B32"
+                "J1"-"B29"
+                "J1"-"B24"
+                "J1"-"B12"
+                "J1"-"B10"
+                "J1"-"B8"
+                "J1"-"B2"
+                "J1"-"B1"
+                "J1"-"A21"
+                "U1"-"15"
+                "U1"-"6"
+                "U1"-"26"
+                "U1"-"51"
+                "U1"-"75"
+                "U1"-"100"
+                "U1"-"84"
+                "U2"-"14"
+                "U2"-"21"
+                "U2"-"41"
+                "U2"-"54"
+                "U3"-"46"
+                "U3"-"27"
+                "U3"-"26"
+                "U3"-"14"
+                "U4"-"5"
+                "C14"-"1"
+                "C15"-"1"
+                "C21"-"1"
+                "C23"-"1"
+                "C24"-"1"
+                "C32"-"2"
+                "C33"-"1"
+                "C41"-"1"
+                "C42"-"1"
+                "C12"-"2"
+                "C13"-"2"
+                "C22"-"2"
+                "C31"-"1"
+                "R12"-"2"
+                "C11"-"2"
+                "J9"-"5"
+            )
+        )
+        (net "CSENSE"
+            (pins
+                "J1"-"B34"
+                "J1"-"B35"
+            )
+        )
+        (net "EA20"
+            (pins
+                "J1"-"B6"
+                "U3"-"15"
+            )
+        )
+        (net "UARTO"
+            (pins
+                "J1"-"B31"
+                "U1"-"71"
+            )
+        )
+        (net "EA21"
+            (pins
+                "J1"-"B5"
+                "U3"-"16"
+            )
+        )
+        (net "EA10"
+            (pins
+                "J1"-"A1"
+                "U3"-"5"
+            )
+        )
+        (net "WS"
+            (pins
+                "J1"-"B48"
+                "U2"-"8"
+            )
+        )
+        (net "EA22"
+            (pins
+                "J1"-"B4"
+                "U2"-"36"
+            )
+        )
+        (net "FLOE"
+            (pins
+                "U3"-"28"
+                "U2"-"46"
+            )
+        )
+        (net "EA11"
+            (pins
+                "J1"-"A3"
+                "U3"-"7"
+            )
+        )
+        (net "JAUDIO"
+            (pins
+                "J1"-"B49"
+                "U2"-"5"
+            )
+        )
+        (net "EA12"
+            (pins
+                "J1"-"A5"
+                "U3"-"24"
+            )
+        )
+        (net "D0"
+            (pins
+                "U3"-"42"
+                "U2"-"33"
+                "U1"-"94"
+            )
+        )
+        (net "D1"
+            (pins
+                "U2"-"38"
+                "U3"-"41"
+                "U1"-"93"
+            )
+        )
+        (net "ED10"
+            (pins
+                "J1"-"A33"
+                "U2"-"63"
+            )
+        )
+        (net "ED0"
+            (pins
+                "J1"-"A23"
+                "U2"-"52"
+            )
+        )
+        (net "EA13"
+            (pins
+                "J1"-"A7"
+                "U3"-"4"
+            )
+        )
+        (net "GPIO0"
+            (pins
+                "J1"-"B42"
+                "U2"-"27"
+            )
+        )
+        (net "EZWR"
+            (pins
+                "U1"-"48"
+                "U2"-"18"
+            )
+        )
+        (net "D2"
+            (pins
+                "U2"-"39"
+                "U3"-"40"
+                "U1"-"92"
+            )
+        )
+        (net "ED11"
+            (pins
+                "J1"-"A37"
+                "U2"-"1"
+            )
+        )
+        (net "ED1"
+            (pins
+                "J1"-"A27"
+                "U2"-"56"
+            )
+        )
+        (net "EA14"
+            (pins
+                "J1"-"A9"
+                "U3"-"3"
+            )
+        )
+        (net "VCC3"
+            (pins
+                "U1"-"16"
+                "U1"-"21"
+                "U1"-"37"
+                "U1"-"63"
+                "U1"-"88"
+                "C14"-"2"
+                "C15"-"2"
+                "U2"-"3"
+                "U2"-"37"
+                "U2"-"26"
+                "U2"-"55"
+                "C21"-"2"
+                "C23"-"2"
+                "C24"-"2"
+                "U3"-"47"
+                "U3"-"37"
+                "C32"-"1"
+                "C12"-"1"
+                "C13"-"1"
+                "C22"-"1"
+                "C31"-"2"
+                "C11"-"1"
+                "J9"-"6"
+            )
+        )
+        (net "RESETL"
+        )
+        (net "D10"
+            (pins
+                "U1"-"61"
+                "U2"-"10"
+                "U3"-"35"
+            )
+        )
+        (via DefVia DefVia via)
+        (via Via119 Via119 via)
+        (via_rule default DefVia)
+        (via_rule Via119 Via119)
+        (class default
+            "GPIO1"  "D3"  "ED12"  "ED2"  
+            "EA15"  "D11"  "FWE"  "EZRESET"  
+            "EZ30"  "D4"  "ED3"  "ED13"  
+            "EA16"  "D12"  "EZ31"  "PWM"  
+            "D5"  "ED4"  "ED14"  "EA17"  
+            "EA1"  "D13"  "D6"  "ED5"  
+            "ED15"  "ROM1"  "EA18"  "EA2"  
+            "D14"  "RESETIL"  "EINT0"  "TDI"  
+            "EZA0"  "D7"  "ED6"  "EA19"  
+            "EA3"  "D15"  "TMS"  "EZA1"  
+            "ED7"  "EA4"  "D8"  "SCK"  
+            "UARTI"  "ERW"  "ED8"  "EA5"  
+            "D9"  "JE2RXD"  "TCK"  "EZRD"  
+            "ED9"  "EA6"  "EA7"  "JCLK"  
+            "EA8"  "TDO"  "EA9"  "CSENSE"  
+            "EA20"  "UARTO"  "EA21"  "WS"  
+            "EA22"  "FLOE"  "EA11"  "JAUDIO"  
+            "EA12"  "D0"  "D1"  "ED10"  
+            "ED0"  "EA13"  "GPIO0"  "EZWR"  
+            "D2"  "ED11"  "ED1"  "EA14"  
+            "RESETL"  "D10"  
+            (clearance_class default)
+            (via_rule default)
+        )
+        (class C1
+            "VCC5"  
+            (clearance_class default)
+            (via_rule Via119)
+            (rule (width 20.00))
+        )
+        (class C2
+            "VCC9"  "VCC3"  
+            (clearance_class default)
+            (via_rule Via119)
+            (rule (width 12.00))
+        )
+        (class C3
+            "GND"  
+            (clearance_class default)
+            (via_rule Via119)
+            (rule (width 0.00))
+        )
+        (class C4
+            "EA10"  
+            (clearance_class default)
+            (via_rule Via119)
+            (rule (width 8.00))
+        )
+    )
+    (wiring
+        (wire
+            (path Top 8.00
+                2342.52  1090.55
+                2342.52  1092.52
+                2342.52  1023.62
+                2372.05  994.09
+                2549.21  994.09
+            )
+            (net "GPIO1")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2824.80  433.07
+                2824.80  413.39
+                2805.12  393.70
+                2568.90  393.70
+            )
+            (net "GPIO1")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2568.90  393.70
+                2528.17  352.97
+                2528.17  228.35
+            )
+            (net "GPIO1")
+            (type protect)
+        )
+        (via Via119 2568.90 393.70
+            (net "GPIO1")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1019.69  708.66
+                1013.78  708.66
+                1230.31  708.66
+                1289.37  767.72
+                1419.29  767.72
+            )
+            (net "D3")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1791.34  533.46
+                1791.34  492.13
+                1801.18  482.28
+                1870.08  482.28
+                1997.17  355.20
+                1997.17  228.35
+            )
+            (net "ED12")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1732.28  533.46
+                1732.28  541.34
+                1732.28  433.07
+                1742.13  423.23
+                1811.02  423.23
+                1820.17  414.09
+                1820.17  228.35
+            )
+            (net "ED2")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  866.14
+                364.17  866.14
+                492.13  738.19
+                492.13  649.61
+                551.18  590.55
+                551.18  570.87
+            )
+            (net "EA15")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                551.18  570.87
+                551.18  482.28
+                649.61  383.86
+            )
+            (net "EA15")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                649.61  383.86
+                649.61  364.17
+                639.76  354.33
+                639.76  275.59
+                640.17  228.35
+            )
+            (net "EA15")
+            (type protect)
+        )
+        (via Via119 551.18 570.87
+            (net "EA15")
+            (type protect)
+        )
+        (via Via119 649.61 383.86
+            (net "EA15")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  807.09
+                1929.13  807.09
+                1968.50  846.46
+                2177.17  846.46
+            )
+            (net "D11")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  866.14
+                1466.54  866.14
+                1525.59  807.09
+                1525.59  728.35
+                1505.91  708.66
+                1505.91  659.45
+            )
+            (net "FWE")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1505.91  659.45
+                1505.91  521.65
+                1417.32  433.07
+                1269.69  433.07
+                1240.16  403.54
+                866.14  403.54
+                846.46  423.23
+                748.03  423.23
+                570.87  600.39
+                433.07  600.39
+                364.17  669.29
+                314.96  669.29
+            )
+            (net "FWE")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                314.96  669.29
+                295.28  688.98
+                255.91  688.98
+            )
+            (net "FWE")
+            (type protect)
+        )
+        (via Via119 1505.91 659.45
+            (net "FWE")
+            (type protect)
+        )
+        (via Via119 314.96 669.29
+            (net "FWE")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1998.03  511.81
+                1958.66  511.81
+                1919.29  551.18
+                1919.29  620.08
+                1909.45  629.92
+                1860.24  629.92
+                1868.11  629.92
+            )
+            (net "EZRESET")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1998.03  511.81
+                1998.03  472.44
+                2037.40  433.07
+                2411.42  433.07
+                2421.26  442.91
+                2421.26  484.25
+            )
+            (net "EZRESET")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1732.28  982.28
+                1732.28  1043.31
+                1761.81  1072.83
+                1988.19  1072.83
+                2096.46  1181.10
+                2352.36  1181.10
+                2391.73  1141.73
+                2431.10  1141.73
+                2440.94  1131.89
+                2440.94  1082.68
+                2440.94  1090.55
+            )
+            (net "EZ30")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  728.35
+                1309.06  728.35
+                1240.16  659.45
+                1240.16  580.71
+                1230.31  570.87
+                1019.69  570.87
+            )
+            (net "D4")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2519.69  484.25
+                2519.69  482.28
+                2519.69  590.55
+                2568.90  639.76
+                2568.90  659.45
+                2568.90  659.45
+            )
+            (net "D4")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2568.90  659.45
+                2391.73  836.61
+                649.61  836.61
+                639.76  846.46
+                639.76  846.46
+            )
+            (net "D4")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                639.76  846.46
+                688.98  797.24
+                688.98  600.39
+                698.82  590.55
+                905.51  590.55
+                925.20  570.87
+                1019.69  570.87
+            )
+            (net "D4")
+            (type protect)
+        )
+        (via Via119 2568.90 659.45
+            (net "D4")
+            (type protect)
+        )
+        (via Via119 639.76 846.46
+            (net "D4")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1712.60  533.46
+                1712.60  531.50
+                1712.60  570.87
+                1722.44  580.71
+                1801.18  580.71
+                2007.87  374.02
+                2047.24  374.02
+                2056.17  365.09
+                2056.17  228.35
+            )
+            (net "ED3")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1692.91  533.46
+                1692.91  501.97
+                1712.60  482.28
+                1712.60  413.39
+                1722.44  403.54
+                1751.97  403.54
+                1761.17  394.35
+                1761.17  228.35
+            )
+            (net "ED13")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  885.83
+                374.02  885.83
+                511.81  748.03
+                511.81  659.45
+                580.71  590.55
+                580.71  541.34
+            )
+            (net "EA16")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                580.71  541.34
+                580.71  492.13
+                669.29  403.54
+                816.93  403.54
+                846.46  374.02
+            )
+            (net "EA16")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                846.46  374.02
+                875.98  344.49
+                875.98  246.06
+                876.17  228.35
+            )
+            (net "EA16")
+            (type protect)
+        )
+        (via Via119 580.71 541.34
+            (net "EA16")
+            (type protect)
+        )
+        (via Via119 846.46 374.02
+            (net "EA16")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                2174.17  197.35
+                2174.17  355.36
+                2165.35  364.17
+                2125.98  364.17
+                2116.14  354.33
+                2116.14  206.69
+                2115.17  197.35
+            )
+            (net "VCC5")
+            (type protect)
+        )
+        (wire
+            (path Top 20.00
+                2233.17  197.35
+                2234.25  196.85
+                2234.25  354.33
+                2224.41  364.17
+                2214.57  364.17
+                2224.41  364.17
+                2204.72  364.17
+            )
+            (net "VCC5")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                2204.72  364.17
+                2185.04  364.17
+                2174.17  353.30
+                2174.17  197.35
+            )
+            (net "VCC5")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                147.64  895.67
+                147.64  797.24
+                177.17  767.72
+                393.70  767.72
+                472.44  688.98
+                610.24  688.98
+                777.56  521.65
+                1368.11  521.65
+                1407.48  561.02
+                1407.48  688.98
+                1437.01  718.50
+                1633.86  718.50
+                1673.23  679.13
+                1673.23  541.34
+                1712.60  501.97
+                2214.57  501.97
+                2234.25  482.28
+                2234.25  452.76
+                2175.20  393.70
+                2175.20  364.17
+                2125.98  364.17
+                2115.17  353.35
+                2115.17  197.35
+            )
+            (net "VCC5")
+            (type protect)
+        )
+        (via Via119 2204.72 364.17
+            (net "VCC5")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  826.77
+                1919.29  826.77
+                1958.66  866.14
+                2194.88  866.14
+                2177.17  866.14
+            )
+            (net "D12")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1692.91  982.28
+                1692.91  974.41
+                1692.91  1033.46
+                1751.97  1092.52
+                1978.35  1092.52
+                2086.61  1200.79
+                2362.20  1200.79
+                2401.57  1161.42
+                2440.94  1161.42
+                2460.63  1141.73
+                2460.63  1090.55
+            )
+            (net "EZ31")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1653.54  982.28
+                1653.54  905.51
+                1683.07  875.98
+                1771.65  875.98
+                1870.08  974.41
+                2037.40  974.41
+                2047.24  984.25
+                2185.04  984.25
+                2177.17  984.25
+            )
+            (net "PWM")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  708.66
+                1318.90  708.66
+                1259.84  649.61
+                1259.84  570.87
+                1240.16  551.18
+                1019.69  551.18
+            )
+            (net "D5")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2500.00  484.25
+                2500.00  482.28
+                2500.00  610.24
+                2509.84  620.08
+                2519.69  629.92
+                2519.69  659.45
+                2519.69  659.45
+            )
+            (net "D5")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2519.69  659.45
+                2362.20  816.93
+                629.92  816.93
+                590.55  856.30
+                590.55  856.30
+            )
+            (net "D5")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                590.55  856.30
+                669.29  777.56
+                669.29  767.72
+                669.29  580.71
+                679.13  570.87
+                895.67  570.87
+                915.35  551.18
+                1019.69  551.18
+            )
+            (net "D5")
+            (type protect)
+        )
+        (via Via119 2519.69 659.45
+            (net "D5")
+            (type protect)
+        )
+        (via Via119 590.55 856.30
+            (net "D5")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  669.29
+                1870.08  669.29
+                1830.71  669.29
+                1820.87  659.45
+                1820.87  590.55
+                2017.72  393.70
+                2096.46  393.70
+                2115.17  374.99
+                2115.17  228.35
+            )
+            (net "ED4")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1515.75  533.46
+                1515.75  482.28
+                1505.91  472.44
+                1456.69  472.44
+                1437.01  452.76
+                1437.01  413.39
+                1456.69  393.70
+                1515.75  393.70
+                1525.59  383.86
+                1525.17  383.43
+                1525.17  228.35
+            )
+            (net "ED14")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  570.87
+                305.12  570.87
+                324.80  551.18
+                442.91  551.18
+                521.65  472.44
+                846.46  472.44
+                944.88  374.02
+                984.25  374.02
+                994.09  364.17
+                994.09  206.69
+                994.17  228.35
+            )
+            (net "EA17")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1019.69  433.07
+                1013.78  433.07
+                1082.68  433.07
+                1141.73  374.02
+            )
+            (net "EA1")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1141.73  374.02
+                885.83  374.02
+                876.17  364.35
+                876.17  228.35
+            )
+            (net "EA1")
+            (type protect)
+        )
+        (via Via119 1141.73 374.02
+            (net "EA1")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  846.46
+                1909.45  846.46
+                1948.82  885.83
+                2177.17  885.83
+            )
+            (net "D13")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  688.98
+                1328.74  688.98
+                1279.53  639.76
+                1279.53  561.02
+                1250.00  531.50
+                1019.69  531.50
+            )
+            (net "D6")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2460.63  484.25
+                2460.63  472.44
+                2460.63  531.50
+                2470.47  541.34
+                2470.47  659.45
+                2470.47  659.45
+            )
+            (net "D6")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2470.47  659.45
+                2332.68  797.24
+                2322.83  797.24
+                2312.99  797.24
+                610.24  797.24
+                590.55  816.93
+                590.55  816.93
+            )
+            (net "D6")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                590.55  816.93
+                649.61  757.87
+                649.61  561.02
+                659.45  551.18
+                885.83  551.18
+                895.67  541.34
+                905.51  531.50
+                1019.69  531.50
+            )
+            (net "D6")
+            (type protect)
+        )
+        (via Via119 2470.47 659.45
+            (net "D6")
+            (type protect)
+        )
+        (via Via119 590.55 816.93
+            (net "D6")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1751.97  533.46
+                1751.97  452.76
+                1761.81  442.91
+                1850.39  442.91
+                1879.17  414.14
+                1879.17  228.35
+            )
+            (net "ED5")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  610.24
+                1368.11  610.24
+                1358.27  600.39
+                1358.27  521.65
+                1289.37  452.76
+                1289.37  206.69
+                1289.37  226.38
+                1289.17  228.35
+            )
+            (net "ED15")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  629.92
+                1358.27  629.92
+                1338.58  610.24
+                1338.58  531.50
+                1279.53  472.44
+                1181.10  472.44
+                1171.26  462.60
+                1171.26  285.43
+                1171.17  228.35
+            )
+            (net "ROM1")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1019.69  885.83
+                1023.62  885.83
+                462.60  885.83
+                442.91  866.14
+                442.91  846.46
+                570.87  718.50
+                600.39  718.50
+                610.24  708.66
+                610.24  521.65
+                620.08  511.81
+                866.14  511.81
+                964.57  413.39
+                1043.31  413.39
+                1092.52  364.17
+                1102.36  364.17
+                1112.17  354.37
+                1112.17  228.35
+            )
+            (net "EA18")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  748.03
+                393.70  748.03
+                433.07  708.66
+                433.07  590.55
+                531.50  492.13
+                856.30  492.13
+                954.72  393.70
+                1033.46  393.70
+                1053.17  374.00
+                1053.17  228.35
+            )
+            (net "EA2")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  885.83
+                1919.29  885.83
+                1938.98  905.51
+                2185.04  905.51
+                2177.17  905.51
+            )
+            (net "D14")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2177.17  964.57
+                2175.20  964.57
+                2549.21  964.57
+                2588.58  925.20
+                2588.58  885.83
+                2185.04  482.28
+                2185.04  462.60
+            )
+            (net "RESETIL")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2185.04  462.60
+                2116.14  393.70
+                1948.82  393.70
+                1938.17  383.05
+                1938.17  228.35
+            )
+            (net "RESETIL")
+            (type protect)
+        )
+        (via Via119 2185.04 462.60
+            (net "RESETIL")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1496.06  982.28
+                1496.06  925.20
+                1584.65  836.61
+                1584.65  659.45
+            )
+            (net "EINT0")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1584.65  659.45
+                1564.96  639.76
+                1564.96  423.23
+                1515.75  374.02
+                1476.38  374.02
+                1466.17  363.80
+                1466.17  228.35
+            )
+            (net "EINT0")
+            (type protect)
+        )
+        (via Via119 1584.65 659.45
+            (net "EINT0")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1673.23  982.28
+                1673.23  915.35
+                1692.91  895.67
+                1761.81  895.67
+                1860.24  994.09
+                2027.56  994.09
+                2037.40  1003.94
+                2177.17  1003.94
+            )
+            (net "EZA0")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  669.29
+                1338.58  669.29
+                1299.21  629.92
+                1299.21  551.18
+                1259.84  511.81
+                1019.69  511.81
+            )
+            (net "D7")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1019.69  511.81
+                895.67  511.81
+                875.98  531.50
+                777.56  531.50
+                639.76  531.50
+                629.92  541.34
+                629.92  738.19
+                600.39  767.72
+                600.39  767.72
+                590.55  777.56
+            )
+            (net "D7")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                590.55  777.56
+                590.55  777.56
+                2303.15  777.56
+                2421.26  659.45
+                2421.26  659.45
+            )
+            (net "D7")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2421.26  659.45
+                2421.26  659.45
+                2440.94  639.76
+                2440.94  472.44
+                2440.94  484.25
+            )
+            (net "D7")
+            (type protect)
+        )
+        (via Via119 590.55 777.56
+            (net "D7")
+            (type protect)
+        )
+        (via Via119 2421.26 659.45
+            (net "D7")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1653.54  533.46
+                1653.54  482.28
+                1673.23  462.60
+                1673.23  393.70
+                1643.17  363.64
+                1643.17  228.35
+            )
+            (net "ED6")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  708.66
+                314.96  708.66
+                374.02  649.61
+                374.02  610.24
+            )
+            (net "EA19")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                374.02  610.24
+                374.02  393.70
+                403.54  364.17
+                403.54  265.75
+                404.17  228.35
+            )
+            (net "EA19")
+            (type protect)
+        )
+        (via Via119 374.02 610.24
+            (net "EA19")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  531.50
+                433.07  531.50
+                511.81  452.76
+                836.61  452.76
+                935.17  354.20
+                935.17  228.35
+            )
+            (net "EA3")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  905.51
+                1909.45  905.51
+                1929.13  925.20
+                2177.17  925.20
+            )
+            (net "D15")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1791.34  982.28
+                1791.34  994.09
+                1811.02  1013.78
+                2017.72  1013.78
+                2125.98  1122.05
+                2224.41  1122.05
+                2244.09  1102.36
+                2244.09  1090.55
+            )
+            (net "EZA1")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1535.43  533.46
+                1535.43  570.87
+                1525.59  580.71
+                1486.22  580.71
+                1397.64  492.13
+                1397.64  393.70
+                1407.48  383.86
+                1407.48  295.28
+                1407.17  228.35
+            )
+            (net "ED7")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  511.81
+                423.23  511.81
+                501.97  433.07
+                669.29  433.07
+                699.17  403.20
+                699.17  228.35
+            )
+            (net "EA4")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                137.80  637.80
+                137.80  649.61
+                255.91  649.61
+            )
+            (net "VCC9")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                255.91  649.61
+                137.80  649.61
+                137.80  637.80
+            )
+            (net "VCC9")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                137.80  637.80
+                137.80  688.98
+            )
+            (net "VCC9")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                137.80  688.98
+                177.17  728.35
+                374.02  728.35
+                452.76  649.61
+                590.55  649.61
+                757.87  482.28
+                1387.80  482.28
+                1446.85  541.34
+                1446.85  669.29
+                1466.54  688.98
+                1604.33  688.98
+                1633.86  659.45
+                1633.86  521.65
+                1663.39  492.13
+                1663.39  413.39
+                1643.70  393.70
+                1594.49  393.70
+                1584.17  383.38
+                1584.17  228.35
+            )
+            (net "VCC9")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                137.80  637.80
+                137.80  688.98
+            )
+            (net "VCC9")
+            (type protect)
+        )
+        (via Via119 137.80 688.98
+            (net "VCC9")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  708.66
+                1909.45  708.66
+                1938.98  679.13
+                2116.14  679.13
+                2125.98  688.98
+                2125.98  718.50
+                2135.83  728.35
+                2177.17  728.35
+            )
+            (net "D8")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1633.86  982.28
+                1633.86  984.25
+                1633.86  895.67
+                1663.39  866.14
+                1663.39  679.13
+                1673.23  669.29
+                1761.81  669.29
+                1771.65  659.45
+                1771.65  610.24
+            )
+            (net "SCK")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1771.65  610.24
+                2273.62  610.24
+                2303.15  580.71
+                2303.15  452.76
+                2312.99  442.91
+                2736.22  442.91
+                2765.75  413.39
+                2764.17  411.80
+                2764.17  228.35
+            )
+            (net "SCK")
+            (type protect)
+        )
+        (via Via119 1771.65 610.24
+            (net "SCK")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2177.17  649.61
+                2125.98  649.61
+                2106.30  629.92
+                2106.30  462.60
+            )
+            (net "UARTI")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2106.30  462.60
+                2076.77  433.07
+                1820.87  433.07
+                1761.81  374.02
+                1761.81  265.75
+                1761.17  228.35
+            )
+            (net "UARTI")
+            (type protect)
+        )
+        (via Via119 2106.30 462.60
+            (net "UARTI")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  885.83
+                1476.38  885.83
+                1545.28  816.93
+                1545.28  718.50
+                1535.43  708.66
+                1535.43  629.92
+            )
+            (net "ERW")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1535.43  629.92
+                1535.43  433.07
+                1505.91  403.54
+                1279.53  403.54
+                1230.17  354.18
+                1230.17  228.35
+            )
+            (net "ERW")
+            (type protect)
+        )
+        (via Via119 1535.43 629.92
+            (net "ERW")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1496.06  533.46
+                1496.06  501.97
+                1486.22  492.13
+                1446.85  492.13
+                1417.32  462.60
+                1417.32  403.54
+                1466.54  354.33
+                1466.17  353.96
+                1466.17  228.35
+            )
+            (net "ED8")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  492.13
+                413.39  492.13
+                492.13  413.39
+                551.18  413.39
+                581.17  383.40
+                581.17  228.35
+            )
+            (net "EA5")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  728.35
+                1919.29  728.35
+                1948.82  698.82
+                2096.46  698.82
+                2106.30  708.66
+                2106.30  728.35
+                2125.98  748.03
+                2177.17  748.03
+            )
+            (net "D9")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1515.75  982.28
+                1515.75  935.04
+                1604.33  846.46
+                1604.33  688.98
+                1624.02  669.29
+                1624.02  620.08
+                1633.86  610.24
+                1712.60  610.24
+            )
+            (net "JE2RXD")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1712.60  610.24
+                1712.60  551.18
+                1732.28  531.50
+                2234.25  531.50
+                2263.78  501.97
+                2263.78  403.54
+                2303.15  364.17
+                2342.52  364.17
+                2352.36  354.33
+                2352.36  265.75
+                2351.17  228.35
+            )
+            (net "JE2RXD")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2941.17  228.35
+                2942.91  226.38
+                2942.91  403.54
+                2844.49  501.97
+                2372.05  501.97
+                2362.20  511.81
+                2362.20  610.24
+                2303.15  669.29
+                1870.08  669.29
+                1811.02  728.35
+                1751.97  728.35
+                1712.60  688.98
+                1712.60  659.45
+                1712.60  610.24
+            )
+            (net "JE2RXD")
+            (type protect)
+        )
+        (via Via119 1712.60 610.24
+            (net "JE2RXD")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1751.97  982.28
+                1751.97  1033.46
+                1771.65  1053.15
+                1998.03  1053.15
+                2106.30  1161.42
+                2283.46  1161.42
+                2303.15  1141.73
+                2303.15  1082.68
+                2303.15  1090.55
+            )
+            (net "EZRD")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1673.23  533.46
+                1673.23  492.13
+                1692.91  472.44
+                1692.91  403.54
+                1702.17  394.29
+                1702.17  228.35
+            )
+            (net "ED9")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  472.44
+                403.54  472.44
+                463.17  412.82
+                463.17  228.35
+            )
+            (net "EA6")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  452.76
+                324.80  452.76
+                345.17  432.39
+                345.17  228.35
+            )
+            (net "EA7")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  767.72
+                1919.29  767.72
+                1958.66  728.35
+            )
+            (net "JCLK")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1958.66  728.35
+                1998.03  688.98
+                2312.99  688.98
+                2381.89  620.08
+                2381.89  531.50
+                2391.73  521.65
+                2942.91  521.65
+                3061.02  403.54
+                3059.17  401.69
+                3059.17  228.35
+            )
+            (net "JCLK")
+            (type protect)
+        )
+        (via Via119 1958.66 728.35
+            (net "JCLK")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  551.18
+                206.69  551.18
+                196.85  541.34
+                196.85  433.07
+                227.17  402.76
+                227.17  228.35
+            )
+            (net "EA8")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1574.80  533.46
+                1574.80  590.55
+                1564.96  600.39
+                1564.96  639.76
+                1555.12  649.61
+                1555.12  698.82
+                1564.96  708.66
+                1564.96  826.77
+                1387.80  1003.94
+            )
+            (net "TDO")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  787.40
+                98.43  787.40
+                68.90  757.87
+                68.90  423.23
+                109.17  382.96
+                109.17  228.35
+            )
+            (net "EA9")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1419.29  748.03
+                1476.38  748.03
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                137.80  570.87
+                137.80  521.65
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                50.17  197.35
+                50.17  345.44
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                50.17  345.44
+                78.74  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                109.17  197.35
+                109.17  345.39
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                109.17  345.39
+                137.80  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                463.17  197.35
+                462.60  344.49
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                462.60  344.49
+                492.13  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                581.17  197.35
+                581.17  344.94
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                581.17  344.94
+                610.24  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                699.17  197.35
+                699.17  344.83
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                699.17  344.83
+                728.35  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1230.17  197.35
+                1230.17  344.64
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 20.00
+                1230.17  344.64
+                1200.79  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                1407.17  197.35
+                1407.17  344.80
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                1407.17  344.80
+                1377.95  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1535.43  1082.68
+                1486.22  1082.68
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1868.11  866.14
+                1811.02  866.14
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1712.60  982.28
+                1712.60  925.20
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2177.17  1023.62
+                2234.25  1023.62
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2716.54  1090.55
+                2716.54  1033.46
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2783.46  826.77
+                2726.38  826.77
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2783.46  649.61
+                2726.38  649.61
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                1702.17  197.35
+                1702.17  343.90
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                1702.17  343.90
+                1732.28  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                1879.17  197.35
+                1879.17  345.24
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                1879.17  345.24
+                1850.39  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2716.54  484.25
+                2716.54  541.34
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                3177.17  197.35
+                3177.17  346.46
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                3177.17  346.46
+                3149.61  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                3118.17  197.35
+                3118.17  346.40
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                3118.17  346.40
+                3090.55  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 12.00
+                3000.17  197.35
+                3000.17  346.29
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 20.00
+                3000.17  346.29
+                2972.44  374.02
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2401.57  393.70
+                2352.36  393.70
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2055.12  629.92
+                2055.12  582.68
+                2057.09  580.71
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2940.94  944.88
+                2940.94  897.64
+                2942.91  895.67
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2940.94  846.46
+                2940.94  799.21
+                2942.91  797.24
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1515.75  433.07
+                1466.54  433.07
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1188.98  649.61
+                1188.98  602.36
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1188.98  602.36
+                1190.94  600.39
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1003.94  964.57
+                954.72  964.57
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2007.87  777.56
+                2007.87  728.35
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1259.84  856.30
+                1259.84  905.51
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2064.96  511.81
+                2064.96  553.15
+                2057.09  561.02
+                2057.09  629.92
+                2055.12  629.92
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2566.93  1181.10
+                2566.93  1228.35
+                2568.90  1230.31
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1594.49  533.46
+                1594.49  610.24
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  629.92
+                334.65  629.92
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1019.69  472.44
+                1013.78  472.44
+                1082.68  472.44
+                1102.36  452.76
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1019.69  452.76
+                1102.36  452.76
+                1082.68  472.44
+                1013.78  472.44
+                1019.69  472.44
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2177.17  551.18
+                2214.57  551.18
+                2244.09  580.71
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2401.57  484.25
+                2401.57  541.34
+                2411.42  551.18
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1019.69  846.46
+                1082.68  846.46
+                1092.52  856.30
+                1102.36  866.14
+                1112.20  875.98
+            )
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (polygon Inner_1 0
+                3188.98  39.37
+                905.51  39.37
+                866.14  78.74
+                866.14  314.96
+                826.77  354.33
+                807.09  374.02
+                767.72  374.02
+                748.03  354.33
+                708.66  314.96
+                708.66  78.74
+                669.29  39.37
+                39.37  39.37
+                39.37  1417.32
+                3188.98  1417.32
+            )
+            (net "GND")
+            (type fix)
+        )
+        (via Via119 1476.38 748.03
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 137.80 521.65
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 78.74 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 137.80 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 492.13 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 610.24 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 728.35 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1200.79 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1377.95 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1486.22 1082.68
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1811.02 866.14
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1712.60 925.20
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2234.25 1023.62
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2716.54 1033.46
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2726.38 826.77
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2726.38 649.61
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1732.28 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1850.39 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2716.54 541.34
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 3149.61 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 3090.55 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2972.44 374.02
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2352.36 393.70
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2057.09 580.71
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2942.91 895.67
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2942.91 797.24
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1466.54 433.07
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1190.94 600.39
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 954.72 964.57
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2007.87 728.35
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1259.84 905.51
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2568.90 1230.31
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1594.49 610.24
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 334.65 629.92
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1102.36 452.76
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2244.09 580.71
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 2411.42 551.18
+            (net "GND")
+            (type protect)
+        )
+        (via Via119 1112.20 875.98
+            (net "GND")
+            (type protect)
+        )
+        (wire
+            (path Bottom 28.00
+                2056.17  197.35
+                2057.09  314.96
+                2037.40  334.65
+                2017.72  334.65
+                1997.17  314.09
+                1997.17  197.35
+            )
+            (net "CSENSE")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  610.24
+                295.28  610.24
+                324.80  580.71
+                344.49  580.71
+            )
+            (net "EA20")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                344.49  580.71
+                345.17  228.35
+            )
+            (net "EA20")
+            (type protect)
+        )
+        (via Via119 344.49 580.71
+            (net "EA20")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                2177.17  629.92
+                2135.83  629.92
+                2125.98  620.08
+                2125.98  492.13
+                2145.67  472.44
+                2145.67  462.60
+            )
+            (net "UARTO")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                2145.67  462.60
+                2096.46  413.39
+                1840.55  413.39
+                1820.87  393.70
+                1820.87  236.22
+                1820.17  228.35
+            )
+            (net "UARTO")
+            (type protect)
+        )
+        (via Via119 2145.67 462.60
+            (net "UARTO")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  590.55
+                196.85  590.55
+            )
+            (net "EA21")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                196.85  590.55
+                196.85  433.07
+                226.38  403.54
+                265.75  403.54
+                286.17  383.13
+                286.17  228.35
+            )
+            (net "EA21")
+            (type protect)
+        )
+        (via Via119 196.85 590.55
+            (net "EA21")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  807.09
+                78.74  807.09
+                50.17  778.51
+                50.17  228.35
+            )
+            (net "EA10")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  748.03
+                1870.08  748.03
+                1771.65  748.03
+                1761.81  738.19
+                1761.81  728.35
+                1761.81  708.66
+                1761.81  708.66
+                1761.81  698.82
+                1761.81  698.82
+            )
+            (net "WS")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1761.81  698.82
+                1761.81  679.13
+                1791.34  649.61
+                1801.18  639.76
+                1811.02  629.92
+                1830.71  629.92
+                1870.08  629.92
+                2283.46  629.92
+                2322.83  590.55
+                2322.83  472.44
+                2332.68  462.60
+                2342.52  462.60
+                2775.59  462.60
+                2824.80  413.39
+                2823.17  411.75
+                2823.17  228.35
+            )
+            (net "WS")
+            (type protect)
+        )
+        (via Via119 1761.81 698.82
+            (net "WS")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  846.46
+                1456.69  846.46
+                1505.91  797.24
+                1505.91  738.19
+                1476.38  708.66
+                1476.38  629.92
+            )
+            (net "EA22")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1476.38  629.92
+                1476.38  521.65
+                1407.48  452.76
+                1259.84  452.76
+                1230.31  423.23
+                875.98  423.23
+                856.30  442.91
+                757.87  442.91
+                580.71  620.08
+                442.91  620.08
+                364.17  698.82
+                196.85  698.82
+                167.32  669.29
+                167.32  423.23
+                227.17  363.39
+                227.17  228.35
+            )
+            (net "EA22")
+            (type protect)
+        )
+        (via Via119 1476.38 629.92
+            (net "EA22")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  649.61
+                1348.43  649.61
+                1318.90  620.08
+                1318.90  541.34
+                1269.69  492.13
+                1019.69  492.13
+            )
+            (net "FLOE")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  767.72
+                108.27  767.72
+                88.58  748.03
+                88.58  462.60
+                168.17  383.02
+                168.17  228.35
+            )
+            (net "EA11")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  688.98
+                1870.08  688.98
+                1811.02  688.98
+                1801.18  679.13
+                1801.18  679.13
+            )
+            (net "JAUDIO")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1801.18  679.13
+                1801.18  669.29
+                1811.02  659.45
+                1820.87  649.61
+                1870.08  649.61
+                1870.08  649.61
+                2293.31  649.61
+                2342.52  600.39
+                2342.52  492.13
+                2352.36  482.28
+                2362.20  482.28
+                2805.12  482.28
+                2883.86  403.54
+                2882.17  401.85
+                2882.17  228.35
+            )
+            (net "JAUDIO")
+            (type protect)
+        )
+        (via Via119 1801.18 679.13
+            (net "JAUDIO")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  433.07
+                305.12  433.07
+                314.96  423.23
+                314.96  413.39
+                286.17  384.59
+                286.17  228.35
+            )
+            (net "EA12")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1419.29  905.51
+                1377.95  905.51
+                1348.43  935.04
+                1220.47  935.04
+                1210.63  925.20
+                1210.63  777.56
+                1200.79  767.72
+                1013.78  767.72
+                1019.69  767.72
+            )
+            (net "D0")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1019.69  748.03
+                1210.63  748.03
+                1269.69  807.09
+                1419.29  807.09
+            )
+            (net "D1")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1771.65  533.46
+                1771.65  472.44
+                1781.50  462.60
+                1860.24  462.60
+                1938.17  384.67
+                1938.17  228.35
+            )
+            (net "ED10")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1555.12  533.46
+                1555.12  580.71
+                1535.43  600.39
+                1476.38  600.39
+                1348.43  472.44
+                1348.43  246.06
+                1348.17  228.35
+            )
+            (net "ED0")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  826.77
+                344.49  826.77
+                452.76  718.50
+                452.76  610.24
+                492.13  570.87
+            )
+            (net "EA13")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                492.13  570.87
+                492.13  501.97
+                423.23  433.07
+                423.23  403.54
+            )
+            (net "EA13")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                423.23  403.54
+                404.17  384.48
+                404.17  228.35
+            )
+            (net "EA13")
+            (type protect)
+        )
+        (via Via119 492.13 570.87
+            (net "EA13")
+            (type protect)
+        )
+        (via Via119 423.23 403.54
+            (net "EA13")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1594.49  982.28
+                1594.49  944.88
+                1614.17  925.20
+                1614.17  885.83
+                1643.70  856.30
+                1643.70  679.13
+                1643.70  688.98
+                1643.70  659.45
+                1663.39  639.76
+                1742.13  639.76
+            )
+            (net "GPIO0")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                1742.13  639.76
+                1742.13  561.02
+                1751.97  551.18
+                2253.94  551.18
+                2283.46  521.65
+                2283.46  433.07
+                2293.31  423.23
+                2460.63  423.23
+                2469.17  414.69
+                2469.17  228.35
+            )
+            (net "GPIO0")
+            (type protect)
+        )
+        (via Via119 1742.13 639.76
+            (net "GPIO0")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1771.65  982.28
+                1771.65  1023.62
+                1781.50  1033.46
+                2007.87  1033.46
+                2116.14  1141.73
+                2273.62  1141.73
+                2283.46  1131.89
+                2283.46  1082.68
+                2283.46  1090.55
+            )
+            (net "EZWR")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1019.69  728.35
+                1220.47  728.35
+                1279.53  787.40
+                1419.29  787.40
+            )
+            (net "D2")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  610.24
+                1879.92  610.24
+                1899.61  590.55
+                1899.61  541.34
+                2027.56  413.39
+                2145.67  413.39
+                2174.17  384.89
+                2174.17  228.35
+            )
+            (net "ED11")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1633.86  533.46
+                1633.86  472.44
+                1653.54  452.76
+                1653.54  403.54
+                1643.70  393.70
+                1594.49  393.70
+                1584.17  383.38
+                1584.17  228.35
+            )
+            (net "ED1")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                255.91  846.46
+                354.33  846.46
+                472.44  728.35
+                472.44  629.92
+                521.65  580.71
+                521.65  541.34
+            )
+            (net "EA14")
+            (type protect)
+        )
+        (wire
+            (path Bottom 8.00
+                521.65  541.34
+                521.65  393.70
+                531.50  383.86
+            )
+            (net "EA14")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                531.50  383.86
+                531.50  364.17
+                521.65  354.33
+                521.65  246.06
+                522.17  228.35
+            )
+            (net "EA14")
+            (type protect)
+        )
+        (via Via119 521.65 541.34
+            (net "EA14")
+            (type protect)
+        )
+        (via Via119 531.50 383.86
+            (net "EA14")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1602.36  1082.68
+                1614.17  1082.68
+                1614.17  982.28
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1602.36  1082.68
+                1653.54  1082.68
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1582.68  433.07
+                1584.65  442.91
+                1614.17  472.44
+                1614.17  533.46
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2468.50  393.70
+                2480.31  393.70
+                2480.31  484.25
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2468.50  393.70
+                2519.69  393.70
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1988.19  629.92
+                1948.82  629.92
+                1929.13  649.61
+                1868.11  649.61
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2874.02  944.88
+                2783.46  944.88
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2874.02  846.46
+                2783.46  846.46
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2874.02  944.88
+                2874.02  895.67
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2874.02  846.46
+                2874.02  797.24
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1582.68  433.07
+                1624.02  433.07
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1326.77  856.30
+                1348.43  856.30
+                1377.95  826.77
+                1419.29  826.77
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1122.05  649.61
+                1102.36  659.45
+                1092.52  669.29
+                1019.69  669.29
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1122.05  649.61
+                1122.05  600.39
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1070.87  964.57
+                1070.87  874.02
+                1062.99  866.14
+                1019.69  866.14
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1070.87  964.57
+                1122.05  964.57
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2074.80  777.56
+                2106.30  777.56
+                2116.14  787.40
+                2177.17  787.40
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1988.19  629.92
+                1988.19  580.71
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2074.80  777.56
+                2074.80  730.31
+                2076.77  728.35
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                1326.77  856.30
+                1326.77  903.54
+                1328.74  905.51
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 11.00
+                2500.00  1181.10
+                2500.00  1090.55
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 12.00
+                2500.00  1181.10
+                2500.00  1230.31
+            )
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (polygon Inner_2 0
+                3188.98  39.37
+                39.37  39.37
+                39.37  1417.32
+                3188.98  1417.32
+            )
+            (net "VCC3")
+            (type fix)
+        )
+        (via Via119 1653.54 1082.68
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 2519.69 393.70
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 2874.02 895.67
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 2874.02 797.24
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 1624.02 433.07
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 1122.05 600.39
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 1122.05 964.57
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 1988.19 580.71
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 2076.77 728.35
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 1328.74 905.51
+            (net "VCC3")
+            (type protect)
+        )
+        (via Via119 2500.00 1230.31
+            (net "VCC3")
+            (type protect)
+        )
+        (wire
+            (path Top 8.00
+                1868.11  787.40
+                1938.98  787.40
+                1978.35  826.77
+                2185.04  826.77
+                2177.17  826.77
+            )
+            (net "D10")
+            (type protect)
+        )
+    )
+)

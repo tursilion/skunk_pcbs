@@ -1,0 +1,4 @@
+HPI_DMACtl_ADR at C0C0 -- is this the HPI DMA address?
+	Probably not -- it says something about DREQ, D0, D1...hmm.
+EZ-OTG can run the 'Flash' bus on GPIO
+There are also modes for boundary scan and EPP and so on

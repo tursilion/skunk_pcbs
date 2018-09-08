@@ -1,0 +1,116 @@
+Package your design files!
+	readme.txt -- describe files!
+	bom.csv -- Bill of Materials with Digikey cross-reference
+	Assembly diagram -- merged PDF with silkscreen/outline showing front side
+	Board outline diagram -- comments showing dimensions!
+
+My board is at 8 mil copper/8 mil space tolerance...
+MUST USE 1 oz copper!
+
+A typical pick and place machine does 400x175 or 300x225 mm panels
+	Our boards are about 82mm wide and 36mm tall
+	A stretch goal is 3x6 panelization (37.5mm tall -- very difficult with cut/scoring limits)
+	An alternative is 2x10 panelization allowing 87.5mm x 40mm -- maybe just achievable
+	Scoring rules want 4mm 'hands off' from the edge of the board...
+		So that probably makes 90mmx42mm...
+	Most machines need 0.5" rail clearance -- is that vertical or does it chew into the sides of the board?
+
+Prototyping costs:
+	Cheapest solution:
+		protoexpress for boards ($48 each for 4 layer at qty 3 = $150 -- ridiculously cheap)
+			Pick them up locally after 4 business days
+		aapcb for assembly ($480 for 3 based on normal quote, or $245 for 3 using crazy discount)
+	Fastest solution:
+		Advanced Circuits is a one stop shop with similar prices to Screaming Circuits
+		PCBExpress + Screaming Circuits has cheaper PCB fabrication and competitive turn times
+		Either solution wants $600+
+		PCBExpress offers 3 day turn on 2 4-layer HASL OR SILVER IMMERSION for $140 
+		Screaming Circuits in turn wants $520 for 2 in 2 days (due to high BOM count) add $31/board
+	Silver immersion is probably all we need for fine pitch components and our edge connector
+		For silver immersion, they recommend via pads be left 'open' (uncovered by solder mask)
+
+
+	Screamingcircuits wants $380 for the first board, $15 each thereafter... That's without PCB manufacture
+	PcbFabExpress won't even go to such low quantities
+		At 5, they want ~$650
+	hotcpb.com won't give a quote but they have prototype assembly in Santa Clara
+	http://www.aapcb.com/ "Does it Smoke?" -- $245 for 3 boards... No PCB manufacture
+		They need an XYRS file for automated placement...  They are in Aurora, Colorado
+	http://www.norcommcorp.com/ will quote you -- in Grass Valley near Auburn, CA
+		See Google Groups message on them
+	http://www.risingtechnologies.net/ said to be cheap -- in Wisconsin
+
+	If I pay ~$250 for 3 boards I did good
+	I just need to finish my files to start shopping it around
+
+	Silvtronics is cheapest, but they are not gonna touch less than 100 units because of fine-pitch
+
+0.2mm routing in FreePCB is about 8mil/8mil... probably enough?
+	The next setting down is 4mil/4mil, so...  :P
+
+The CY4640 has 6 mil/0.15mm traces -- it looks like it was routed in mils with lots of off-center traces
+	The pads are .307 mm wide with .194 mm spacing -- i.e., 12 mils with 7.6 mil gap
+	We can manage .3/.2mm just fine
+	The pads are 1.6mm high
+	The starts of the pads are ~13.772 apart
+	The ends of the pads are ~17.029 apart
+
+-> I have 8 mil traces and 14 mil vias...  The CY4640 seems to have 10 mil vias
+	
+The ECS CSM-7-DN shows a 15 mm wide pad, but CY4640 used 14 mm with no ill effects
+
+Design for manufacture rules:
+	http://www.4pcb.com/index.php?load=content&page_id=93
+
+	"Leave 100 mills between components and PCB edge"
+		Hopefully this does not apply to USB parts...
+
+I'm using 14 mil vias, but most people want 15-18 mil vias...
+	I'm also as low as 7.6 mil clearances in places when 8 mil is the (cheaper) norm
+
+Possibilities:
+	Pcbfabexpress is about $9.33/part @ 180 and they allow panelizing...  Located in Sunnyvale, pretty nice!
+		$9.33 covers assembly only -- 1330.35 + 350 NRE for 10 panels/10 days
+		PCB 'deals' don't allow panelizing... not clear what would!
+		6mil/6mil
+	eTekNet is $11/part @ 180 -- PCB and assembly included!
+		$433 NRE, $1460 manufacturing, $74 shipping -- so, only $8.50 for the 'second run'
+		Said to be 'half the cost' of Pcbfabexpress
+		They are a broker for an Asian manufacturer -- but ship from crates in Mesa, Arizona
+		Can do 5mil/5mil, but this quote was on 8mil/8mil -- looks like no big difference
+	MyroPCB is as little as $6/part, but it's Chinese labor...
+		6mil/6mil specs
+		and the turnaround time is pretty long...
+		Looks like AtariAge guys have used them
+	Screaming circuits is $16/part @ 180 just for assembly :-(
+		PCBExpress uses Screaming Circuits...
+		-> I DID THE QUOTE WRONG TOO -- they want to quote by board, not full panels
+	Silvtronics is around $10/board @ 432 (but that includes PCB manufacture and shipping)
+		8mil/12mil
+		-> Silvtronics design rules probably do not allow manufacture of this board...
+	futurlec?
+		Can do it, but only 2 layer...forget it!
+	protoexpress.com?  (said to be cheap for 4 layers...)
+		They say call for quote
+		They're in the bay area too
+	pcbnet.com?
+		Quotes are _very_ cheap -- might be competitive with eTekNet -- no good for proto
+
+	FlexOne -- In San Jose, has right capabilities, no hint on pricing
+
+	Advanced Circuits (4pcb) is the premiere one -- everybody talks about how good it is -- pricey?
+		Who cares, they don't do assembly!  Actually they do -- slightly cheaper than Screaming Circuits
+
+GerbMerge is a good tool for panelization
+
+Some links:
+	http://www.eod.gvsu.edu/egr326/PCBManufacturing
+	http://www.tinymicros.com/embedded/pcbs.html
+
+Silvtronics numbers:
+	PCB:		24 panels @ 18 @ 4L = 408 + 14 * 34 + 50 + 24 * 16 = $1318/432
+	Assembly:	200 setup + 30*432*0.8 part + 432..1296/fine pitch = $2532/432
+	shipping:	$1/unit (both ways) = $432/432
+
+	$3.05/PCB + $5.86/assemble + $1/shipping = $10/board @ 432!
+

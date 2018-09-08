@@ -1,0 +1,29 @@
+Logical model:
+
+	USB Controller
+		4KB FIFO connects to:
+			OHCI _or_
+			Mass Storage Controller by way of AES crypto engine
+		4KB registers store:
+			Mass Storage Block List (for streaming/seeking) 
+			HCM (Host Controller Machine) Instructions
+			EEPROM and Memory Track Buffers (used by MSC)
+			COM port buffer
+		Link controller connects to:
+			Mass Storage Controller
+			COM port buffer
+			Interrupt/Reset logic
+
+	Bus Controller
+		Jaguar bus connects to:
+			Cartridge Memory
+			Bus config register (memory map, reset, SPI rate, etc)
+			4KB FIFO
+			4KB registers
+		Jaguar audio out/CD in connects to FIFO			
+		Cartridge EEPROM connects to EEPROM/Memory Track buffer
+		UART connects to COM port buffer
+
+	Cartridge Memory
+
+	

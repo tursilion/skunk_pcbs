@@ -1,0 +1,11 @@
+USB B can only go 3mm past the end of the board
+USB A can go 9mm past the end of the board
+
+But the plastic might extend even higher
+	This ensures devices are nice and flush
+	All laptops have extra plastic above the port
+
+Raised plastic lets us have minimal bracing 'behind' the port
+	This lets us have a little more of a shelf behind
+
+I have to get SolidWorks and get busy(er)...

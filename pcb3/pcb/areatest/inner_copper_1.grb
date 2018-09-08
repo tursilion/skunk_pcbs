@@ -1,0 +1,21 @@
+G04 FreePCB version 1.334*
+G04 c:\jag\pcb\areatest\inner_copper_1.grb*
+G04 inner 1 layer *
+G04 Scale: 100 percent, Rotated: No, Reflected: No *
+%FSLAX24Y24*%
+%MOIN*%
+%LNTop*%
+G90*
+G70D02*
+
+G04 Step and Repeat for panelization *
+
+G04 -------------- Draw Parts, Pads, Traces, Vias and Text (positive)*
+%LPD*%
+G04 Draw part J2*
+
+G04 Draw traces*
+
+G04 Draw Text*
+M00*
+M02*

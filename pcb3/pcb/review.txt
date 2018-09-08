@@ -1,0 +1,183 @@
+o Post-ship issues:
+  o Inner pads are missing on USBA... what does this mean?  (That's why they look funny!)
+	Apparently it means nothing...  It looks the same as J4 on the copper output.
+  o Shipped with a couple of width=8 stubs plus the EN1 trace on U4.
+  o Ran a potentially noisy trace right over a slot in the adjacent VCC plane (OVRCURL versus LAYER TXT)
+  o Still got the tantalum footprint wrong  ;_;
+	o I used EIA 535BAAC (wave solder profile) instead of EIA 1206 (reflow profile)
+		It should still work, but man I feel dumb...
+  o I missed minimum inner plane tolerances on all holes except the vias -- pad tolerances are OK...
+	.039 holes grew to 0.0405, missing inner tolerances by 1.5 mils (.75 on either side)
+	.090 holes grew to 0.0935, missing inner tolerances by 3.5 mils (1.75 on either side)
+	This can cause shorts between planes -- awesome!
+	I just have to cross my fingers on this one
+
+x Send the parts out!  15 minutes late for next day -- not that it matters with PCB done on Tuesday  :P
+
+
+o Final steps:
+  x Ground mounting holes to shield ground (they will become plated)
+  x Remove mounting hole reference designators
+  x Fix C20 footprint and location
+  x Finalize BOM -- double check all part numbers/descriptions/XYRS locations
+	x Double-check C15 against PCB Libraries...  It was wrong!  (GASP)
+  x Create Cypress-style BOM XLS and Readme file
+	x Don't forget to mention plated hole sizes
+  x Do one final check for 7, 8, and 12 mil traces in the FPC
+  x Squarify board outline -- people don't want round -- standard board outline is 10 mils
+  x Start Viewmate rework:
+	  - Repair 'fat traces' on top copper using Viewmate
+		CAN'T BE DONE
+	  - Add 3 fiducials on top copper using Viewmate (WHERE?)
+		Not required by Screaming Circuits
+	  x Create assembly diagram using Viewmate (save as PDF?)
+	  x Clean up solder masks on edge connectors
+	  x Delete the paste mask on edge connectors
+  - Create combo board outline/finger plating diagram in Viewmate
+  x http://www.pcbexpress.com/technical/faq.php#fab
+  x Zip it up... send it out... and go to sleep!
+
+x Shielding nightmares:
+  You are taking a big risk by merging J1+J2 and J3 into one shield
+  Devices leave this unconnected (Which is good), but hosts like the PC may not
+	Can you cause a ground loop or overheating between the PC and Jaguar this way?
+	No -- because there is no metal chassis ground floating at 15V like other devices
+  CY4640 bridges all shield grounds to real ground through zero-ohm resistors at 6 points
+  	This is not as safe but might make for better EMI on a quiet board
+  We can't assume our ground is quiet -- the Jaguar is probably a noisy monster
+  CONCLUSION:  Stick with Cypress R2/C20 recommendation
+
+o THINGS THAT SUCK:
+	o The clock traces are only 30 mils from shield ground...
+	o The clock and clock caps are too close to EZ-HOST ground returns and NOT symmetrical
+		However, my layout doesn't even look as bad as the reference, so...
+	o Most boards have components numbered sequentially -- mine looks unprofessional
+	o A PC with a noisy case or high AC potential could mess up our hosting abilities
+	o I'm around 17 mils min for hole-to-pad/hole-to-trace -- this is tight by most standards
+	o The rest of the world puts tiny unplated holes under QFPs...  I don't!
+	o We didn't use RoHS for prototyping...  Theoretically we should use it for final boards
+	o OTGVBUS has decoupling cap in application note, not in mine -- could fry hotplugging?
+	o I could've done better on routing U2.15 -- it doesn't need to squeeze through like that
+	o I am really missing that Atmel '322 -- it was shortsighted not to include it
+
+x Ferrite beads
+  Intel shows the ferrite bead on VBUS past the bulk decoupling cap -- same as us
+  Many people say not to put a bead on ground because of common mode signalling requirements
+
+x No thermal vias -- they are not needed in reflow according to some posters
+  x PTH components still need thermal reliefs
+
+x Are ESD components properly rated?
+  x Are L1 and R20 of sufficient wattage?  Steal from Cypress!
+
+x If you put solder mask on the edge fingers, they're going to be ruined, right?  YES
+
+o Review dimensions in BOM builder:
+===> o U3 pins land pretty close to inside of pad -- what's this mean?
+===> o C17 pins land off the inner pads -- also weird that 'F55' means a 'D' size can
+===> o C15/C16 pins land off the inner pads -- this is the most serious one
+  x X1 is an HC-49 that matches BOM builder but BOM builder has a wrong description
+  x J1/J2 are convincing at +1mm from back of pins (we have 1mm to U4 from there)
+  x U1/U2/U3/U4 dimensions came from PCI Libraries -- check out against data sheets
+  x 0603s and 0805s look fine
+
+x Power consumption -- assume safety
+  x Max 200mA VBUS plus ~130mA VCC3 (Peak U1 80mA, U2 35mA, U3 10mA/25mA programming)
+	This supports enumeration of two 100mA (low power) devices
+  x 330mA is 20% of the Jaguar's core power -- should be within tolerances
+
+o Decoupling capacitors on shield ground recommended at 2 sites in this:
+	http://www.intel.com/design/network/desguides/82566_lc.pdf
+  They say you should place several sites, then empirically determine where needed...  Hm.
+
+o EMI checklist:
+  o Are all signals away from the edges of the ground plane?  (Move plane outward?)
+  o Are opposite polarity vias as close together as possible?  o-[] []-o = Evil...
+
+o Is every component in the BOM RoHS?
+	Confirmed so far:  U1, U2 (two versions), U3 (maybe -- green pkg?), U4, C15+16, C17, 
+	Check BOM from DigiKey!
+
+x We are not placing J7 close enough to the edge of the board...  See datasheet/CY4640.
+  x This makes it harder to run the shield through -- see CY4640's unique solution
+  x Pin center is 6.25mm from board edge -- our edge is 37.5, so place at 41x, 31.25y
+
+x Mounting and thermal relief holes should be unplated for EMI
+
+x Results of Jag schematic review:
+	x All pins match Jag schematic
+
+x Results of U1 review:
+	x All pin mappings are correct -- all NCs are okay
+	x Does enabling nSSI leave SPI input lines floating/metastable?  Probably  :-(
+		x FIX:  Cheap insurance -- bridge MISO/74 to D8 and run in master mode
+		WORST CASE:  Stay off the data bus and let EINT0 float
+	x Does reading the data bus (aka TDO) cause any problems when they are disconnected?
+		x We can ship this way and find out later
+	x CLKSEL is a pull-up
+	x XTALIN/XTALOUT layout is crappy - but no crappier than the developer board
+===>	x UNKNOWN:  DP2B is the right pin for OVERCURL
+		There are separate pull-up control registers for both device ports
+		I'd give it 50/50 chance of working -- just try and see, it's non-critical
+	x AGND/AVCC, BOOSTGND/BOOSTVCC is right
+	x All SWITCH lines can be N/C - YES
+	x Pin 84 is grounded
+
+x Results of U2 review:
+	x All pin mappings are correct - VCI/VCC/GND, CLK1-3, TCK/TDI/TMS/TDO
+		x GSR=ED11, GTS1=D9, GTS2=UART0
+	x Crappy power is supplied to VCCIO only -- VCC has good power
+
+x Results of U3 review:
+	x All pin mappings are correct
+	x High and low address split matches 8KB/4KW buffer
+
+x Results of U4 review:
+	x Must ground EN1 to prevent metastable and ensure USB stick is online sooner
+		x Make sure trace is cuttable
+	o Overcurrent is probably EMI-free with USB pull-up, until it triggers -- check w/scope
+	- IGNORED:  Use a stub to double up vias on the 5V power input - 20 mils is good
+	x Decoupling LDO_OUT might improve EMI -- to smooth switching currents on plane?
+		x Both app-notes seem to show TDO_OUT decoupled...
+	x Fixed power supply cross-coupling to USB VBUS
+	x Overcurrent assert/deassert is 5.5/10.5ms -- so poll at 1KHz, wait for 500ms trigger
+	x Design check:
+		x Decouple + bulk on VIN, bulk on OUT1
+		x Bypass on LDO_OUT needs ESR between 200 micro-ohm and 10 ohm
+			x If we go with T491A106M016AT, we have max 7 ohms up to 125KHz
+	x Are we screwing up OUT2 by raising its enable _after_ LDO comes online?
+		x Should be harmless since it's a no-connect and all hubs use 3V enables
+	- IGNORED:  Decouple on OUT1 is mentioned to 'improve' short circuit immunity
+		Does the ferrite bead do that?  Neither TPS appnote has one, nor does EZ-HOST
+		Other appnotes suggest the VIN cap does most of the work
+
+- Should we be avoiding tees?  Lots of sites recommend avoiding them, but how do you do it?	
+
+x Fewer hole sizes = cheaper board
+	x 2.3mm/90mil (mounting holes), 1.0mm/39mil (pins), 20 mil (vias)
+
+	We had our USB at 0.92mm, but it looks like EZ-HOST does 39 too...
+	It's not like plating is an exact science anyway...
+
+x UARTI/UARTO look to be wired to the wrong pins :-(
+	FIXED:  Use CPLD instead
+
+x Allan mentions that footprints for headers are WRONG -- they do not fit the typical 0.025" square pins
+	FIXED
+	Molex recommends 1.0mm +/- holes for their pins -- 39 mils
+	The included holes are 28 mils  :-(
+
+x I HAVE TO DO A DATASHEET/FOOTPRINT COMPARE ON ALL PARTS -- Even J9
+
+- Clock stuff:
+	o Some clock layouts have traces entering the load capacitors first -- does it matter?
+	o Soldering the case of the crystal to 'ground' can result in damaging the crystal by overheating
+	o Most people advise that crystal pads be as small as possible to reduce parasitic capacitance
+	o Ground plane beneath the crystal pads causes still more capacitance
+
+o Do we have to worry about OTGBUS going high if someone plugs in PC while Jag is turned off?
+	Ask Cypress!
+
+x Yet more layout guide recommend '10 mils' from bypass cap to ground pin
+
+

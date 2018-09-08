@@ -1,0 +1,321 @@
+EZ-HOST memory is extremely limited, so we need super-tight assembly firmware with limited space:
+	4KB reserved for BIOS (and GDB stub)
+	4KB window for Jaguar prefetch and/or OHCI buffer
+	1KB window for 'registers' (status, control, block read lists, and of course joystick readback)
+	1KB reserved for private state (hidden TD lists, configuration, EEPROM store, etc)
+	4KB reserved for loadable firmware (boot-up, OHCI driver, ROM Flash driver, in-game driver)
+		3KB host, 1KB device (reset, serial, etc)
+	2KB reserved for RC4, RSA, private keys, firmware load, MSC SCSI read
+
+Boot-up:
+	Enumerate Disk port -- enable device, find bulk endpoint, wait for spin up
+	Initialize Mass Storage Class SCSI read with correct bulk endpoint
+	We might need to use USB FDMP to get SCSI/CHS mapping to understand the partition table
+	Parse partition table
+	Parse boot sector for dimensions
+	Search root file system for BOOT.JAG
+	Trace FAT16/FAT32 into block list
+	Present block list to firmware load
+	Firmware then streams the block list just like in-game streaming
+
+Blocklist:
+	A 510-byte block list can allow 85 fragments
+		4G addressible sectors equals 2TB
+		64K sector spans equals 32MB per span
+		So, peak file size is around 1GB with 30 fragments
+	When addressing the raw file system...
+		Our optimized block list tries to group files together into one fragment
+		The Jag BIOS receives a TOC -- containing file name CRCs and their byte offsets
+
+In-game driver:
+	The OS uses OHCI to full enumerate and configure all devices
+		I.e., enumerate/activate BT dongle, establish pairing, parse HID descriptor, set up interrupts
+		Program in-game driver with correct endpoints/interrupt rates, HID packet->stick mapping
+			HID parsing can be pretty generic -- just parse a rotating buffer for key-bytes
+
+	It would rock to have a general purpose 'bytecode' for creating and parsing the USB chain...
+		You could probably save enough code to free up the configuration space for this
+		For example, supporting ethernet UDP reads is very similar to HID reads
+		And supporting Bluetooth reads versus USB hub device reads versus teamtap writes...
+		All this stuff is better left to the OS to set up
+
+If we want to achieve peak performance in firmware 2.0, the USB Host firmware can be rewritten
+	The USB Host is less than 500 lines, and under 100 instructions on the TD path
+	And a native OHCI-helper stack eliminates a lot of unnecessary copying of TD lists around
+	A good double-buffered approach can raise our peak throughput by 20%
+		This just precalculates everything needed for the next transfer -- including bit times
+		Then on transfer-done interrupt:
+			Check for success (jump away on not equal)
+			Compare current frame time against transaction bit time (jump away on carry)
+		 	Then just set the registers and hit go...
+		At this point, we can calculate everything needed for the next transaction
+			And we can take time to fix up addresses and mask out reserved bits for security
+		Double-buffering lets us quickly replay the current transaction on NAK
+		It's probably as much code as any other OHCI driver...
+
+Streaming risks from fat.c:
+	"Some slower media have a problem keeping up with a 2048 byte read,"
+	"and STALL over
+ USB and produce a Not Ready error"
+
+The bus interface can roughly match the Jag CD:
+	ROM1/A22+A4/A5 = Dxxx0x, Dxxx1x, Dxxx2x, Dxxx3x
+
+You can get a USB device PID for $60 from Mecanique for the device side.
+
+The USB interface should roughly model OHCI...
+	This requires the GPU to do frame-by-frame DMA with reliable 1ms interrupts
+		A 4KB round-robin FIFO is plenty for this
+	It's pointless to give the EZ-HOST responsibility for scheduling most things...
+		This is because load balancing and retransmission require GPU help
+		Interrupt scheduling is okay, but the OHCI/GPU driver can do that too
+	Having the GPU driver do all scheduling just makes life easier
+		No interrupt or isochronous lists to copy that way!
+	One approach might be 2x2KB buffers -- one for current frame, one for next frame
+		That way, the GPU can store up to 1500 bytes to write in the 'next frame'
+		This is too tricky
+	A better approach is 3x1360 byte buffers in a 4KB window
+		FR1: 	EZ-HOST writes buffer B and reads buffer C
+			GPU reads buffer A then writes buffer A
+		FR2:	EZ-HOST writes buffer C and reads buffer A
+			GPU reads buffer B then writes buffer B
+		FR3:	EZ-HOST writes buffer A and reads buffer B
+			GPU reads buffer C then writes buffer C
+	1360 is plenty -- that's 20 68-byte buffers, and we can only send 19 64-byte bulks
+		If we exceed 1360 send or receive, we just stop for the frame
+	Unfortunately, this really doesn't work either... since we have one frame latency
+		I.e., we can't figure out where FR1 left off until FR3
+	2x2KB works if we have a sync buffer and async buffer
+		But this requires pre-allocated buffer lengths for receipt -- too many assumptions?
+		If we can always predict receive lengths, it's great... but that seems unlikely
+	3x1360 works if we have a sync send buffer, async send queue, and receipt queue
+		Sync buffer:
+			The GPU interrupt occurs after the last sync command is processed
+			The GPU immediately overwrites the sync buffer with next frame
+		Receipt queue:
+			The GPU reads all the received data up to the end of the queue
+		Async queue:
+			The GPU fills up as much of the async buffer as it can with more work
+	3x2KB works even better...  Assuming we can spare 6KB for buffering.
+	A carefully crafted solution will never do more than 700 16-bit card I/Os
+		And we can use GPU phrase mode to make DRAM read/writes almost free
+	Call it 5,000 GPU cycles per millisecond -- or about 20% system overhead
+		This leaves 80% to the 68K, which might be able to barely run TCP and FAT...
+
+TD style:
+	The EZ-HOST BIOS expects to execute a list of TDs
+		This is the perfect approach for our In-Game firmware -- covering streaming and all
+	TDs may be less ideal for OHCI-compliance
+		TDs just retry on link or NAK errors -- whereas OHCI moves on to other transfers
+			This we can live with
+		TDs might expect fixed-size receive buffers?
+		There is a concept of EOT (End of Transfer)
+			This is time the HCD reserves to update the TD list
+			If we want peak performance in OHCI, we can't have EOT
+			At an absolute _minimum_ we would need 20% -- reduced to 75% throughput
+	We may still need to build TDs to work with the host BIOS...
+		But if the EZ-HOST is doing the building, it can go a lot faster
+
+	The best TD approach works with a single 4KB buffer, carved up by the GPU
+		1) Two sync TD lists (double-buffered)
+		2) Blocks allocated by GPU for each possible interrupt/receive or send on sync list
+		3) One async TD list (re-linked to the end of each sync list, automatically)
+			A bad async send causes retries -- the async list is always serial!
+			Only the GPU can recover by unlinking the bad async TD
+		4) Blocks allocated by GPU for each async send/receive
+
+		The GPU can pre-allocate the correct amount of space for the sync portion
+			Everything leftover is safe for async -- which safely works like a queue!
+				Since the max async buffer size is 64 bytes
+				And since we never skip an entry in async
+
+		It would be more convenient to read a receive buffer than link through TDs...
+			But that's not how EZ-HOST is set up!
+
+	For performance and type safety, the best approach is:
+		Use EOT to build a quick TD in private memory
+			Read stripped down TDs from public memory -- copy to private memory
+			Mask out reserved bits and fix up data pointers
+			Copy 'results' from last TD list into contiguous memory
+			This makes it easy for GPU to check status using one sequential read
+
+It is clear that the EZ-HOST OHCI firmware is different than the EZ-HOST In-Game firmware...
+	This might allow 6KB of SRAM available if we really pack it tight
+	The 'root' firmware handles Link I/O and signature checks/decrypt
+
+Full-speed packet sizes:
+	Control (exactly 64 bytes)
+	Interrupt (64 bytes or less)
+	Isochronous (1023 bytes or less)
+	Bulk (exactly 64 bytes -- less means EOF!)
+
+Packet composition:
+	8-bits sync
+	8-bits PID (16 packet types)
+	Either:
+		7-bits addr (127 devices - 0=unknown)
+		4-bits endp (16 endpoints - 0=control)
+		5-bits CRC (on token)
+	Or:
+		16-bits CRC (on data)
+	Or:
+		Nothing (for acknowledge)
+	3-bits end-of-packet
+
+	35-bits overhead for data or token, 19 for ACK
+
+	601-bits for a 64-byte packet
+		But bit stuffing has a worst case of 1.1667 (7/6) -- that means 702-bits
+	
+	1,216,000 bytes top for 19x64 packets per frame (1187.5KB)
+		Worst case is closer to 17x64 packets with bit stuffing -- 1,088,000
+
+	With 106 bit-time delays, the EZ-HOST can handle 731-818 bit times or 16-14 packets/ms
+		In plain English, 896,000 - 1024,000 peak!
+
+OHCI assumes shared memory -- wrong model for us!
+	This means we have two modes!
+
+OHCI emulation mode:
+	'Init' stores relocatable code in GPU SRAM
+		This is a lot like the JagCD I/O approach
+		Interrupts are hooked up from there
+	The GPU does all DMA in and out, responding to ints
+		At peak interrupt rate (1KHz) -- move 1200 bytes
+	The GPU shadows the OHCI lists in memory, copying them
+
+	This probably works with 2x2KB FIFOs
+		One contains marked-up data from the EZ-HOST
+			I.e., which endpoints triggered
+		The other contains marked-up data from the Jag
+			Mostly data to send...
+			But maybe updates too?
+			'Data to send' requires feedback...
+				Otherwise we don't know how much we can overwrite!
+			The isochronous data is probably allocated at a fixed length
+		'Data to send' is probably just prioritized command/bulk lists
+			And anything we don't send this time gets continued next time!
+			So we need minimal feedback to keep the list wrapping...
+
+	The GPU does just about everything OHCI related -- tracking all the regs and lists
+
+Standalone mode:
+	Deinit the GPU -- the EZ-HOST is still running the lists!
+	Now move data in and out on demand from mailboxes
+
+	No ability to update transfer descriptors exists
+	All mailboxes are just queues now -- no device add/remove
+
+	No enumeration is possible
+
+We have a few extra features beyond OHCI:
+	'Streaming' allows automatic bulk transfers
+		The bulk device must be initialized
+		The 'block list' must be defined in advance
+		Data is automatically preloaded
+		Data may be read via buffer PIO or via I2S
+		The I2S rate is programmable
+		'Seeking' finds a new position in the block list
+		All in-game file system access works this way
+	Network I/O transfers UART data from/to other units
+		The other units must be initialized
+		Interrupt lists must define data destinations
+		Daisy-chaining happens automatically
+		Received data is retimed to avoid UART bug
+		This probably requires help from the CPU clock...
+	HID I/O
+		The HID must be initialized
+		Interrupt lists must define data destinations
+		The 'parse rules' must be defined in advance
+		Incoming packets are parsed using parse rules
+		The resulting data is stored in a buffer
+		The buffer may be addressed using R/W GPIO1
+	Audio output
+		The device must be initialized to play at 44KHz
+		The periodic frame list must be set up
+		Data is copied from I2S to audio buffer
+		Limited interpolation is performed
+	Transparent decryption
+		Streaming data may be decrypted
+		The decryption key must be set via 'parse license'
+	EEPROM emulation
+		Data is serialized -- 3wire protocol is emulated
+		Data is stored to a pre-set block similar to streaming
+	Memory track emulation
+		Read/write data commands give access to 100KB+ 'files'
+		Again data is stored to a pre-set list of blocks on Host
+
+We also have some pre-runtime options:
+	License and hash parsing
+		Licenses are 64 bytes long
+		The parsed results are available only for decrypt
+		This feature can be 'disabled until reset'
+	Flash programming
+		Flash is programmed and verified
+		Blocks are checked against the 'banned block' list in parallel
+
+We also have a few device functions:
+	Automatic enumeration
+		Device is enumerable at any time
+	Serial buffering
+		Link/debug serial data is buffered on device
+		This may be linked to UART (see above)
+	Debug commands
+		Non-link data can cause RESET or INT
+	Transparent Disk Host access
+		Bulk and Control operations sent via Device
+		Operations are queued and interleaved to Disk Host
+	Auto reset
+		If enabled, host writes cause Jag RESET
+		Device must delay host until Jag/OS is booted
+
+With ninja coding we might have ~6KB of on-chip buffers
+	That leaves room for 6KB of code (3000 lines)
+	The BIOS has to use the remaining 3KB (GDB stub)
+	When debugging we can use 4KB of buffers
+	All these buffers are required for holding lists/rules/etc
+	If we're lucky we'll have 4KB left over for streaming!
+
+We might have two 2KB windows plus the joystick window for public access
+
+We also need two code windows:
+	'Core' code contains Disk port access, private keys, RC4/RSA, signature check
+	'Overlay' code switches between:
+		Bootstrap
+		Program Flash
+		CD emulation (everything but EEPROM)
+		Cart emulation (everything but memory track)
+		Debug
+
+Evil Jaguar boot trick:
+	Booting via I2C is too ugly and easy to hack...
+		I2C is slooow (quarter second just for 4KB!)
+	HPI is fast and can be very sneaky...
+		Since you would need to tap 17-18 lines instead of just 2 to see it!
+
+	For example, make it look like we are 'decrypting' the 68K code by mixing pairs of words
+		In fact, half of those words are being trapped by the CPLD state machine
+		Careful timing in the Jaguar's 'decryption' routine lets the CPLD write to EZ-HOST
+		And with 16 cycles of mixing or so, we can be well scrambled
+		And we can boot in 100K cycles or so -- 4ms instead of 250ms
+
+	One nice thing about HPI boot is that it can reuse most of the scratchpad state machines
+		We just count up until we hit the end of our 4KB window
+		Then we check to ensure our state bits are all '0' (checksum)
+		Then, if we pass checksum, we write to the mailbox, telling it to start executing
+
+	To further confound hackers, the EZ-HOST can read the OTP key from the Flash ROM
+		This can seed decryption of the bootstrap code and keys
+
+	That way, even if you reverse engineer everything you still can't steal the keys!
+		Not without a hardware hack anyway.
+
+	After 'decryption', the Jag just waits for interrupts... each interrupt reads 2KB or so.
+		There is a two second timeout on this... after which we beg EZ-HOST for status
+		This means we can do a 'fast boot' right back into a game after a debug reset...
+			In that case the CPLD does not re-enter boot mode and descramble is ignored
+
+	One final irritation is that we drive A16 (or so) low until the Flash is programmed
+		This prevents people from accessing game ROMs after a reset
+		...since every 64KB block is mirrored twice, half the ROM is missing!
+

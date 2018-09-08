@@ -1,0 +1,1649 @@
+(PCB "jagwave"
+    (parser
+        (string_quote ")
+        (space_in_quoted_tokens on)
+        (host_cad "FreePCB Ver 1.332")
+        (host_version "translated by: FpcROUTE Ver 1.204R")
+        (case_sensitive on)
+    )
+    (resolution mil 100)
+    (structure
+        (boundary
+            (rect pcb 0.00 0.00 3228.35 1476.38)
+        )
+        (boundary
+            (path signal 0
+                0.00  0.00
+                753.00  0.00
+                753.00  349.00
+                753.13  351.96
+                753.52  354.90
+                754.16  357.80
+                755.05  360.63
+                756.19  363.37
+                757.56  366.00
+                759.15  368.50
+                760.95  370.85
+                762.96  373.04
+                765.15  375.05
+                767.50  376.85
+                770.00  378.44
+                772.63  379.81
+                775.37  380.95
+                778.20  381.84
+                781.10  382.48
+                784.04  382.87
+                787.00  383.00
+                789.96  382.87
+                792.90  382.48
+                795.80  381.84
+                798.63  380.95
+                801.37  379.81
+                804.00  378.44
+                806.50  376.85
+                808.85  375.05
+                811.04  373.04
+                813.05  370.85
+                814.85  368.50
+                816.44  366.00
+                817.81  363.37
+                818.95  360.63
+                819.84  357.80
+                820.48  354.90
+                820.87  351.96
+                821.00  349.00
+                821.00  0.00
+                3228.35  0.00
+                3228.35  1476.38
+                0.00  1476.38
+            )
+        )
+        (snap_angle
+            fortyfive_degree
+        )
+        (via
+            DefVia
+        )
+        (control
+            (via_at_smd off)
+        )
+        (rule
+            (width 8.0)
+            (clear 8.0)
+            (clear 8.0 (type pad_to_turn_gap))
+            (clear 8.0 (type smd_to_turn_gap))
+            (clear 10.0 (type default_area))
+            (clear 8.0 (type via_via))
+            (clear 8.0 (type via_smd))
+            (clear 8.0 (type via_pin))
+            (clear 8.0 (type pin_pin))
+            (clear 8.0 (type smd_pin))
+            (clear 8.0 (type smd_smd))
+            (clear 25.0 (type default_Outlines))
+            (clear 25.0 (type area_Outlines))
+            (clear 25.0 (type via_Outlines))
+            (clear 25.0 (type smd_Outlines))
+            (clear 25.0 (type pin_Outlines))
+            (clear 0.00 (type Outlines_Outlines))
+        )
+        (layer Top
+            (type signal)
+            (direction horizontal)
+        )
+        (layer Inner_1
+            (type signal)
+            (direction horizontal)
+        )
+        (layer Inner_2
+            (type signal)
+            (direction vertical)
+        )
+        (layer Bottom
+            (type signal)
+            (direction vertical)
+        )
+    )
+    (placement
+        (place_control
+            (flip_style mirror_first)
+        )
+        (component "HOLE_100_NOPAD"
+            (place "M1" 118.11 1141.73 front 0)
+            (place "M2" 3110.24 1141.73 front 0)
+        )
+        (component "TSOP48"
+            (place "U3" 255.91 905.51 front 270)
+        )
+        (component "TSOP100"
+            (place "U1" 2716.54 570.87 front 90)
+        )
+        (component "6X1HDR-100"
+            (place "J9" 1299.21 1358.27 front 180)
+        )
+        (component "C0603"
+            (place "C11" 2490.16 1200.79 front 0)
+            (place "C12" 2874.02 964.57 front 0)
+            (place "C13" 2874.02 866.14 front 0)
+            (place "C14" 2529.53 413.39 front 0)
+            (place "C15" 2017.72 797.24 front 0)
+            (place "C21" 1604.33 1102.36 front 0)
+            (place "C22" 1958.66 649.61 front 0)
+            (place "C23" 1511.81 452.76 front 0)
+            (place "C24" 1259.84 866.14 front 0)
+            (place "C31" 1003.94 974.41 front 0)
+            (place "C32" 1122.05 669.29 front 0)
+            (place "C81" 2893.70 688.98 front 0)
+            (place "C82" 2893.70 590.55 front 0)
+            (place "R11" 2874.02 1062.99 front 0)
+            (place "C41" 521.65 1161.42 front 0)
+            (place "C42" 521.65 1072.83 front 0)
+            (place "R12" 1998.03 531.50 front 0)
+            (place "R41" 836.61 974.41 front 0)
+            (place "C71" 2116.14 1358.27 front 270)
+            (place "R71" 2253.94 1358.27 front 270)
+        )
+        (component "CSM-7-DN"
+            (place "X8" 3070.87 925.20 front 180)
+        )
+        (component "TANT_A"
+            (place "C44" 2273.62 403.54 front 0)
+            (place "C43" 629.92 974.41 front 0)
+        )
+        (component "J1"
+            (place "J1" 3177.17 228.35 back 0
+                (lock_type position)
+            )
+        )
+        (component "C0805"
+            (place "L5" 767.72 1259.84 front 0)
+            (place "C33" 137.00 590.00 front 90)
+        )
+        (component "F55CAP"
+            (place "C51" 1062.99 1161.42 front 270)
+        )
+        (component "USBA"
+            (place "J5" 374.02 1259.84 front 180)
+            (place "J6" 2854.33 1259.84 front 180)
+        )
+        (component "VQ-64"
+            (place "U2" 1791.34 629.92 front 90)
+        )
+        (component "MSOP8"
+            (place "U4" 669.29 1141.73 front 270)
+        )
+        (component "USBMINI"
+            (place "J7" 1614.17 1200.79 front 180)
+        )
+    )
+    (library
+        (image "HOLE_100_NOPAD"
+            (side front)
+            (keepout (circle signal 110.00 0.00 0.00))
+            (outline
+                (rect signal -76.00 -76.00 76.00 76.00)
+            )
+            (outline
+                (circle  signal 100.00 0.00 0.00)
+            )
+        )
+        (image "TSOP48"
+            (side front)
+            (pin Pad102 (rotate 270) "1" 0.00 0.00)
+            (pin Pad102 (rotate 270) "2" 19.69 0.00)
+            (pin Pad102 (rotate 270) "3" 39.37 0.00)
+            (pin Pad102 (rotate 270) "4" 59.06 0.00)
+            (pin Pad102 (rotate 270) "5" 78.74 0.00)
+            (pin Pad102 (rotate 270) "6" 98.43 0.00)
+            (pin Pad102 (rotate 270) "7" 118.11 0.00)
+            (pin Pad102 (rotate 270) "8" 137.80 0.00)
+            (pin Pad102 (rotate 270) "9" 157.48 0.00)
+            (pin Pad102 (rotate 270) "10" 177.17 0.00)
+            (pin Pad102 (rotate 270) "11" 196.85 0.00)
+            (pin Pad102 (rotate 270) "12" 216.54 0.00)
+            (pin Pad102 (rotate 270) "13" 236.22 0.00)
+            (pin Pad102 (rotate 270) "14" 255.91 0.00)
+            (pin Pad102 (rotate 270) "15" 275.59 0.00)
+            (pin Pad102 (rotate 270) "16" 295.28 0.00)
+            (pin Pad102 (rotate 270) "17" 314.96 0.00)
+            (pin Pad102 (rotate 270) "18" 334.65 0.00)
+            (pin Pad102 (rotate 270) "19" 354.33 0.00)
+            (pin Pad102 (rotate 270) "20" 374.02 0.00)
+            (pin Pad102 (rotate 270) "21" 393.70 0.00)
+            (pin Pad102 (rotate 270) "22" 413.39 0.00)
+            (pin Pad102 (rotate 270) "23" 433.07 0.00)
+            (pin Pad102 (rotate 270) "24" 452.76 0.00)
+            (pin Pad102 (rotate 270) "25" 452.76 783.46)
+            (pin Pad102 (rotate 270) "26" 433.07 783.46)
+            (pin Pad102 (rotate 270) "27" 413.39 783.46)
+            (pin Pad102 (rotate 270) "28" 393.70 783.46)
+            (pin Pad102 (rotate 270) "29" 374.02 783.46)
+            (pin Pad102 (rotate 270) "30" 354.33 783.46)
+            (pin Pad102 (rotate 270) "31" 334.65 783.46)
+            (pin Pad102 (rotate 270) "32" 314.96 783.46)
+            (pin Pad102 (rotate 270) "33" 295.28 783.46)
+            (pin Pad102 (rotate 270) "34" 275.59 783.46)
+            (pin Pad102 (rotate 270) "35" 255.91 783.46)
+            (pin Pad102 (rotate 270) "36" 236.22 783.46)
+            (pin Pad102 (rotate 270) "37" 216.54 783.46)
+            (pin Pad102 (rotate 270) "38" 196.85 783.46)
+            (pin Pad102 (rotate 270) "39" 177.17 783.46)
+            (pin Pad102 (rotate 270) "40" 157.48 783.46)
+            (pin Pad102 (rotate 270) "41" 137.80 783.46)
+            (pin Pad102 (rotate 270) "42" 118.11 783.46)
+            (pin Pad102 (rotate 270) "43" 98.43 783.46)
+            (pin Pad102 (rotate 270) "44" 78.74 783.46)
+            (pin Pad102 (rotate 270) "45" 59.06 783.46)
+            (pin Pad102 (rotate 270) "46" 39.37 783.46)
+            (pin Pad102 (rotate 270) "47" 19.69 783.46)
+            (pin Pad102 (rotate 270) "48" 0.00 783.46)
+            (outline
+                (rect signal -15.85 -38.54 468.60 822.01)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  93.83
+                    452.76  93.83
+                    452.76  689.63
+                    0.00  689.63
+                    0.00  457.02
+                    4.92  457.02
+                    4.92  326.44
+                    0.00  326.44
+                )
+            )
+        )
+        (image "TSOP100"
+            (side front)
+            (pin Pad103 (rotate 270) "1" 0.00 -66.93)
+            (pin Pad103 (rotate 270) "2" 19.69 -66.93)
+            (pin Pad103 (rotate 270) "3" 39.37 -66.93)
+            (pin Pad103 (rotate 270) "4" 59.06 -66.93)
+            (pin Pad103 (rotate 270) "5" 78.74 -66.93)
+            (pin Pad103 (rotate 270) "6" 98.43 -66.93)
+            (pin Pad103 (rotate 270) "7" 118.11 -66.93)
+            (pin Pad103 (rotate 270) "8" 137.80 -66.93)
+            (pin Pad103 (rotate 270) "9" 157.48 -66.93)
+            (pin Pad103 (rotate 270) "10" 177.17 -66.93)
+            (pin Pad103 (rotate 270) "11" 196.85 -66.93)
+            (pin Pad103 (rotate 270) "12" 216.54 -66.93)
+            (pin Pad103 (rotate 270) "13" 236.22 -66.93)
+            (pin Pad103 (rotate 270) "14" 255.91 -66.93)
+            (pin Pad103 (rotate 270) "15" 275.59 -66.93)
+            (pin Pad103 (rotate 270) "16" 295.28 -66.93)
+            (pin Pad103 (rotate 270) "17" 314.96 -66.93)
+            (pin Pad103 (rotate 270) "18" 334.65 -66.93)
+            (pin Pad103 (rotate 270) "19" 354.33 -66.93)
+            (pin Pad103 (rotate 270) "20" 374.02 -66.93)
+            (pin Pad103 (rotate 270) "21" 393.70 -66.93)
+            (pin Pad103 (rotate 270) "22" 413.39 -66.93)
+            (pin Pad103 (rotate 270) "23" 433.07 -66.93)
+            (pin Pad103 (rotate 270) "24" 452.76 -66.93)
+            (pin Pad103 (rotate 270) "25" 472.44 -66.93)
+            (pin Pad103 (rotate 0) "26" 539.37 0.00)
+            (pin Pad103 (rotate 0) "27" 539.37 19.69)
+            (pin Pad103 (rotate 0) "28" 539.37 39.37)
+            (pin Pad103 (rotate 0) "29" 539.37 59.06)
+            (pin Pad103 (rotate 0) "30" 539.37 78.74)
+            (pin Pad103 (rotate 0) "31" 539.37 98.43)
+            (pin Pad103 (rotate 0) "32" 539.37 118.11)
+            (pin Pad103 (rotate 0) "33" 539.37 137.80)
+            (pin Pad103 (rotate 0) "34" 539.37 157.48)
+            (pin Pad103 (rotate 0) "35" 539.37 177.17)
+            (pin Pad103 (rotate 0) "36" 539.37 196.85)
+            (pin Pad103 (rotate 0) "37" 539.37 216.54)
+            (pin Pad103 (rotate 0) "38" 539.37 236.22)
+            (pin Pad103 (rotate 0) "39" 539.37 255.91)
+            (pin Pad103 (rotate 0) "40" 539.37 275.59)
+            (pin Pad103 (rotate 0) "41" 539.37 295.28)
+            (pin Pad103 (rotate 0) "42" 539.37 314.96)
+            (pin Pad103 (rotate 0) "43" 539.37 334.65)
+            (pin Pad103 (rotate 0) "44" 539.37 354.33)
+            (pin Pad103 (rotate 0) "45" 539.37 374.02)
+            (pin Pad103 (rotate 0) "46" 539.37 393.70)
+            (pin Pad103 (rotate 0) "47" 539.37 413.39)
+            (pin Pad103 (rotate 0) "48" 539.37 433.07)
+            (pin Pad103 (rotate 0) "49" 539.37 452.76)
+            (pin Pad103 (rotate 0) "50" 539.37 472.44)
+            (pin Pad103 (rotate 270) "51" 472.44 539.37)
+            (pin Pad103 (rotate 270) "52" 452.76 539.37)
+            (pin Pad103 (rotate 270) "53" 433.07 539.37)
+            (pin Pad103 (rotate 270) "54" 413.39 539.37)
+            (pin Pad103 (rotate 270) "55" 393.70 539.37)
+            (pin Pad103 (rotate 270) "56" 374.02 539.37)
+            (pin Pad103 (rotate 270) "57" 354.33 539.37)
+            (pin Pad103 (rotate 270) "58" 334.65 539.37)
+            (pin Pad103 (rotate 270) "59" 314.96 539.37)
+            (pin Pad103 (rotate 270) "60" 295.28 539.37)
+            (pin Pad103 (rotate 270) "61" 275.59 539.37)
+            (pin Pad103 (rotate 270) "62" 255.91 539.37)
+            (pin Pad103 (rotate 270) "63" 236.22 539.37)
+            (pin Pad103 (rotate 270) "64" 216.54 539.37)
+            (pin Pad103 (rotate 270) "65" 196.85 539.37)
+            (pin Pad103 (rotate 270) "66" 177.17 539.37)
+            (pin Pad103 (rotate 270) "67" 157.48 539.37)
+            (pin Pad103 (rotate 270) "68" 137.80 539.37)
+            (pin Pad103 (rotate 270) "69" 118.11 539.37)
+            (pin Pad103 (rotate 270) "70" 98.43 539.37)
+            (pin Pad103 (rotate 270) "71" 78.74 539.37)
+            (pin Pad103 (rotate 270) "72" 59.06 539.37)
+            (pin Pad103 (rotate 270) "73" 39.37 539.37)
+            (pin Pad103 (rotate 270) "74" 19.69 539.37)
+            (pin Pad103 (rotate 270) "75" 0.00 539.37)
+            (pin Pad103 (rotate 0) "76" -66.93 472.44)
+            (pin Pad103 (rotate 0) "77" -66.93 452.76)
+            (pin Pad103 (rotate 0) "78" -66.93 433.07)
+            (pin Pad103 (rotate 0) "79" -66.93 413.39)
+            (pin Pad103 (rotate 0) "80" -66.93 393.70)
+            (pin Pad103 (rotate 0) "81" -66.93 374.02)
+            (pin Pad103 (rotate 0) "82" -66.93 354.33)
+            (pin Pad103 (rotate 0) "83" -66.93 334.65)
+            (pin Pad103 (rotate 0) "84" -66.93 314.96)
+            (pin Pad103 (rotate 0) "85" -66.93 295.28)
+            (pin Pad103 (rotate 0) "86" -66.93 275.59)
+            (pin Pad103 (rotate 0) "87" -66.93 255.91)
+            (pin Pad103 (rotate 0) "88" -66.93 236.22)
+            (pin Pad103 (rotate 0) "89" -66.93 216.54)
+            (pin Pad103 (rotate 0) "90" -66.93 196.85)
+            (pin Pad103 (rotate 0) "91" -66.93 177.17)
+            (pin Pad103 (rotate 0) "92" -66.93 157.48)
+            (pin Pad103 (rotate 0) "93" -66.93 137.80)
+            (pin Pad103 (rotate 0) "94" -66.93 118.11)
+            (pin Pad103 (rotate 0) "95" -66.93 98.43)
+            (pin Pad103 (rotate 0) "96" -66.93 78.74)
+            (pin Pad103 (rotate 0) "97" -66.93 59.06)
+            (pin Pad103 (rotate 0) "98" -66.93 39.37)
+            (pin Pad103 (rotate 0) "99" -66.93 19.69)
+            (pin Pad103 (rotate 0) "100" -66.93 0.00)
+            (outline
+                (rect signal -108.43 -108.43 580.87 580.87)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  19.69
+                    19.69  0.00
+                    472.44  0.00
+                    472.44  472.44
+                    0.00  472.44
+                )
+            )
+        )
+        (image "6X1HDR-100"
+            (side front)
+            (pin Pad104 (rotate 0) "1" 0.00 0.00)
+            (pin Pad105 (rotate 0) "2" 100.00 0.00)
+            (pin Pad105 (rotate 0) "3" 200.00 0.00)
+            (pin Pad105 (rotate 0) "4" 300.00 0.00)
+            (pin Pad105 (rotate 0) "5" 400.00 0.00)
+            (pin Pad105 (rotate 0) "6" 500.00 0.00)
+            (outline
+                (rect signal -35.00 -35.00 535.00 35.00)
+            )
+            (outline
+                (circle  signal 28.00 0.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 100.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 200.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 300.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 400.00 0.00)
+            )
+            (outline
+                (circle  signal 28.00 500.00 0.00)
+            )
+        )
+        (image "C0603"
+            (side front)
+            (pin Pad106 (rotate 0) "1" 0.00 0.00)
+            (pin Pad106 (rotate 0) "2" 66.93 0.00)
+            (outline
+                (rect signal -41.46 -43.43 108.39 43.43)
+            )
+            (outline
+                (polygon signal 0
+                    -33.46  35.43
+                    100.39  35.43
+                    100.39  -35.43
+                    -33.46  -35.43
+                )
+            )
+        )
+        (image "CSM-7-DN"
+            (side front)
+            (pin Pad107 (rotate 90) "1" 0.00 0.00)
+            (pin Pad107 (rotate 270) "2" 0.00 334.65)
+            (outline
+                (rect signal -49.37 -118.27 49.37 452.91)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  136.15
+                    0.00  136.15
+                    0.00  198.49
+                    0.00  198.49
+                    0.00  195.21
+                    0.00  195.21
+                    0.00  139.44
+                    0.00  139.44
+                )
+            )
+        )
+        (image "TANT_A"
+            (side front)
+            (pin Pad108 (rotate 0) "1" 0.00 0.00)
+            (pin Pad108 (rotate 0) "2" 118.00 0.00)
+            (outline
+                (rect signal -115.00 -53.00 176.00 55.00)
+            )
+            (outline
+                (polygon signal 0
+                    -45.00  40.00
+                    163.00  40.00
+                    163.00  -40.00
+                    -45.00  -40.00
+                )
+            )
+            (outline
+                (path signal 0
+                    -100.00  20.00
+                    -60.00  20.00
+                )
+            )
+            (outline
+                (path signal 0
+                    -80.00  40.00
+                    -80.00  0.00
+                )
+            )
+        )
+        (image "J1"
+            (side front)
+            (pin Pad109 (rotate 270) "B54" 0.00 -31.00)
+            (pin Pad109 (rotate 270) "B53" 59.00 -31.00)
+            (pin Pad110 (rotate 270) "B52" 118.00 0.00)
+            (pin Pad109 (rotate 270) "B51" 177.00 -31.00)
+            (pin Pad110 (rotate 270) "B50" 236.00 0.00)
+            (pin Pad110 (rotate 270) "B49" 295.00 0.00)
+            (pin Pad110 (rotate 270) "B48" 354.00 0.00)
+            (pin Pad110 (rotate 270) "B47" 413.00 0.00)
+            (pin Pad110 (rotate 270) "B46" 472.00 0.00)
+            (pin Pad110 (rotate 270) "B45" 531.00 0.00)
+            (pin Pad110 (rotate 270) "B44" 590.00 0.00)
+            (pin Pad110 (rotate 270) "B43" 649.00 0.00)
+            (pin Pad110 (rotate 270) "B42" 708.00 0.00)
+            (pin Pad110 (rotate 270) "B41" 767.00 0.00)
+            (pin Pad110 (rotate 270) "B40" 826.00 0.00)
+            (pin Pad110 (rotate 270) "B39" 885.00 0.00)
+            (pin Pad110 (rotate 270) "B38" 944.00 0.00)
+            (pin Pad109 (rotate 270) "B37" 1003.00 -31.00)
+            (pin Pad109 (rotate 270) "B36" 1062.00 -31.00)
+            (pin Pad109 (rotate 270) "B35" 1121.00 -31.00)
+            (pin Pad109 (rotate 270) "B34" 1180.00 -31.00)
+            (pin Pad110 (rotate 270) "B33" 1239.00 0.00)
+            (pin Pad109 (rotate 270) "B32" 1298.00 -31.00)
+            (pin Pad110 (rotate 270) "B31" 1357.00 0.00)
+            (pin Pad110 (rotate 270) "B30" 1416.00 0.00)
+            (pin Pad109 (rotate 270) "B29" 1475.00 -31.00)
+            (pin Pad110 (rotate 270) "B28" 1534.00 0.00)
+            (pin Pad110 (rotate 270) "B27" 1593.00 0.00)
+            (pin Pad110 (rotate 270) "B26" 1652.00 0.00)
+            (pin Pad110 (rotate 270) "B25" 1711.00 0.00)
+            (pin Pad109 (rotate 270) "B24" 1770.00 -31.00)
+            (pin Pad110 (rotate 270) "B23" 1829.00 0.00)
+            (pin Pad110 (rotate 270) "B22" 1888.00 0.00)
+            (pin Pad110 (rotate 270) "B21" 1947.00 0.00)
+            (pin Pad110 (rotate 270) "B20" 2006.00 0.00)
+            (pin Pad110 (rotate 270) "B19" 2065.00 0.00)
+            (pin Pad110 (rotate 270) "B18" 2124.00 0.00)
+            (pin Pad110 (rotate 270) "B17" 2183.00 0.00)
+            (pin Pad110 (rotate 270) "B16" 2242.00 0.00)
+            (pin Pad110 (rotate 270) "B15" 2301.00 0.00)
+            (pin Pad109 (rotate 270) "B12" 2478.00 -31.00)
+            (pin Pad110 (rotate 270) "B11" 2537.00 0.00)
+            (pin Pad109 (rotate 270) "B10" 2596.00 -31.00)
+            (pin Pad110 (rotate 270) "B9" 2655.00 0.00)
+            (pin Pad109 (rotate 270) "B8" 2714.00 -31.00)
+            (pin Pad110 (rotate 270) "B7" 2773.00 0.00)
+            (pin Pad110 (rotate 270) "B6" 2832.00 0.00)
+            (pin Pad110 (rotate 270) "B5" 2891.00 0.00)
+            (pin Pad110 (rotate 270) "B4" 2950.00 0.00)
+            (pin Pad110 (rotate 270) "B3" 3009.00 0.00)
+            (pin Pad109 (rotate 270) "B2" 3068.00 -31.00)
+            (pin Pad109 (rotate 270) "B1" 3127.00 -31.00)
+            (pin Pad111 (rotate 270) "A1" 3127.00 0.00)
+            (pin Pad111 (rotate 270) "A2" 3068.00 0.00)
+            (pin Pad111 (rotate 270) "A3" 3009.00 0.00)
+            (pin Pad111 (rotate 270) "A4" 2950.00 0.00)
+            (pin Pad111 (rotate 270) "A5" 2891.00 0.00)
+            (pin Pad111 (rotate 270) "A6" 2832.00 0.00)
+            (pin Pad111 (rotate 270) "A7" 2773.00 0.00)
+            (pin Pad111 (rotate 270) "A8" 2714.00 0.00)
+            (pin Pad111 (rotate 270) "A9" 2655.00 0.00)
+            (pin Pad111 (rotate 270) "A10" 2596.00 0.00)
+            (pin Pad111 (rotate 270) "A11" 2537.00 0.00)
+            (pin Pad111 (rotate 270) "A12" 2478.00 0.00)
+            (pin Pad111 (rotate 270) "A15" 2301.00 0.00)
+            (pin Pad111 (rotate 270) "A16" 2242.00 0.00)
+            (pin Pad111 (rotate 270) "A17" 2183.00 0.00)
+            (pin Pad111 (rotate 270) "A18" 2124.00 0.00)
+            (pin Pad111 (rotate 270) "A19" 2065.00 0.00)
+            (pin Pad111 (rotate 270) "A20" 2006.00 0.00)
+            (pin Pad112 (rotate 270) "A21" 1947.00 -31.00)
+            (pin Pad111 (rotate 270) "A22" 1888.00 0.00)
+            (pin Pad111 (rotate 270) "A23" 1829.00 0.00)
+            (pin Pad111 (rotate 270) "A24" 1770.00 0.00)
+            (pin Pad111 (rotate 270) "A25" 1711.00 0.00)
+            (pin Pad111 (rotate 270) "A26" 1652.00 0.00)
+            (pin Pad111 (rotate 270) "A27" 1593.00 0.00)
+            (pin Pad111 (rotate 270) "A28" 1534.00 0.00)
+            (pin Pad111 (rotate 270) "A29" 1475.00 0.00)
+            (pin Pad111 (rotate 270) "A30" 1416.00 0.00)
+            (pin Pad111 (rotate 270) "A31" 1357.00 0.00)
+            (pin Pad111 (rotate 270) "A32" 1298.00 0.00)
+            (pin Pad111 (rotate 270) "A33" 1239.00 0.00)
+            (pin Pad111 (rotate 270) "A34" 1180.00 0.00)
+            (pin Pad111 (rotate 270) "A35" 1121.00 0.00)
+            (pin Pad111 (rotate 270) "A36" 1062.00 0.00)
+            (pin Pad111 (rotate 270) "A37" 1003.00 0.00)
+            (pin Pad112 (rotate 270) "A38" 944.00 -31.00)
+            (pin Pad111 (rotate 270) "A39" 885.00 0.00)
+            (pin Pad111 (rotate 270) "A40" 826.00 0.00)
+            (pin Pad111 (rotate 270) "A41" 767.00 0.00)
+            (pin Pad111 (rotate 270) "A42" 708.00 0.00)
+            (pin Pad111 (rotate 270) "A43" 649.00 0.00)
+            (pin Pad111 (rotate 270) "A44" 590.00 0.00)
+            (pin Pad111 (rotate 270) "A45" 531.00 0.00)
+            (pin Pad111 (rotate 270) "A46" 472.00 0.00)
+            (pin Pad111 (rotate 270) "A47" 413.00 0.00)
+            (pin Pad111 (rotate 270) "A48" 354.00 0.00)
+            (pin Pad111 (rotate 270) "A49" 295.00 0.00)
+            (pin Pad111 (rotate 270) "A50" 236.00 0.00)
+            (pin Pad111 (rotate 270) "A51" 177.00 0.00)
+            (pin Pad111 (rotate 270) "A52" 118.00 0.00)
+            (pin Pad111 (rotate 270) "A53" 59.00 0.00)
+            (pin Pad111 (rotate 270) "A54" 0.00 0.00)
+            (outline
+                (rect signal -25.00 -192.00 3152.00 130.00)
+            )
+        )
+        (image "C0805"
+            (side front)
+            (pin Pad113 (rotate 0) "1" 0.00 0.00)
+            (pin Pad113 (rotate 0) "2" 74.80 0.00)
+            (outline
+                (rect signal -45.40 -51.31 120.20 51.31)
+            )
+            (outline
+                (polygon signal 0
+                    -37.40  43.31
+                    112.20  43.31
+                    112.20  -43.31
+                    -37.40  -43.31
+                )
+            )
+        )
+        (image "F55CAP"
+            (side front)
+            (pin Pad114 (rotate 270) "1" 0.00 -102.36)
+            (pin Pad114 (rotate 270) "2" 0.00 102.36)
+            (outline
+                (rect signal -144.92 -200.04 148.86 171.42)
+            )
+            (outline
+                (path signal 0
+                    -129.92  129.92
+                    129.92  129.92
+                )
+            )
+            (outline
+                (path signal 0
+                    129.92  129.92
+                    129.92  -90.55
+                    90.55  -129.92
+                    -90.55  -129.92
+                    -129.92  -90.55
+                )
+            )
+            (outline
+                (path signal 0
+                    -129.92  -90.55
+                    -129.92  129.92
+                )
+            )
+            (outline
+                (path signal 0
+                    133.86  -165.35
+                    94.49  -165.35
+                )
+            )
+            (outline
+                (path signal 0
+                    114.17  -145.67
+                    114.17  -185.04
+                )
+            )
+        )
+        (image "USBA"
+            (side front)
+            (pin Pad115 (rotate 0) "1" -137.80 0.00)
+            (pin Pad116 (rotate 0) "2" -39.37 0.00)
+            (pin Pad116 (rotate 0) "3" 39.37 0.00)
+            (pin Pad116 (rotate 0) "4" 137.80 0.00)
+            (pin Pad117 (rotate 0) "5" -258.66 -106.69)
+            (pin Pad117 (rotate 0) "6" 258.66 -106.69)
+            (keepout (circle Inner_1 46.22 -137.80 0.00))
+            (keepout (circle Inner_2 46.22 -137.80 0.00))
+            (keepout (circle Inner_1 46.22 -39.37 0.00))
+            (keepout (circle Inner_2 46.22 -39.37 0.00))
+            (keepout (circle Inner_1 46.22 39.37 0.00))
+            (keepout (circle Inner_2 46.22 39.37 0.00))
+            (keepout (circle Inner_1 46.22 137.80 0.00))
+            (keepout (circle Inner_2 46.22 137.80 0.00))
+            (keepout (circle Inner_1 100.55 -258.66 -106.69))
+            (keepout (circle Inner_2 100.55 -258.66 -106.69))
+            (keepout (circle Inner_1 100.55 258.66 -106.69))
+            (keepout (circle Inner_2 100.55 258.66 -106.69))
+            (outline
+                (rect signal -333.62 -530.75 333.62 58.31)
+            )
+            (outline
+                (polygon signal 0
+                    -259.84  43.31
+                    259.84  43.31
+                    259.84  -515.75
+                    -259.84  -515.75
+                )
+            )
+            (outline
+                (circle  signal 36.22 -137.80 0.00)
+            )
+            (outline
+                (circle  signal 36.22 -39.37 0.00)
+            )
+            (outline
+                (circle  signal 36.22 39.37 0.00)
+            )
+            (outline
+                (circle  signal 36.22 137.80 0.00)
+            )
+            (outline
+                (circle  signal 90.55 -258.66 -106.69)
+            )
+            (outline
+                (circle  signal 90.55 258.66 -106.69)
+            )
+        )
+        (image "VQ-64"
+            (side front)
+            (pin Pad103 (rotate 270) "1" 0.00 -76.77)
+            (pin Pad103 (rotate 270) "2" 19.69 -76.77)
+            (pin Pad103 (rotate 270) "3" 39.37 -76.77)
+            (pin Pad103 (rotate 270) "4" 59.06 -76.77)
+            (pin Pad103 (rotate 270) "5" 78.74 -76.77)
+            (pin Pad103 (rotate 270) "6" 98.43 -76.77)
+            (pin Pad103 (rotate 270) "7" 118.11 -76.77)
+            (pin Pad103 (rotate 270) "8" 137.80 -76.77)
+            (pin Pad103 (rotate 270) "9" 157.48 -76.77)
+            (pin Pad103 (rotate 270) "10" 177.17 -76.77)
+            (pin Pad103 (rotate 270) "11" 196.85 -76.77)
+            (pin Pad103 (rotate 270) "12" 216.54 -76.77)
+            (pin Pad103 (rotate 270) "13" 236.22 -76.77)
+            (pin Pad103 (rotate 270) "14" 255.91 -76.77)
+            (pin Pad103 (rotate 270) "15" 275.59 -76.77)
+            (pin Pad103 (rotate 270) "16" 295.28 -76.77)
+            (pin Pad103 (rotate 0) "17" 372.05 0.00)
+            (pin Pad103 (rotate 0) "18" 372.05 19.69)
+            (pin Pad103 (rotate 0) "19" 372.05 39.37)
+            (pin Pad103 (rotate 0) "20" 372.05 59.06)
+            (pin Pad103 (rotate 0) "21" 372.05 78.74)
+            (pin Pad103 (rotate 0) "22" 372.05 98.43)
+            (pin Pad103 (rotate 0) "23" 372.05 118.11)
+            (pin Pad103 (rotate 0) "24" 372.05 137.80)
+            (pin Pad103 (rotate 0) "25" 372.05 157.48)
+            (pin Pad103 (rotate 0) "26" 372.05 177.17)
+            (pin Pad103 (rotate 0) "27" 372.05 196.85)
+            (pin Pad103 (rotate 0) "28" 372.05 216.54)
+            (pin Pad103 (rotate 0) "29" 372.05 236.22)
+            (pin Pad103 (rotate 0) "30" 372.05 255.91)
+            (pin Pad103 (rotate 0) "31" 372.05 275.59)
+            (pin Pad103 (rotate 0) "32" 372.05 295.28)
+            (pin Pad103 (rotate 270) "33" 295.28 372.05)
+            (pin Pad103 (rotate 270) "34" 275.59 372.05)
+            (pin Pad103 (rotate 270) "35" 255.91 372.05)
+            (pin Pad103 (rotate 270) "36" 236.22 372.05)
+            (pin Pad103 (rotate 270) "37" 216.54 372.05)
+            (pin Pad103 (rotate 270) "38" 196.85 372.05)
+            (pin Pad103 (rotate 270) "39" 177.17 372.05)
+            (pin Pad103 (rotate 270) "40" 157.48 372.05)
+            (pin Pad103 (rotate 270) "41" 137.80 372.05)
+            (pin Pad103 (rotate 270) "42" 118.11 372.05)
+            (pin Pad103 (rotate 270) "43" 98.43 372.05)
+            (pin Pad103 (rotate 270) "44" 78.74 372.05)
+            (pin Pad103 (rotate 270) "45" 59.06 372.05)
+            (pin Pad103 (rotate 270) "46" 39.37 372.05)
+            (pin Pad103 (rotate 270) "47" 19.69 372.05)
+            (pin Pad103 (rotate 270) "48" 0.00 372.05)
+            (pin Pad103 (rotate 0) "49" -76.77 295.28)
+            (pin Pad103 (rotate 0) "50" -76.77 275.59)
+            (pin Pad103 (rotate 0) "51" -76.77 255.91)
+            (pin Pad103 (rotate 0) "52" -76.77 236.22)
+            (pin Pad103 (rotate 0) "53" -76.77 216.54)
+            (pin Pad103 (rotate 0) "54" -76.77 196.85)
+            (pin Pad103 (rotate 0) "55" -76.77 177.17)
+            (pin Pad103 (rotate 0) "56" -76.77 157.48)
+            (pin Pad103 (rotate 0) "57" -76.77 137.80)
+            (pin Pad103 (rotate 0) "58" -76.77 118.11)
+            (pin Pad103 (rotate 0) "59" -76.77 98.43)
+            (pin Pad103 (rotate 0) "60" -76.77 78.74)
+            (pin Pad103 (rotate 0) "61" -76.77 59.06)
+            (pin Pad103 (rotate 0) "62" -76.77 39.37)
+            (pin Pad103 (rotate 0) "63" -76.77 19.69)
+            (pin Pad103 (rotate 0) "64" -76.77 0.00)
+            (outline
+                (rect signal -118.27 -118.27 413.54 413.54)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  19.69
+                    19.69  0.00
+                    295.28  0.00
+                    295.28  295.28
+                    0.00  295.28
+                )
+            )
+        )
+        (image "MSOP8"
+            (side front)
+            (pin Pad118 (rotate 90) "1" 0.00 0.00)
+            (pin Pad119 (rotate 270) "2" 25.59 0.00)
+            (pin Pad119 (rotate 270) "3" 51.18 0.00)
+            (pin Pad119 (rotate 270) "4" 76.77 0.00)
+            (pin Pad119 (rotate 270) "5" 76.77 165.35)
+            (pin Pad119 (rotate 270) "6" 51.18 165.35)
+            (pin Pad119 (rotate 270) "7" 25.59 165.35)
+            (pin Pad119 (rotate 270) "8" 0.00 165.35)
+            (pin Pad120 (rotate 270) "9" 38.39 82.68)
+            (outline
+                (rect signal -18.86 -32.64 95.57 197.99)
+            )
+            (outline
+                (polygon signal 0
+                    0.00  36.42
+                    76.77  36.42
+                    76.77  128.94
+                    0.00  128.94
+                    0.00  96.46
+                    6.40  96.46
+                    6.40  68.90
+                    0.00  68.90
+                )
+            )
+        )
+        (image "USBMINI"
+            (side front)
+            (pin Pad121 (rotate 270) "1" -62.99 0.00)
+            (pin Pad121 (rotate 270) "2" -31.50 0.00)
+            (pin Pad121 (rotate 270) "3" 0.00 0.00)
+            (pin Pad121 (rotate 270) "4" 31.50 0.00)
+            (pin Pad121 (rotate 270) "5" 62.99 0.00)
+            (pin Pad122 (rotate 270) "6" -193.90 0.00)
+            (pin Pad122 (rotate 270) "7" 193.90 0.00)
+            (pin Pad123 (rotate 270) "8" -193.90 -157.48)
+            (pin Pad123 (rotate 270) "9" 193.90 -157.48)
+            (outline
+                (rect signal -244.25 -341.77 244.25 78.90)
+            )
+            (outline
+                (polygon signal 0
+                    -196.85  31.50
+                    196.85  31.50
+                    196.85  -326.77
+                    -196.85  -326.77
+                )
+            )
+        )
+        (padstack DefVia
+            (shape (circle signal 30.00))
+        )
+        (padstack Pad102
+            (shape (rect Top -28.54 -5.85 28.54 5.85))
+        )
+        (padstack Pad103
+            (shape (rect Top -31.50 -5.85 31.50 5.85))
+        )
+        (padstack Pad104
+            (shape (rect Top -25.00 -25.00 25.00 25.00))
+            (shape (circle Inner_1 50.00))
+            (shape (circle Inner_2 50.00))
+            (shape (rect Bottom -25.00 -25.00 25.00 25.00))
+        )
+        (padstack Pad105
+            (shape (circle signal 50.00))
+        )
+        (padstack Pad106
+            (shape (rect Top -21.65 -23.62 21.65 23.62))
+        )
+        (padstack Pad107
+            (shape (rect Top -108.27 -39.37 108.27 39.37))
+        )
+        (padstack Pad108
+            (shape (rect Top -27.00 -35.50 27.00 35.50))
+        )
+        (padstack Pad109
+            (shape (rect Top -151.00 -15.00 151.00 15.00))
+        )
+        (padstack Pad110
+            (shape (rect Top -120.00 -15.00 120.00 15.00))
+        )
+        (padstack Pad111
+            (shape (rect Bottom -120.00 -15.00 120.00 15.00))
+        )
+        (padstack Pad112
+            (shape (rect Bottom -151.00 -15.00 151.00 15.00))
+        )
+        (padstack Pad113
+            (shape (rect Top -25.59 -31.50 25.59 31.50))
+        )
+        (padstack Pad114
+            (shape (rect Top -59.06 -29.53 59.06 29.53))
+        )
+        (padstack Pad115
+            (shape (rect Top -29.53 -29.53 29.53 29.53))
+            (shape (rect Bottom -29.53 -29.53 29.53 29.53))
+        )
+        (padstack Pad116
+            (shape (circle Top 59.06))
+            (shape (circle Bottom 59.06))
+        )
+        (padstack Pad117
+            (shape (circle Top 129.92))
+            (shape (circle Bottom 129.92))
+        )
+        (padstack Pad118
+            (shape (rect Top -22.64 -8.86 22.64 8.86))
+        )
+        (padstack Pad119
+            (shape (rect Top -22.64 -8.80 22.64 8.80))
+        )
+        (padstack Pad120
+            (shape (rect Top -36.42 -36.42 36.42 36.42))
+        )
+        (padstack Pad121
+            (shape (rect Top -44.29 -9.84 44.29 9.84))
+        )
+        (padstack Pad122
+            (shape (rect Top -68.90 -40.35 68.90 40.35))
+        )
+        (padstack Pad123
+            (shape (rect Top -70.87 -40.35 70.87 40.35))
+        )
+    )
+    (network
+        (net "GPIO1"
+            (pins
+                "J1"-"B43"
+                "U1"-"45"
+            )
+        )
+        (net "D11"
+            (pins
+                "U2"-"11"
+                "U1"-"60"
+                "U3"-"36"
+            )
+        )
+        (net "D3"
+            (pins
+                "U3"-"39"
+                "U2"-"40"
+                "U1"-"90"
+            )
+        )
+        (net "ED12"
+            (pins
+                "J1"-"A34"
+                "U2"-"64"
+            )
+        )
+        (net "ED2"
+            (pins
+                "J1"-"A31"
+                "U2"-"61"
+            )
+        )
+        (net "EA15"
+            (pins
+                "J1"-"A11"
+                "U3"-"2"
+            )
+        )
+        (net "EZRESET"
+            (pins
+                "U2"-"2"
+                "U1"-"85"
+                "R12"-"1"
+            )
+        )
+        (net "EZ30"
+            (pins
+                "U2"-"20"
+                "U1"-"40"
+            )
+        )
+        (net "D12"
+            (pins
+                "U2"-"12"
+                "U1"-"59"
+                "U3"-"38"
+            )
+        )
+        (net "D4"
+            (pins
+                "U3"-"32"
+                "U2"-"42"
+                "U1"-"91"
+            )
+        )
+        (net "FWE"
+            (pins
+                "U3"-"11"
+                "U2"-"35"
+            )
+        )
+        (net "ED3"
+            (pins
+                "J1"-"A35"
+                "U2"-"59"
+            )
+        )
+        (net "ED13"
+            (pins
+                "J1"-"A30"
+                "U2"-"60"
+            )
+        )
+        (net "EA16"
+            (pins
+                "J1"-"A15"
+                "U3"-"1"
+            )
+        )
+        (net "VCC5"
+            (pins
+                "J1"-"B36"
+                "J1"-"B37"
+                "J1"-"A38"
+                "C44"-"1"
+                "C42"-"2"
+                "U4"-"2"
+                "U4"-"7"
+            )
+        )
+        (net "EZ31"
+            (pins
+                "U2"-"22"
+                "U1"-"39"
+            )
+        )
+        (net "PWM"
+            (pins
+                "U2"-"24"
+                "U1"-"53"
+            )
+        )
+        (net "D13"
+            (pins
+                "U2"-"13"
+                "U1"-"58"
+                "U3"-"43"
+            )
+        )
+        (net "D5"
+            (pins
+                "U3"-"31"
+                "U2"-"43"
+                "U1"-"92"
+            )
+        )
+        (net "ED4"
+            (pins
+                "J1"-"A36"
+                "U2"-"4"
+            )
+        )
+        (net "ED14"
+            (pins
+                "J1"-"A26"
+                "U2"-"50"
+            )
+        )
+        (net "EA1"
+            (pins
+                "J1"-"B15"
+                "U3"-"25"
+            )
+        )
+        (net "EA17"
+            (pins
+                "J1"-"A17"
+                "U3"-"17"
+            )
+        )
+        (net "VBUS1"
+            (pins
+                "J5"-"1"
+                "J6"-"1"
+                "L5"-"1"
+            )
+        )
+        (net "OTGVBUS"
+            (pins
+                "J7"-"1"
+                "U1"-"11"
+            )
+        )
+        (net "D14"
+            (pins
+                "U2"-"15"
+                "U1"-"57"
+                "U3"-"44"
+            )
+        )
+        (net "D6"
+            (pins
+                "U3"-"30"
+                "U2"-"44"
+                "U1"-"93"
+            )
+        )
+        (net "ED5"
+            (pins
+                "J1"-"A32"
+                "U2"-"62"
+            )
+        )
+        (net "ED15"
+            (pins
+                "J1"-"A22"
+                "U2"-"48"
+            )
+        )
+        (net "ROM1"
+            (pins
+                "J1"-"A20"
+                "U2"-"47"
+            )
+        )
+        (net "EA18"
+            (pins
+                "J1"-"A19"
+                "U3"-"48"
+            )
+        )
+        (net "EA2"
+            (pins
+                "J1"-"A18"
+                "U3"-"8"
+            )
+        )
+        (net "RESETIL"
+            (pins
+                "J1"-"B33"
+                "U1"-"54"
+            )
+        )
+        (net "EINT0"
+            (pins
+                "J1"-"B25"
+                "U2"-"32"
+            )
+        )
+        (net "TDI"
+            (pins
+                "J9"-"2"
+                "U2"-"29"
+                "U1"-"42"
+            )
+        )
+        (net "EZA0"
+            (pins
+                "U2"-"23"
+                "U1"-"52"
+            )
+        )
+        (net "D15"
+            (pins
+                "U2"-"16"
+                "U1"-"56"
+                "U3"-"45"
+            )
+        )
+        (net "D7"
+            (pins
+                "U3"-"29"
+                "U2"-"45"
+                "U1"-"94"
+            )
+        )
+        (net "ED6"
+            (pins
+                "J1"-"A28"
+                "U2"-"57"
+            )
+        )
+        (net "EA19"
+            (pins
+                "J1"-"B7"
+                "U3"-"10"
+            )
+        )
+        (net "EA3"
+            (pins
+                "J1"-"A16"
+                "U3"-"19"
+            )
+        )
+        (net "TMS"
+            (pins
+                "J9"-"1"
+                "U2"-"28"
+                "U1"-"41"
+            )
+        )
+        (net "EZA1"
+            (pins
+                "U2"-"17"
+                "U1"-"50"
+            )
+        )
+        (net "D8"
+            (pins
+                "U2"-"6"
+                "U1"-"66"
+                "U3"-"33"
+            )
+        )
+        (net "ED7"
+            (pins
+                "J1"-"A24"
+                "U2"-"51"
+            )
+        )
+        (net "EA4"
+            (pins
+                "J1"-"A12"
+                "U3"-"20"
+            )
+        )
+        (net "VCC9"
+            (pins
+                "J1"-"B27"
+                "U3"-"13"
+                "C33"-"2"
+            )
+        )
+        (net "SCK"
+            (pins
+                "J1"-"B47"
+                "U2"-"25"
+            )
+        )
+        (net "UARTI"
+            (pins
+                "J1"-"B30"
+                "U1"-"70"
+            )
+        )
+        (net "ERW"
+            (pins
+                "J1"-"B21"
+                "U2"-"34"
+            )
+        )
+        (net "D9"
+            (pins
+                "U2"-"7"
+                "U1"-"65"
+                "U3"-"34"
+            )
+        )
+        (net "ED8"
+            (pins
+                "J1"-"A25"
+                "U2"-"49"
+            )
+        )
+        (net "EA5"
+            (pins
+                "J1"-"A10"
+                "U3"-"21"
+            )
+        )
+        (net "DM2A"
+            (pins
+                "U1"-"9"
+                "J7"-"2"
+            )
+        )
+        (net "CLKSEL"
+            (pins
+                "R11"-"1"
+                "U1"-"38"
+            )
+        )
+        (net "JE2RXD"
+            (pins
+                "J1"-"B40"
+                "J1"-"B50"
+                "U2"-"31"
+            )
+        )
+        (net "TCK"
+            (pins
+                "J9"-"4"
+                "U2"-"30"
+                "U1"-"44"
+            )
+        )
+        (net "EZRD"
+            (pins
+                "U2"-"19"
+                "U1"-"47"
+            )
+        )
+        (net "ED9"
+            (pins
+                "J1"-"A29"
+                "U2"-"58"
+            )
+        )
+        (net "EA6"
+            (pins
+                "J1"-"A8"
+                "U3"-"22"
+            )
+        )
+        (net "DM1A"
+            (pins
+                "U1"-"22"
+                "J5"-"2"
+            )
+        )
+        (net "EA7"
+            (pins
+                "J1"-"A6"
+                "U3"-"23"
+            )
+        )
+        (net "DM1B"
+            (pins
+                "U1"-"18"
+                "J6"-"2"
+            )
+        )
+        (net "JCLK"
+            (pins
+                "J1"-"B52"
+                "U2"-"9"
+            )
+        )
+        (net "EA8"
+            (pins
+                "J1"-"A4"
+                "U3"-"18"
+            )
+        )
+        (net "DP2A"
+            (pins
+                "U1"-"10"
+                "J7"-"3"
+            )
+        )
+        (net "XTALOUT"
+            (pins
+                "U1"-"28"
+                "X8"-"1"
+                "C81"-"2"
+            )
+        )
+        (net "TDO"
+            (pins
+                "J9"-"3"
+                "U2"-"53"
+                "U1"-"43"
+            )
+        )
+        (net "EA9"
+            (pins
+                "J1"-"A2"
+                "U3"-"6"
+            )
+        )
+        (net "GND"
+            (pins
+                "J1"-"B54"
+                "J1"-"B53"
+                "J1"-"B51"
+                "J1"-"B32"
+                "J1"-"B29"
+                "J1"-"B24"
+                "J1"-"B12"
+                "J1"-"B10"
+                "J1"-"B8"
+                "J1"-"B2"
+                "J1"-"B1"
+                "J1"-"A21"
+                "U1"-"15"
+                "U1"-"6"
+                "U1"-"26"
+                "U1"-"51"
+                "U1"-"75"
+                "U1"-"100"
+                "U1"-"84"
+                "U2"-"14"
+                "U2"-"21"
+                "U2"-"41"
+                "U2"-"54"
+                "U3"-"46"
+                "U3"-"27"
+                "U3"-"26"
+                "U3"-"14"
+                "U4"-"5"
+                "U4"-"9"
+                "U4"-"8"
+                "C11"-"2"
+                "C12"-"2"
+                "C13"-"2"
+                "C14"-"2"
+                "C15"-"1"
+                "C21"-"2"
+                "C22"-"2"
+                "C23"-"1"
+                "C24"-"1"
+                "C31"-"1"
+                "C32"-"2"
+                "C33"-"1"
+                "C44"-"2"
+                "C42"-"1"
+                "C43"-"2"
+                "C41"-"1"
+                "C51"-"2"
+                "R11"-"2"
+                "C81"-"1"
+                "C82"-"1"
+                "R12"-"2"
+                "J5"-"4"
+                "J6"-"4"
+                "J7"-"5"
+                "C71"-"2"
+                "R71"-"2"
+                "J9"-"5"
+            )
+        )
+        (net "SHIELD"
+            (pins
+                "J5"-"5"
+                "J5"-"6"
+                "J6"-"5"
+                "J6"-"6"
+                "J7"-"6"
+                "J7"-"7"
+                "J7"-"8"
+                "J7"-"9"
+                "C71"-"1"
+                "R71"-"1"
+            )
+        )
+        (net "DP1A"
+            (pins
+                "U1"-"23"
+                "J5"-"3"
+            )
+        )
+        (net "CSENSE"
+            (pins
+                "J1"-"B34"
+                "J1"-"B35"
+            )
+        )
+        (net "EA20"
+            (pins
+                "J1"-"B6"
+                "U3"-"15"
+            )
+        )
+        (net "OVRCURL"
+            (pins
+                "U4"-"6"
+                "U1"-"5"
+                "R41"-"1"
+            )
+        )
+        (net "VBUS"
+            (pins
+                "L5"-"2"
+                "C51"-"1"
+                "U4"-"1"
+                "C41"-"2"
+            )
+        )
+        (net "DP1B"
+            (pins
+                "U1"-"19"
+                "J6"-"3"
+            )
+        )
+        (net "XTALIN"
+            (pins
+                "U1"-"29"
+                "X8"-"2"
+                "C82"-"2"
+            )
+        )
+        (net "UARTO"
+            (pins
+                "J1"-"B31"
+                "U1"-"71"
+            )
+        )
+        (net "EA21"
+            (pins
+                "J1"-"B5"
+                "U3"-"16"
+            )
+        )
+        (net "EA10"
+            (pins
+                "J1"-"A1"
+                "U3"-"5"
+            )
+        )
+        (net "WS"
+            (pins
+                "J1"-"B48"
+                "U2"-"8"
+            )
+        )
+        (net "EA22"
+            (pins
+                "J1"-"B4"
+                "U2"-"36"
+            )
+        )
+        (net "FLOE"
+            (pins
+                "U3"-"28"
+                "U2"-"46"
+            )
+        )
+        (net "EA11"
+            (pins
+                "J1"-"A3"
+                "U3"-"7"
+            )
+        )
+        (net "JAUDIO"
+            (pins
+                "J1"-"B49"
+                "U2"-"5"
+            )
+        )
+        (net "D0"
+            (pins
+                "U3"-"42"
+                "U2"-"33"
+                "U1"-"86"
+            )
+        )
+        (net "EA12"
+            (pins
+                "J1"-"A5"
+                "U3"-"24"
+            )
+        )
+        (net "D1"
+            (pins
+                "U3"-"41"
+                "U2"-"38"
+                "U1"-"87"
+            )
+        )
+        (net "ED10"
+            (pins
+                "J1"-"A33"
+                "U2"-"63"
+            )
+        )
+        (net "ED0"
+            (pins
+                "J1"-"A23"
+                "U2"-"52"
+            )
+        )
+        (net "EA13"
+            (pins
+                "J1"-"A7"
+                "U3"-"4"
+            )
+        )
+        (net "GPIO0"
+            (pins
+                "J1"-"B42"
+                "U2"-"27"
+            )
+        )
+        (net "RESETL"
+            (pins
+                "J1"-"B18"
+                "U3"-"12"
+            )
+        )
+        (net "EZWR"
+            (pins
+                "U2"-"18"
+                "U1"-"48"
+            )
+        )
+        (net "D10"
+            (pins
+                "U2"-"10"
+                "U1"-"61"
+                "U3"-"35"
+            )
+        )
+        (net "D2"
+            (pins
+                "U3"-"40"
+                "U2"-"39"
+                "U1"-"89"
+            )
+        )
+        (net "ED11"
+            (pins
+                "J1"-"A37"
+                "U2"-"1"
+            )
+        )
+        (net "ED1"
+            (pins
+                "J1"-"A27"
+                "U2"-"56"
+            )
+        )
+        (net "EA14"
+            (pins
+                "J1"-"A9"
+                "U3"-"3"
+            )
+        )
+        (net "VCC3"
+            (pins
+                "U1"-"16"
+                "U1"-"21"
+                "U1"-"37"
+                "U1"-"63"
+                "U1"-"88"
+                "C11"-"1"
+                "C12"-"1"
+                "C13"-"1"
+                "C14"-"1"
+                "C15"-"2"
+                "U2"-"3"
+                "U2"-"37"
+                "U2"-"26"
+                "U2"-"55"
+                "C21"-"1"
+                "C22"-"1"
+                "C23"-"2"
+                "C24"-"2"
+                "U3"-"47"
+                "U3"-"37"
+                "C31"-"2"
+                "C32"-"1"
+                "C43"-"1"
+                "U4"-"3"
+                "R41"-"2"
+                "J9"-"6"
+            )
+        )
+        (via DefVia DefVia via)
+        (via_rule default DefVia)
+        (class default
+            "GPIO1"  "D11"  "D3"  "ED12"  
+            "ED2"  "EA15"  "EZRESET"  "EZ30"  
+            "D12"  "D4"  "FWE"  "ED3"  
+            "ED13"  "EA16"  "VCC5"  "EZ31"  
+            "PWM"  "D13"  "D5"  "ED4"  
+            "ED14"  "EA1"  "EA17"  "VBUS1"  
+            "OTGVBUS"  "D14"  "D6"  "ED5"  
+            "ED15"  "ROM1"  "EA18"  "EA2"  
+            "RESETIL"  "EINT0"  "TDI"  "EZA0"  
+            "D15"  "D7"  "ED6"  "EA19"  
+            "EA3"  "TMS"  "EZA1"  "D8"  
+            "ED7"  "EA4"  "VCC9"  "SCK"  
+            "UARTI"  "ERW"  "D9"  "ED8"  
+            "EA5"  "DM2A"  "CLKSEL"  "JE2RXD"  
+            "TCK"  "EZRD"  "ED9"  "EA6"  
+            "DM1A"  "EA7"  "DM1B"  "JCLK"  
+            "EA8"  "DP2A"  "XTALOUT"  "TDO"  
+            "EA9"  "GND"  "SHIELD"  "DP1A"  
+            "CSENSE"  "EA20"  "OVRCURL"  "VBUS"  
+            "DP1B"  "XTALIN"  "UARTO"  "EA21"  
+            "EA10"  "WS"  "EA22"  "FLOE"  
+            "EA11"  "JAUDIO"  "D0"  "EA12"  
+            "D1"  "ED10"  "ED0"  "EA13"  
+            "GPIO0"  "RESETL"  "EZWR"  "D10"  
+            "D2"  "ED11"  "ED1"  "EA14"  
+            "VCC3"  
+            (clearance_class default)
+            (via_rule default)
+        )
+    )
+    (wiring
+    )
+)

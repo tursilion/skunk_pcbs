@@ -1,0 +1,57 @@
+Pre-bringup:
+
+	x Find a good adjustable power supply and clips for the test
+	x Write Windows and BJL code to allow remote I/O to Jag
+	o Write the VHDL program for the CPLD.  Test it on the prototype board.
+		This one just maps ROM+A22+RW to the various RD/WR lines
+	o Write the CY16 boot loader and test it on the prototype board
+		This one just enumerates the USB stick and parses fat and root dir
+
+	These tasks get you ramped up on the tools in time for the board to arrive
+
+Actual bringup:
+
+x Check for shorts between ground and VCC and shield ground with multimeter
+x Visually insepect all components for polarity and shorts
+	x Look out for shorting shield ground to VBUS under J1 -- doh!
+		That trace is 3.7mm south of mounting connector -- datasheet says 3.75
+		Hopefully the solder mask is non-conductive  :-(
+x Check that ground and VCC planes have good continuity -- they could be broken!
+
+x Clamp jumpers to VCC and GND -- apply 5V and cross fingers
+x Use multimeter to measure 3V+GND via JTAG interface
+	3.32V @ 85ma -- good enough!
+x Use USB to probe for EZ-HOST
+	No reset required!
+x Use JTAG cable to probe for CPLD
+	XC9572 baby!
+
+x If you get this far, you are a rock star
+	Call me Bono!
+
+x Test again, in Jaguar this time...  Watch Jaguar clock on JTAG interface
+	Can't do... none of my tools allow that kind of scan
+
+x Program CPLD to do a simple bus controller -- try to read AA55 and 55AA on Jaguar
+	Works in 16-bit mode!  Woo!
+x Program CPLD to do an async bus bridge to EZ and Flash, with HPI mode bootstrap
+	x Try programming in dual word mode
+		I CAN'T BELIEVE IT WORKS!
+	x Try to read and write EZ memory -- confirm memory layout is as expected (endian swap)
+		Endian is correct for 16-bit words -- slightly funky for 32-bit ones
+		Strings are 'backwards'....
+
+x If you get this far, you are a superhero
+	Call me superskunk!
+
+Erase Flash, program boot image, get it to boot
+
+If you get this far, you are a diety
+
+Test basic SPI read/write (audio loopback)
+Test SPI master at 44.1KHz with audio loopback
+Test EEPROM bit banging (just see if we can read/write A5)
+Test UART at Doom speed (see if we can read/write A5)
+
+If you get this far, you are done... send out for manufacturing
+

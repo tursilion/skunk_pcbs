@@ -1,0 +1,8 @@
+Sunstone Circuits:
+	Qty 100
+	3.702" x 1.4764"
+	3.228" gold fingers
+
+	3 weeks = $10.44/board (save 21 cents/board by dropping front silkscreen)
+
+	

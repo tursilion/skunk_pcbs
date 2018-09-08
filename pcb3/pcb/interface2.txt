@@ -1,0 +1,270 @@
+All the software is going to be open source, in the desperate hope somebody else supports it!
+
+Boot:
+	Jaguar does not access the bus for some time after reset -- it copies ROM to RAM first
+	On first access to /ROM1+A22+RW, the CPLD brings reset high
+		Flash should output data within 100ns -- fast enough for the 375ns boot bus
+	Once RESET goes high, the CPLD begins the EZ-HOST count down
+		This is about 2.5ms (32768 Jag ticks)
+	The MD5 stub is hacked to bail out immediately -- MD5 is not even executed
+		However, it should take longer than 2.5ms to reach this phase
+	Once the EZ-host countdown completes...
+		At this point, Flash ROM access is denied while EZ-HOST is initialized
+		The boot-up state machine writes the low interrupt vectors
+			This disables TX/RX (killing the EZ-HOST on attempted access)
+			This also sets up the boot vector at 3000 in EZ-HOST
+			Finally it sets the HPI write address to 2000 in EZ-HOST
+		At this state, the boot-up state machine becomes clocked by A22 instead of JCLK
+	The GPU then finishes, and 68K code begins execution at 801000 (COLD START vector)
+		The cold start code copies a small copy stub to 1000 in Jag memory
+		It also has a tiny wait loop in RAM to ensure that EZ-HOST is initialized
+			This makes sense in case you have a BJL ROM that skipped the GPU
+	The copy stub copies from C00082-C02081 to 10000-101FFB
+		The boot state machine interprets these reads as follows:
+			C00082	Write 0x60 to Flash
+			C00083  Write 0x2F to Flash	Hard lock boot sector
+			C00084	Write 0x90 to Flash	Read user Flash ID
+			C00085	Read word from Flash into scrambler, masking word from Jag
+			C00086	Read word from Flash into scrambler, masking word from Jag
+			C00087	Write 0xFF to Flash
+			C00088+	Read word from Flash into scrambler and Jag, write scrambler to EZ
+->		This behavior is convenient since it lets a 'warmed up' EZ-HOST take over faster
+			For example, if the EZ-HOST resets the Jag, these reads pull from EZ-FIFO
+	ROM accesses are counted using the JCLK counter (aka UART counter, EZ-HOST countdown)
+		We allow 4095 accesses -- the count is reset once when A22 first goes high
+		That means we get 4096 accesses for copy kernel, then 4096 accesses for program
+		This prevents unauthorized ROM execution and EZ-HOST buffer overflows
+	After 4095 reads from C0xxxx, the 32-bit scrambler register must be 0xFFFFFFFF
+		This is all 1s in the scrambler and JCLK counter and other bits...
+		Only at this instant is the EZ-HOST mailbox written, starting EZ-HOST code
+	The 68K copy-loop jumps to 10010 -- the error handler
+		The error handler begins polling D00000, waiting for D15 to go to 1
+		The CPLD keeps returning 0 until it exits boot mode
+	The EZ-HOST begins its own boot-up
+		This involves enumeration, file system identification, FAT/directory parsing
+		It then loads the 'boot block' -- an 8KB, RSA-signed, RC4 encrypted, data block
+		The signature is checked using the CPLD RSA feature
+		If anything goes wrong, an appropriate code is written back to the CPLD
+		If nothing is wrong, the boot block receives control
+		The boot block seeks ahead (past other EZ-HOST code and cart checksums)
+		It then sets up streaming to the Jaguar and sets F1F1 (success) in the CPLD
+		It then loads the remainder of the file -- the unencrypted BIOS and 68K boot loader
+	The 68K error handler sees D15 go to 1
+		It checks for F1F1 -- if it gets it, we run the blitloader
+		If any other code is returned, the error handler displays an appropriate message
+		Additionally, if no code is returned after 2 seconds, the hardware is assumed dead
+		The EZ-HOST can send 'SPN' codes to indicate a slow spin-up on hardware
+		Even after an error code is displayed, the error handler continues polling
+			This allows slow spinning hardware or loose connections to be fixed
+	The 68K blitloader loads the BIOS and boot loader into memory starting at 0x400
+		The blitloader might not even use interrupts -- it could poll and move 2KB...
+		Once 16KB of code is successfully loaded, the blitloader transfers control to 0x4000
+		That means just 1KB of boot loader stub is loaded so far
+	The 68K boot loader stub is expected to use the BIOS to finish boot-up
+		This usually means continuing to read from the current file
+		Simple boot loaders can just load the rest of their image into memory from here
+		More complex boot loaders may play sounds and audio and decompress their files
+		The most complex boot loaders may scan other parts of the FAT...  Crazy!
+
+	There is no need for multiboot here
+		If you're testing boot loaders, swap USB sticks or overwrite images from your PC
+		It's not like you ever need an emergency boot!
+
+Erasing:
+	Erasing must begin as soon as possible, hopefully right after EZ-HOST is loaded
+		RDY/BUSY sure would've rocked...
+
+	One slice of stupidity is that the CPLD is blocking ROM access when we ought to be erasing
+		So we can't really check to see if the sector is already erased
+		HOPEFULLY the state machine on-chip is smart enough to check for us to save time
+->		TIME IT!
+		Otherwise we need to XOR the bits for scanning -- so we see 0xFFFF0000 as erased
+	We also need to poll erasing... RDY/BUSY where are you?  :-(  I had the 322 in cyjag.txt...
+		Polling an erase can't intefere with OHCI or other EZ-HOST activity
+		Best bet is 1KHz poll in GPU -- just read and see if bit 7 wobbles
+	So the CPLD logic has to allow:
+		Write 60/D0/20/D0... read anything (no restrictions)... write FF (read restricted)
+		Or we can just let only SR7/5/4/3 bleed through -- that's not gonna kill us?
+		Probably read restriction is as cheap though... and it's cleaner
+	1KHz poll rate is _plenty_ -- that only adds 70ms overhead worst case!
+		And of course that gets ganged on OHCI...
+
+My favorite boot loader:
+	cat bios bootload boot.ini audio.wav.gz splash.bmp.gz vmlinux.gz initrd.gz > catboot.bin
+
+	This little boot loader contains a GPU-based zlib and primitive .ini parser
+		This lets it pass kernel parameters to the booting image
+	Audio and a splash screen are played while loading and booting the kernel
+	Prior to kernel launch, the BIOS is switched into OHCI mode
+	With a little help from the kernel, audio and animation continues seemlessly during boot
+		Editing boot.ini can get you console output if you prefer
+
+	catbios.bin can be stored uncompressed as the first entry in a zip file
+		The first 64 bytes of the bios are ignored, so the zip file header doesn't hurt
+
+	This is perfect for jagwave.zip -- the preferred boot file (if it exists)
+		That way, corrupt sticks can be reloaded with jagwave.zip
+
+	The boot loader uses the 'framebuffer' memory (256KB reserved) for audio and bitmaps
+		That implies we can have 15 seconds of 22KHz/ADPCM audio plus 320x224x256 splash
+		All that leaves room for the boot loader too!  (Not that it's doing much)
+
+	The initrd contains the single XIP executable that we pair with the kernel
+		It also contains various device nodes and other cheap stuff we need
+
+	On startup, the runtime examines the BIOS header to find out how it booted (ZIP vs IMG)
+		The BIOS header is also written with the machine serial number
+		Then again, the serial number could harmlessly be in the boot Flash
+
+	Did I say ZIP?  I meant romfs -- we're already using it for initrd.
+
+	If the runtime determines it was booted from catsetup.bin, it mounts it via loopback
+		USB->FAT->ROMFS
+	It then opens main.lua, which displays the necessary instructions, disk check, status bar
+		Fonts and widgets are built into the runtime, so all we need is one lua!
+	After walking the user through removing devices and agreeing to licenses, install...
+		The install gunzips all the files from ROM to FAT (maaaybe using the GPU)
+		Its final action is to copy catbios.bin out to disk, then delete itself
+	If we ever have to reprogram the CPLD, that happens after the next reset...
+		Here's hoping we never have to change the boot block
+		It is technically possible, but requires an EZ-HOST reset without a Jag reset
+			We should allow this for the sake of swap copy
+		When the EZ-HOST is reset, we can read from C1 and hardlock a different block
+
+->	This could be the 'easy way' to program minimum version bits after upgrade...
+
+Hardware interface:
+	GPIO0 is not available for read/write -- sample code reads and writes it
+
+Jag bus:
+	Addresses and commands are always written to 0x801FF0:
+		8x00-8xFF	Set joystick pointer (next 2 accesses are from reg*4, then FIFO)
+		4000-4FFE	Set register pointer (next access is from reg, then FIFO)
+		2000-2FFE	Set FIFO pointer (next access is from FIFO)
+		1000-1FFF	Set peripheral mode (SCK speed, UART speed, etc)
+		0000-0FFF	Send command to EZ-HOST (mode changes, reset, etc)
+
+	Data is usually read/written from 0xD00024, but can also come from 0xC0xxxx on boot
+
+	Flash can never be written, but writes are generated in program and erase mode
+		Program and erase mode are set up by the EZ-HOST
+		Cart read mode is entered only after conditions in the EZ-HOST are met
+
+	Yet another misfortune of not using the '322:
+		With the 322, we can use device erase to ensure all sectors are erased
+		With the 320, we have to trust the boot logic to erase everything
+
+EEPROM interface:
+	SCK and EEPROM cannot be enabled at the same time -- there's not enough state!
+
+	Only read and write commands are understood
+	Read commands cause the requested address to be read immediately (that's 2 EZ transactions)
+	Write commands cause the requested address to be written eventually
+
+	The read/write timing is the same as a register command -- FIFO is available after completion
+
+	Register commands still work while EEPROM are shifted in or out
+	UNLESS the EEPROM trigger shift occurs the cycle after a register address change
+
+SCK interface:
+	Automatically shifts out FIFO data at precise intervals controlled by peripheral mode reg
+	FIFO access is not allowed
+	Register access is allowed, but with constrained timing
+		We might even need to poll -- worth experimenting with
+
+UART interface:
+	UART timer could be auto-configure -- but Jag sets it first
+
+-->	Need to find out if mailbox has timing as strict as memory port
+
+	The most likely variation clocks out UART bits in sync with bits clocking in
+		There is just one 9-bit shift register (maybe a little more for parity/start)
+	The EZ mailbox is polled while the shifter is idle
+		Whenever a byte is arriving or being sent, the mailbox is not polled
+	This allows simultaneous reads and writes to stay exactly synchronized -- only one shifter!
+	When a byte has fully arrived, the CPLD waits for an idle bus cycle
+		It uses this cycle to first write the incoming byte to the mailbox
+		Then it reads the outgiong byte (or all 0s) from the mailbox
+		This clears out the shift register, preparing us to receive another byte
+		This should be able to occur within one bit time
+
+Joystick emulation interface:
+	Any command write with D15 high is assumed to be a joystick write
+	Bit 0&1 are XORed with bits 6&7 in setting the address -- this is not a shift
+	Supporting 'banked' controllers is a PITA... we need some extra XORs for that
+		Of course it must be disabled by default...  Yay for mode bits  :-(
+		If enabled, accesses to row 0 on socket 0-1 on port 1 or 2 must toggle the flipflop
+		Maybe only missile command supports 2 bank controllers anyway
+		There is such a thing as a 3 bank controller, but what would support it?
+
+MAJOR GAPS:
+-->	XXX: How is the EZ-HOST supposed to know the current FIFO address for generating interrupts?
+
+EZ-HOST side:
+	The Jaguar controls practically all mode flags and settings in the CPLD
+	The EZ-HOST can reset or interrupt the Jaguar directly without CPLD help
+
+	The EZ-HOST provides the main (8MHz) clock to the CPLD -- allowing well-timed bus access
+		8MHz requires a fancier clock divider for SCK than the expected 6MHz
+		6MHz does not allow the same tight timing of course
+			8MHz = /2 + 16:6.66 on/off = 5.66ms
+			6MHz = /2 + 16:1 on/off = 5.66ms
+		12MHz makes timing bus I/O more complicated -- since we have to count half-cycles
+		We might only use 6MHz when SCK is enabled
+			Register read/writes suck when SCK is on anyway!
+
+	The EZ-HOST can send data back to the CPLD via 'mailbox reads'
+		The CPLD polls for these all the time when the clock is running
+		It may take up to one 'UART byte time' between polls -- at most 100us
+
+	The mailbox read format is very simple:
+		D0-9:	UART data/one-hot mode bits
+		D10-14: Additional one-hot bits
+		D15:	Read mode enable (turns on UART, disables RSA/Flash erase/Flash program)
+
+Flash erase mode:
+	In Flash erase mode, the EZ-HOST is available but Flash access is controlled by a flag
+	This, and Flash Program, are really just different states of the same mode
+	
+	Flash erase mode walks through 5 states -- write 60/D0/20/D0 and read
+		Read mode lasts until a word is read from Flash with a D7 of 1
+	If D6-D0 are non-zero, the erase has failed -- but that's the Jag's problem
+	The very next Flash read restarts the state machine
+
+	The only way to exit this 5 state loop is via EZ-HOST write
+
+Flash program mode:
+	In Flash program mode, the EZ-HOST is not available except for mailbox/command write
+		This lets the Jaguar alert the EZ-HOST when a retry is required
+	
+	Like erase mode, we walk through 4 states -- write E0/read EZ/read EZ/Flash read
+		Read mode lasts until a word is read from Flash with a D7 of 1
+	If D6-D0 are non-zero, the program has failed...
+		Working around this may require EZ-HOST cooperation with the Jag
+		The EZ-Host _might_ get notified of this by the CPLD...
+
+RSA mode:
+	In RSA mode, neither the EZ-HOST or Flash are available at all
+	All attempted reads just float, and writes are ignored
+
+	I'm not sure how many state bits this needs but it's probably a lot
+	I'm not even sure how to implement the chinese remainder algorithm in silicon
+
+	I don't really want to do this piece...  It sounds hard.
+
+	All we can do in hardware is a modular multiply...
+		Simple shift-and-add approach (aka Blakley's method) uses 512 passes
+		Each pass wants 6*6*32 I/Os or about 81 per second...
+
+		Wow, could it really be this fast?  'Cause that's fast enough...
+		Assuming we stick with small exponents, like 2 or 3, this is cheap!
+
+		Montgomery's method is simpler in hardware but requires more precalc
+			We can afford that precalc since we always use the same keys, right?
+			No, part of the precalc is on the data!
+			This thing works by scaling the division to be a factor of 2
+
+		Stick with Blakley -- it is just a lot simpler to understand
+
+	Blakley fits in the CPLD just fine:
+		

@@ -1,0 +1,551 @@
+The CY4640 routes some USB pairs through vias (and even back sometimes)!
+The CY4640 puts the crystal on component side with decoupling on back side.
+	The XTALOUT (28) is 12mm + 12mm away from its pad... XTALIN (29) is closer
+	XTALOUT is shunted to ground before arriving at the XTAL pad... XTALIN is shunted after
+	Our distance is just about exactly the same...	
+
+Extra features in prototype version:
+	Traces to allow 5V VPP (9V is default)
+	Xilinx-compatible JTAG jumper with EZ-HOST reset pin
+
+	Time to hit up Jameco (did I get 0805 beads?  Hoorah!)
+
+U3 (TSOP/Flash) wiring:
+        A0 (25) must map to Jaguar A1 (to write subsequent words in dual programming mode)
+        A1-A11 must map to Jaguar EA2-EA12 -- the detailed mappings are not important
+        A12-A20 must map to Jaguar EA13-EA21 -- again, detailed mappings are not important
+                This ensures that the entire 8KB 'bottom boot block' is correctly mapped
+	A12-A14 _should_ map to EA13-EA15
+		This makes the erasing algorithm more convenient -- i.e., we know where the 8KB blocks are
+	A15-A20 _should_ map to EA16-EA21
+
+These four pins attack the right side:
+        A1 EA10		A11 5
+        A2 EA9		A10 6
+        A3 EA11		A9 7
+        A4 EA8		A7 18
+
+After that we have to attack the left (inside):
+	Note that we can also split at A4 with minor rearrangement...
+
+        A5 EA12		A1 24
+        A6 EA7		A2 23
+        A7 EA13 	A12 4 	2xthru
+        A8 EA6		A3 22
+        A9 EA14		A13 3	2xthru
+        A10 EA5		A4 21
+        A11 EA15	A14 2	2xthru
+        A12 EA4		A5 20
+        A15 EA16	A15 1	2xthru
+        A16 EA3		A6 19
+        A17 EA17	A17 17
+        A18 EA2		A8 8
+        A19 EA18	A16 48
+
+These mappings come from below:
+        B5 EA21		A18 16
+        B6 EA20		A19 15
+        B7 EA19		A20 10
+        B15 EA1		A0 25
+
+U2 (VQ/CPLD) wiring:
+        It looks like we can be pretty arbitrary...
+        The 4 function blocks have 12-14 pins each
+                So no single function block will control 16b
+
+	The major routing headache will probably be in control logic
+		I don't know whether to concentrate or spread control...
+		Each function block can pick 54 inputs on the 9572
+		So routing congestion is less likely...
+		Control should be split between two blocks by function
+			I.e., all chip selects in one block
+			All I2S/E2DATA stuff in another
+
+        However, we can take advantage of GTS pins...
+                These are global output enables
+                We can probably only use one -- for Jag RD
+        There are also Global Clock pins...
+                It's less clear whether we can use these
+                Maybe they are useful for system clocks...
+                It won't hurt to wire them up that way
+        Finally, GSR is there to reset (selected) pins
+                Maybe this is under EZ-HOST control?
+                I'm not clear when/if I would ever reset...
+
+
+           32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17
+        33       T  T  T     V              G           G  16 GCK2
+        34       C  M  D     C              N           C  15 GCK1
+        35       K  S  I     I              D           K  14 GND
+        36                                              3  13
+    VCC 37                                                 12
+        38                                                 11
+        39                                                 10
+        40                                                  9
+    GND 41                                                  8
+        42                                                  7
+        43                                                  6
+        44                                                  5 GTS1
+        45                                                  4
+        46             T  G  V                          G   3 VCC
+        47             D  N  C                          S   2 GTS2
+        48             O  D  I                          R   1
+           49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64
+
+Vias beneath U2:
+	FWE EA22 ERW EINT0 <VCC> <E2DATA> GPIO0 SCK WS TXD RXD JCLK
+
+Pins left in U2:
+	36 35 34 32 <VCC> 31 27 25 9 8 5
+
+Jaguar control lines:
+	EA22	J1.B4	U2.36
+	RESETL 	J1.B18	U3.12
+	ERW	J1.B21	U2.34
+	EINT0	J1.B25	U2.32
+	EINT1	J1.B26  U1.46		XXX:  EINT1 is not worth the routing effort!
+	UARTI	J1.B30	U1.70	TXD	Danger:  Has a 1K resistor -- needed to protect Jag from bus activity pre-startup :(
+	UARTO	J1.B31	U1.71	RXD
+	RESETIL J1.B33	U1.54
+	CSENSE	J1.B34	J1.B35
+	JE2RXD	J1.B40	J1.B50	U2.31
+	GPIO0	J1.B42	U2.27
+	GPIO1	J1.B43	U1.45
+	SCK	J1.B47	U2.25
+	WS	J1.B48	U2.8
+	JAUDIO	J1.B49	U2.5
+	JCLK	J1.B52	U2.9
+	
+JTAG wiring:
+	TMS	J9.1	U2.28	U1.41
+	TDI	J9.2	U2.29	U1.42
+	TDO	J9.3	U2.53	U1.43
+	TCK	J9.4	U2.30	U1.44
+	GND	J9.5
+	VDD	J9.6
+
+
+3V bus wiring (FLASH side):
+
+	FWE	U3.11	U2.35
+	FLOE	U3.28	U2.46
+	D7	U3.29	U2.45	U1.94	UH..RENAME THESE GENIUS!
+	D6	U3.30	U2.44	U1.93
+	D5	U3.31	U2.43	U1.92
+	D4	U3.32	U2.42	U1.91
+	D3	U3.39	U2.40	U1.90
+	D2	U3.40	U2.39	U1.89
+	D1	U3.41	U2.38	U1.87
+	D0	U3.42	U2.33	U1.86
+
+3V bus wiring (EZ-HOST side):
+	
+	D8	U2.6	U1.66	U3.33
+	D9	U2.7	U1.65	U3.34
+	D10	U2.10	U1.61	U3.35
+	D11	U2.11	U1.60	U3.36
+	D12	U2.12	U1.59	U3.38
+	D13	U2.13	U1.58	U3.43
+	D14	U2.15	U1.57	U3.44
+	D15	U2.16	U1.56	U3.45
+
+	PWM	U2.24 	U1.53
+	EZA0	U2.23	U1.52
+	EZA1	U2.17	U1.50
+	EZWR	U2.18	U1.48
+	EZRD	U2.19	U1.47
+	EZ30	U2.20	U1.40
+	EZ31	U2.22	U1.39
+	EZRESET	U2.2	U1.85
+
+	38 CLKSEL	R1
+	39 GPIO31	CPLD		These become control lines to set up CPLD modes
+	40 GPIO30	CPLD
+	41 GPIO29	JTAG TDI	DANGER/CONFIRM/XXX:  TDI has a built-in pull-up?
+	42 UARTTX	JTAG TMS	XXX:  Safe in case TX needs to transmit as long as clock is low?
+	43 UARTRX	JTAG TDO	XXX: Is this high-Z?  Needs to source something.
+	44 PWM3		JTAG TCK	Should be fine
+	45 IRQ1		GPIO1 	B43	This has to be an interrupt in
+	46 HPI_INT	EINT1	B26	This has to be an interrupt out -- may as well send it somewhere.
+	47 HPI_RD	CPLD
+	48 HPI_WR	CPLD
+	49 HPI_CS	GND		Protect this with No-Load R?
+	50 HPI_A1	CPLD
+	52 HPI_A0	CPLD
+	53 PWM2		CPLD		This forms the 12MHz clock
+	54 PWM1		RESETIL	B33	Reset the Jag (has pull-up?)
+	55 PWM0		???		Free?
+
+           32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17
+    C11 33 C  C  T  T  T  C  V  C  C  A  C  G  A  A  A  G  16 GCK2/A11
+     C6 34 4  3  C  M  D  9  C  8  5  1  2  N  1  1  1  C  15 GCK1/A9
+    C14 35       K  S  I     I        2     D  7  5  0  K  14 GND
+    C15 36                                              3  13 A4
+    VCC 37                                              /  12 A3
+    C17 38                                              A  11 A8
+    C10 39                                              1  10 A6
+    C12 40                                              4   9 A5
+    GND 41                                                  8 A2
+    C16 42                                                  7 B17
+     D2 43                                              B   6 B15
+     D5 44                                              9   5 GTS1/B14
+     D8 45                                              /   4 B12
+     D3 46    D  D  D  T  G  V  D  D                    G   3 VCC
+     D4 47 D  1  1  1  D  N  C  1  1  B  B  B  B  B  B  S   2 GTS2/B11
+    D11 48 6  4  0  2  O  D  I  5  7  3  4  2  5  6  8  R   1 B10
+           49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64
+
+Clock wiring:
+	XTALIN U1.29 X8.2 C82.2
+	XTALOUT U1.28 X8.1 C81.2
+	CLKSEL R11.1 U1.38
+	GND R11.2 C81.1 C82.1
+
+USB signal wiring:
+	DP1A U1.23 J5.3
+	DM1A U1.22 J5.2
+	DP1B U1.19 J6.3
+	DM1B U1.18 J6.2
+	DP2A U1.10 J7.3
+	DM2A U1.9 J7.2
+
+	They recommend equal trace width and spacing -- i.e., 8 mil/8 mil
+		Or maybe 7.875/7.875 for us.. (7 7/8ths ~= 20mm)
+	They recommend 3X minimum spacing for low speed signals...
+		7x for high speed, but we can't afford that
+
+USB power distribution:
+	VBUS1 	J5.1 J6.1 L5.1
+	SHIELD	J5.5 J5.6 J6.5 J6.6 J7.6 J7.7 J7.8 J7.9 C71.1 R71.1
+	GND	J5.4 J6.4 J7.5 C71.2 R71.2
+
+Power system:
+	VCC5	C44.1 C42.2 U4.2 U4.7		Note:  7 is ENL1 (tied high) 
+	VCC3	C43.1 U4.3 R41.1
+	VBUS	L5.2 C51.1 U4.1 C41.2 
+	OVRCURL	U4.6 U1.5 R41.2
+	OTGVBUS J7.1 U1.11
+	GND	C44.2 C42.1 C43.2 C41.1 C51.2 U4.5 U4.9 U4.8
+
+Routing the data bus:
+	The 5V bus should come into the bottom of the chip.
+	The 3V bus connects to two places 
+
+5V VCC routing:
+	VCC is easily routed to on the top layer just above the fingers
+		Of course it arrives at the far right power station
+	It can join up with the back-side VCC through some thick vias
+
+9V VCC routing:
+	This is harder to route to the left side of the board
+	Fortunately there is lots of space for big caps over there
+	This may alter the location of the Jaguar control thrus...
+		EA1 (already on surface)
+		RESETL
+		EWE0L
+		EOE0L
+		EINT0
+		EINT1 (maybe)
+	All of these could surface 'to the left' of the 9V line
+	-> The 9V line could also snake all around the back of the board
+		It can be pushed 'right' by other traces...
+		Then head left after they surface
+		This works fine since the control traces surface fast
+		This approach even lets us take some care in 'crossing traces'
+			I.e., don't want too many data lines crossing 9V power
+			That's sort of unavoidable though -- and we have power planes between
+
+5V data bus:
+	A20 ROM1->47
+	A22 ED15->48
+	A23 ED0-->52	Reach-through
+	A24 ED7-->51	Reach-through
+	A25 ED8-->49
+	A26 ED14->50
+
+Split by capacitor...
+
+	A27 ED1-->56
+	A28 ED6-->57
+	A29 ED9-->58
+
+Split by pin density...
+
+	A30 ED13->60
+	A31 ED2-->61
+	A32 ED5-->62
+	A33 ED10->63
+	A34 ED12->64
+	A35 ED3-->59	Reach-through
+	A36 ED4-->4	Reach-through
+	A37 ED11->1
+
+3V data bus:
+	We have 9 pins on left, 14 on the right
+	We can rebalance this easily enough...  But do we have to?
+		Rebalancing could help with decoupling cap placement...
+		12 on right prevents D lines from snaking around the cap on pin 3.
+	
+	On the left, we want 8D plus OE (CE is hardwired, WE is a 2xthru)
+	On the right, we want 8D plus A1/A0/RD/WR, at least one INT... I.e., 13?
+		We could use a pin on the top if we had to
+	We still want at least one PWM too, and a line to feed RESET on both chips
+		RESET could be 3xthru if necessary -- routing is tight there with VCC nearby
+		It would've been a 2xthru otherwise
+
+3V data route to TSOP:
+	We can split this in two to make room for the VQ and TSOP bypass caps in the middle
+	4 pins high, 5 pins (4+OE) low
+
+U1 EZ-HOST wiring:
+
+	D0-D15		- 16
+	A0/A1/RD/WR	- 4
+	CS (pulled low) - 1
+	PWM		- 1
+	GPIO30/31	- 2
+	JTAG		- 4	The key to future 'firmware' upgrades
+	GPIO1(E2STROBE)	- 1	This triggers an interrupt
+	RESETIL		- 1	This resets the console
+	USB TRIP/SENSE	- 2
+
+Boundary scan/ISP:
+	We should be able to top-route 32-28 on VQ to 39-43 on TQ
+		This gives us GPIO30/31 (C3/C4) and TDI/TMS/TCK (GPIO29/GPIO28/GPIO27)
+	We're getting pretty tight with clearances here...
+		Typically 100 mills (~6 traces or 2.5mm) from PCB edge to part pin
+	-> This may not fit around the CPLD's top decoupling cap and/or USB B connector
+		The alternative requires at least 3x2xthrus (for JTAG)
+		And the back of the board is getting pretty hairy too
+	-> This could also interfere with placement of EZ-HOST top bypass and clksel pullup
+		Forget it... JTAG probably needs thrus  :(
+
+	Another approach to JTAG plumbing relies on GPIO10/GPIO11 for TCK/TDI -- TDO and TMS are elsewhere
+		This relies on the fact that holding TMS high causes TCK/TDI to be ignored
+		But this prevents us from using boundary scan in an active system -- maybe that's an okay tradeoff
+
+	One STUPID idea of using GPIO10/GPIO11 is that we can use SPI in PIO mode to run the JTAG bus at 8MHz
+		We don't need high speed JTAG!  We only have 55KB of data to transfer.  :-P
+		Even at 500KHz that's under a second -- and bit banging can easily hit 3X that
+
+Power control:
+	We can use two GPIOs to control USB power...
+		One to detect overcurrent, one to switch off USB power
+		We are going to share host power between both ports to save on big caps
+	Switching off USB power may be unnecessary?
+
+Complete list of CPLD pins:
+	3D0-3D15 	- 16
+	5D0-5D15 	- 16	5D0 also helps with Microwire emulation
+	TSOP OE/WE 	- 2
+	Jag ROM1/RW	- 2	Is RW good enough?  See discussion below.
+	TQ A0/A1/RD/WR  - 4	We can't drop A0 because we need the mailbox for booting?
+	EZ-HOST RESET	- 1	We must have a separate reset to handle swap-copy and debug
+	TQ GPIO30/31	- 2	These simplify ISP and save on passives -- plus work as CPLD mode select lines
+
+	43 minimum required for communication...  That leaves 9 'options':
+
+	TQ PWM		- 1	Insurance policy -- to help with Microwire or I2S clocking or RSA state machine
+	Jag SCK/WS      - 2	Help with I2S emulation
+	Jag STXD	- 1	Help with digital audio playback
+	Jag E2DATA&SRXD - 1	Help with Microwire emulation and I2S emulation
+	Jag GPIO0	- 1	Help with Microwire emulation and allow running from JagCD (when A22 is unavailable)
+	Jag A22		- 1	Minimal address bus for CD emulation
+	Jag EINT0	- 1	To auto-generate FIFO ready level-trigger or 'erase/program done'
+	Jag CLK		- 1	Insurance policy -- for bus analyzer or bus workarounds
+
+	52 already...  Options I wish I had room for, in order:
+		WAITL could be a lifesaver if the CPLD FIFO logic gets complex enough
+		A5 could improve CD hardware emulation quality down the road
+		RD/WR in place of RW would allow the mythical 'bus anaylzer' feature someday -- naw, not really
+
+	Can we drive EINT0 off GPIO31?
+		Seems harmless, since EINT0 is input-only and doesn't show pull-ups on the schematic
+		We would need to drive GPIO31 low instead of pull-down in the CPLD during startup...
+		This does risk some unexpected interrupts in the Jag at boot and some failures to start in HPI mode
+		It also makes hacking somewhat easier -- so maybe it's not worth it
+
+	Do we really need Jag RESET?  NO!
+		If there is inherent reset logic, we do not need Jag RESET...
+			We would hold EZ-HOST in reset on start-up (post-initialize) and just wait for 68K access
+			We should wait for a unique pattern on the data and control lines to reduce accidents
+		"During power-up, all user registers are initialized to the user-defined preload state (default to 0)."
+		-> We can't hold the Flash chip in reset, though, because we need to boot off that
+			We can safely tie the Flash chip reset to the system reset
+			Worst case this means Swap Copy can't re-init EZ-HOST from Flash... boo-hoo.
+
+	Do we really need to drive GPIO30/31 from CPLD?
+		Documentation says to use resistors, even if you're grounding
+		The sample applications use resistors even though they have a CPLD
+		The BIOS listing shows no GPIO access -- not even a glitch -- in HPI mode
+			The logic analyzer could confirm
+		It's easy to put resistor pads in the prototype and then cut the trace if we end up screwed
+		The major downside is that all boards must be JTAG programmed instead of fully ISP like I imagined
+		The upside is that we get two pins back... is it worth it?
+			And don't we need those 'mode pins' anyway?
+
+	Too many I2S unknowns:
+		We can't use slave mode above 2MHz so overriding SCK is not gonna happen
+		We might need to hook one of our PWMs into nSSI -- but this probably won't work in master mode?
+		We might be able to use a PWM to generate WS -- we can more easily free up GPIOs than CPLD pins
+			Yes, you can use a PWM to generate WS at appropriate boundaries in a 34 cycle loop
+			Yes, you can use a second PWM at the same time to generate Slave Select for 32/34 cycles
+		But who the hell knows if it works...
+		-> YOU CAN WIRE THIS UP AT HOME RIGHT NOW YOU SLACKER!
+
+	TQ INT to CPLD not required:
+		We can fake TQ INT using A0/A1 and HPI if we had to
+		But the Jag can trigger all the INTs it needs via GPIO!
+		And the CPLD probably doesn't do INTs often/ever
+
+	Is E2DATA required?
+		Yeah, probably...  The 'official' EEPROM code expects to read bits at ~300KHz
+		So, GPIO-based bitbanging is probably too slow...
+
+	-> WAIT!  I planned on a CPLD-driven external interrupt to wake up EZ-HOST post-restart
+		We can use a mailbox interrupt for this -- but it means overwriting mailbox ISR, right?
+		This requires 8 writes on startup versus the planned 6...  I.e., no big deal!
+
+	Jag RW might substitute for RD/RW...
+		RW looks pretty safe since it is used to control the external bus direction buffers
+		To protect against jitter on writes, we might want to latch this against Jag CLK -- worth exploring
+		However, RD/WR make the bus analyzer work better down the road...
+
+	Minimal address bus:
+		ROM/GPIO0/A22
+			We can map 0x8-0xBF.., plus DFFF24 our 'one and only register'
+			We can map EEPROM on GPIO0 after startup/once in game mode
+				Before that, GPIO0 can be our main port -- for minimal support in CD
+	'Optional' pins:
+		A1 would be _really_ nice in case Jag ROM1 doesn't strobe reliably
+			It also opens up more addressible locations
+			But we are safe without it -- even if ROM1 doesn't strobe in 64-bit read, we rely on Jag CLK
+				Since we know the bus length in cycles, we can count off CLK cycles and strobe TQ RD
+		A5 is _technically_ optional, if we have to...
+
+	Bus analyzer might be able to see:
+		Number of CPU clocks for each transaction
+		ROM1/A22 say:  10 = DRAM, 00 = CART, 01 = CD, 11 = Chip Space
+		-> 50/50 chance of these being enabled...
+			The Jag 2 Schematic has R173 tied to ground -- i.e., always enabled!
+			The stupid Jag 1 schematic is cut off but looks quite similar  :-D
+		Without RD/WR, it's going to be impossible for us to determine bus cycle length...
+			RW can't even hint at when cycles start and end
+		Even with RD/WR, we still don't have full visibility...
+			Texture mapping and 68K cycles are invisible 75% of the time!  (Because we only have low RD/WR)
+		The bus analyzer really isn't all that useful...  Just a dumb demo to get people excited.
+		Bus analyzer must sustain writes via HPI at up to 13MB/second (no problem)
+			Each byte looks like:  ROM1/A22/RD/WR/HalfCycle
+			The HalfCycle flag says whether the transaction lasted a full (13.3MHz) cycle or changed mid-way
+			Using the HalfCycle flag lets us determine which transactions took 3 Tom cycles versus 2.
+
+	Why we need Jag RESET and TSOP/EZ-HOST RESET on separate nets:
+		We need to slave POR off the Jag RESET
+			It is too risky to generate our own POR, isn't it?
+		We need to force a RESET without a Jag RESET on swap-copy
+		We _probably_ need to prevent EZ-HOST RESET on debug-triggered RESET
+			There are workarounds for this
+
+I2S options:
+	1) CPLD as shifter:
+		E2DATA is tied to SRXD on Jaguar
+		Carts don't use SXRD and CDs don't use E2DATA (except maybe some homebrew ones?)
+		WS and SCK are generated by CPLD using internal 6-bit counter
+		PWM generates the 1.5, 3, or 6MHz clock to control CPLD
+
+		Problems:
+
+		Can't read back audio for USB at these rates because SPI is too slow in slave mode
+			Best workaround has CPLD also tapping STXD -- but we're out of pins!
+		Requires Ninja CPLD design skills...
+			We have to read words from HPI at precise moments to prevent shift underflow
+			We might need to write words back for audio playback
+			We have to avoid bus contention for joystick readback/other HPI communication
+				Maybe we can use HPI mailbox to dodge this one
+				Or we could try rigging up 'WAITL'
+			At 6MHz we can read _or_ write in one bit time -- not both!
+				So we need one extra bit of buffering -- CPLD hell
+
+	2) EZ-HOST SPI:
+		It just doesn't work...
+		MOSI/MISO is a show-stopper if you care about audio playback
+		Sans audio, CD emulation at correct speeds is still impossible because:
+			3MHz/8 = 375,000 when we want 352,800 -- 6.3% off-target is enough to cause breakage
+			nSSI is tri-state -- not a working input -- in master mode
+			Slave mode can't go past 2MHz -- we need 3MHz minimum for Cinepak playback
+			We could carefully time 4-byte DMA blocks by polling with interrupts cleared...
+				We have 512 cycles between blocks -- _most_ interrupts are shorter than that
+					But fewer are shorter than 256 cycles...
+				So we'd throw away half of the CPU just to do this... blech!
+			SS Delay looks like it applies to DMA blocks only, and doesn't do double-buffering
+				Even if it did, the settings aren't right for the 2 bit-times we need
+
+	Using the CPLD for SPI eliminates the hand-wringing -- the VHDL to make it work can come later
+		Heck, V1 was not planned to support CD emulation anyway...
+
+Features we've lost:
+	No UART alignment for Jerry workaround
+		Doom will miss this... :(  Guess we'll patch it to use PIO!
+		Jag voice modem also will miss this
+		This would have cost one pin -- wired to UARTI... and somehow keeping lock step with CPU clock
+		This is all too voodoo -- without really understanding the problem I can't wire it!
+	No large register set
+		We get 1 of them:  DFFF24
+			We need some extra special read/write magic to work around this limit
+		This would have cost one pin
+	No ROM scrambling post-reboot -- BUT WHO NEEDS IT
+		Contents of ROM are fully visible, instead of mirrored
+		This would have cost one pin
+		-> As an alternative, we can limit ROM accesses with a counter
+		This is even nastier than mirroring :D
+
+Complete list of EZ-HOST GPIO:
+	D0-D15		- 16
+	A0/A1/RD/WR	- 4
+	CS (pulled low) - 1
+	PWM		- 1
+	GPIO30/31	- 2
+	JTAG		- 4	The key to future 'firmware' upgrades
+	GPIO1(E2STROBE)	- 1	This triggers an interrupt
+	RESETIL		- 1	This resets the console
+	USB TRIP/SENSE	- 2
+
+	Already at 32...
+
+	PLL is not really worth anything
+		It's just the horizontal blank... big deal!  We can get interrupts via HPI if we need this info
+
+	EINT1 is useless since it is DSP-only -- can't get to 68K or GPU
+
+	We have wired every pin except:
+		The OE/WEs (unneeded at 16 bits), WAITL, GPIO2-GPIO4, EINT1, PLL, ED16-ED31, A0, A23
+		WAITL is used to extend a bus cycle -- something we would want to do during FIFO wraparound
+
+Spare pin ideas:
+	If NSSI is not needed for DMA jitter correction, we can use it as a programmable output ('manual mode')
+		It sounds like we can't use SS as an input in any case...
+		But it sure sounds like SS delay does a useful thing...
+			But probably the setting is in 1.5 bit time increments...
+		Ideally we want 2 bit time delay per 32 bits -- 1.5M/34 = 44,117Hz
+			AKA half-bit per byte!
+		Must test with logic analyzer!
+	RTS/CTS are _not_ useful for this... they are hard-coded for hardware flow control
+
+External bus ideas:
+	Is there anything we should or could be bridging our external bus to?
+	With the right wait states, can we drive JTAG via the external bus?
+	The problem with the bus is that it doesn't hold... but that's fine for some purposes...
+
+	We might be able to put EINT1 on nROMSEL or something...
+		But we don't want EINT1 anymore!
+
+	The longest memory wait state is 8 cycles -- 167ns
+		According to xapp070.pdf, this is more than long enough to meet the minimum JTAG setup and hold times
+
+	But the memory interface doesn't work enough like a JTAG interface
+		JTAG needs hold time to last past the rising edge of the 'clock' -- memory busses don't do this
+		Or rather, memory busses have chip selects, not clocks
+
+	So the external bus is useless!
+
+	The external bus could poll at about 6MHz with all interrupts and DMA disabled...  But what's the point?

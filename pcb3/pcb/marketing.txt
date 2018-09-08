@@ -1,0 +1,27 @@
+Q. What is the Jagwave?
+
+The Jagwave is a peripheral that allows USB devices to be used with the Atari Jaguar.  It
+ships with a 256MB thumb drive, but is compatible with thousands of devices available at an
+electronics store near you.
+
+Q. What can I do with my Jagwave as an enthusiast?
+
+Multicart:  	You can store your collection of game cartridges on the included thumb drive.
+		A menu allows you to select games
+		This eliminates the clutter and wear and tear caused by cartridge swapping.
+
+Homebrew:	You can access game demos and prototypes available online with no additional hardware.
+		Simply plug the included thumb drive into your PC or Mac and save files to it directly from your browser.
+		All known formats are supported, including BJL, COF, JAG, ROM, Alpine, Flash.
+
+Controllers:	You can use USB and Bluetooth (wireless) controllers with existing Jaguar games.
+		Up to 8 controllers can be used simultaneously.
+		Rotary and analog features can be used in some games.
+		Bluetooth support requires an inexpensive Bluetooth USB adaptor (not included).
+
+Q. What can I do someday
+
+Audio
+
+Q. What can I do with my Jagwave as a developer?
+

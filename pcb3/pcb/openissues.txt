@@ -1,0 +1,515 @@
+- Bypass on BOTH VCC and GND?  :/  Not gonna.
+
+x Read every component datasheet top to bottom one more time...
+	x What about the PCB 'safe' zone under the USB mini-B?  DONE
+
+x Re-place your capacitors -- min 35 mils pad to pad
+	x Kemet shows vias pointing down, as close together near the center of the pad as possible -- GOOD IDEA!
+	x At some point I decided 35 mils from pads was okay, so I'm sticking to it...  Need minimum nH!
+	x Fairchild recommends pin->cap->via approach with 100 mil max trace
+	x AMCC recommends the bulk decoupling capacitor is placed within 300 mils of the PCB power entry point
+		Lots of people are recommending bulk decoupling be close to the power 'source'
+	x Altera recommends that the VCC bulk decoupling capacitor be placed right at the regulator output
+	- Altera recommends a ferrite bead _at_the_PCB_source_ (before the decoup capacitor)
+		This could prevent our noise from tripping up the Jag and vice-versa
+		Scratch that -- our switching power supply should keep VCC clean, and GND is dirty anyway
+	- AMCC recommends capacitors are located within 150 mils of the GROUND PIN (not VCC)
+		We have some ground pins with no capacitors that close on EZ-HOST!
+	x The AMCC uses the 'bad' pin->cap->via approach -- actually, they route ground through decoup caps too
+	x Xilinx recommends pad->via traces be equal in width to the via (i.e., 30mil) and as close as 30 mils
+	- YUCK:  Bypass capacitors generate big EMI fields that disrupt nearby clock and USB traces
+
+	x Lots of people have said you need bypass caps near layer changes on fast signals
+		x One example is a bypass cap near a USB mini-AB 'peninsula' -- due to probable vias
+		x Most people suggest it is okay to 'borrow' a nearby power cap for this -- and we have many
+
+x Smaller bulk caps?  Yes, but... stick with tantalum!
+	Ceramic bulk caps are getting more popular... and they are smaller and as cheap as tantalum for 10uF
+	Kemet says:  "Large cap value ceramics may provide effective decoupling... at 1/4th tantalum uF"
+		They say the biggest risk is temperature sensitivity -- especially in Y5/Z5, but even in X7R!
+		Y5R - 82% capacitance loss over -30+85C, where X5R is 15% over -30+85C, and X7R 15%/-55+125C
+		X7R hold up _way_ better with DC voltage -- 16V rated @ 5V is -20% X7R versus -60% Y5R
+	x Most app notes suggest 10uF is enough for my application -- I don't why I'm pushing 47...
+		If you choose ceramics, go with 10uF -- 3x or 4x overrated
+		The TPS-2149 only wants 4.7uF on the input, and 'at least' 4.7uF on the LDO output...
+		They also need ESR between 200 mO and 10 O -- they give ceramic a blessing right there!
+	x SAY NO TO CERAMICS:  "Circuit stability can actually suffer if you try to do all of your
+				power supply bypassing using low-ESR, high-Q capacitors."
+		The EMI doctor also says basically the same thing -- low-Q is your friend to swamp resonance
+	x Good small Tantalums (3216-18 is a little bigger than an 0805):
+		T491A106M016AT	10uF/16V/3216-18	$0.18/100
+		B45196H3106K109 10uF/16V/3216-18	$0.16/100
+	x These are cheaper than our $0.49/100 Tants...
+
+x Ongoing TPS-2149 confusion...
+	x UPDATE:  Found local VDO decoups on all appnotes, implemented that, not on OUT1
+	x The appnote in the datasheet shows 0.1uF decoupling on VDO, not OUT1
+	x The description doesn't say anything about VDO, but suggests you want it on OUT1 to avoid shorts
+	x A separate appnote shows 22 pF on OUT1, 0.1uF on VIN, bulk on OUT1 and VIN (100uF!) and nothing on VDO
+	x My conclusion:
+		- Make sure Flash decouple is right next to VDO to cover that base
+		x Decouple OUT1 with 0.1uF + 150uF aluminum
+		x Decouple VIN with 0.1uF + 10uF ceramic (near PCB port of entry)
+			x The logic here is that most bulk power is in Jaguar power supply -- not needed here
+			x You should not need a ferrite bead since noise is not likely to escape on VCC5
+		x Decouple VDO with 10uF ceramic (right at output)
+
+x Clock layout
+	x Do not run traces under clock
+	- Move clock capacitors as far from EZ-HOST ground returns as possible
+	- Keep clock as far from bypass capacitors as possible -- oops
+
+x USB trace layout
+	x Even nearby power traces will cross-couple enough with one side to modify the pair impedence
+		Most people say you need 3X - 5X spacing on either side
+	- Everybody suggests USB traces belong adjacent to GND plane, just like clock traces
+		Some people put GND plane on layer 3 when they have surface mount components, for this reason!
+	- Probably need a local pull-up on OVRCURL if we are going to use it at all...
+		It is just too ugly to run such a noisy trace _right_next_to_ the USB signal lines
+	- VBUS is probably even worse -- it has a 2K pull-down in EZ-HOST, but has gotta be noisy...
+		At least the nearby lines don't need to work until VBUS is being held high?
+		The app notes say no resistors are required, but the CY4640 provides a no-load pull-down
+		The app notes suggest transient protection is not required on OTG VBUS
+	x More spacing has been added...
+
+x Edge connector assembly
+	x Which carts are gold plated?  All of them.
+	x What are the risks of not doing this?
+		Tin plating can corrode when it touches the gold connector  ACK
+		Copper will quickly tear up the connector and itself during swap copy
+	x Immersion (soft) gold versus electrolytic (hard) gold?
+		Only hard gold is suitable for edge connectors...
+	- Need special quote from eTekNet on hard gold...
+	- Need to route the edge connector at 20 degrees according to Atari (many people use 30)
+
+x EMI prevention
+	x USB shield should be tied to ground with a decoupling cap to keep it from resonating too much
+		x Most people suggest 0.1 uF -- apparently it works more like an inductor anyway
+		- One guy on eng-tips makes fun of the capacitor idea and says just use a fancy trace
+		- One Cypress note says use 'some resistor value -- you figure it out'
+		x Another Cypress note says to use a 1M resistor plus a decoup capacitor (4700pF/250V)
+			This probably prevents ESD from ruining your day
+		- Many people suggest (including antidotes) that powered devices should NEVER couple shield to GND
+			- Apparently hosts usually do, and this leads to a device overheating due to ground loop
+		AC coupling (capacitor) provides the necessary immunity for the device port
+		DC coupling (ferrite bead) works best for host ports
+	- Decoupling capacitors should be low ESR!
+	- Pull-ups should be near their open-collector outputs -- we snake OVRCURL about 4 inches  :-/
+	x A lot of people say avoid ferrite beads on GND because it is too critical -- can't take fluctuation
+
+o ESD protection
+	o Don't butt the USB connectors against the surface -- leave some plastic clearance like your laptop
+
+x What capacitor for VPP?  Probably a multilayer ceramic 0603 or 0805?
+	- You might be thinking of capacitor arrays, not multilayer ceramics?  Nope!  Don't want that
+	- We need a separate .1 uF high frequency decoupling capacitor _and_ bulk capacitor...
+	- One DC/DC app note states that VPP capacitance can be in the 2uF range
+
+	ECJ-1VB1A225M		2.2uF/10V - 0603/X5R			- $0.09/100
+	LMK212BJ475KG-TR	4.7uF/10V - 0805/X7R			- $0.17/100
+	LMK212BJ475KG-T		4.7uF/10V - 0805/X5R			- $0.15/100
+	EMK107F225ZA-T		2.2uF/10V - 0603/Y5V			- $0.06/100
+	LMK212F106ZG-T		10uF/10V  - 0805/Y5V			- $0.16/100
+	GRM188F51A475ZE20D	4.7uF/10V - 0603/Y5V 			- $0.11/100
+	C2012Y5V1A475Z	  	4.7uF/10V - 0805/Y5V			- $0.10/100
+	CC0805ZKY5V6BB335 	3.3uF/10V - 0805/Y5V = bad toler/temp 	- $0.12/100
+	C0805C225K8RACTU  	2.2uF/10V - 0805/X7R 			- $0.21/100
+	
+	x You can get by with 1uF because the SRF is ~9MHz and we are still on the chart at 5.3MHz
+	x 1uF 0603 or 0805 gives us 'okay' decoupling and 'okay' bulk capacitance...
+
+x Biggest EMI mistakes right now:
+	x Shield ground is not tied to real ground (usually via resistor) -- this is in Cypress usblayout.pdf
+	x Link port VBUS is routed right next to Link port D+/D- -- noisy power from host = noise on USB bus
+	- USB lines are not routed adjacent to GND plane
+
+x USB 2.0 standard says we should monitor VBUS on our USB peripheral port
+ 	This is to avoid sending current on DP/DM into a host that is powered down (logical enough)
+	Pin 11 is a dedicated VBUS detect pin...  We should look at wiring that up
+
+- We can probably specify C44 No-Load, then add it later -- there is enough bulk decoup in the Jag, right?
+	x Too risky for me
+
+- The shield area screws up parsing of the entire Gerber file in GC-Prevue...
+	x viewMaster can fix?
+
+x Cross-check your land pad with land pad viewer...  (Found mistakes too)
+
+x USB traces are 12 mils apart when routed diagonally?  WTF?
+	x Fact of routing life
+
+x PowerPad hell:
+	x The PowerPad method in the IPS 2149 requires vias in pad -- assemblers hate this
+		TI recommends plugging the bottom of the vias using solder mask to keep solder from escaping
+		But Screaming Circuits says that gasses form during reflow that pop the plugs
+	x On larger pads, people use solder mask around the vias -- this works just fine!
+		But it probably reduces the cooling efficiency...
+		-> Also, this requires a good solder mask stencil to keep solder out of all those little 'holes'
+	x You're probably better trading off good cooling efficiency for vias well off the pad...
+	x DO NOT PUT ANY UNRELATED VIAS UNDER A POWERPAD
+		It looks like cheap (silver) PCBs have a chemical reaction that can cause shorts to the PowerPad
+	x DO NOT USE WEB OR SPOKE VIAS
+
+- Ensure none of the other chips I'm working with have metal on the bottom... otherwise our vias are screwed
+
+x I'm not using multiple vias yet -- how many and what size are recommended for major power lines?
+	x Even 14 mil vias (smaller than standard) are fine for up to 200 ma...  Put two on the 5V line
+	x We should tie more ground pins together with single vias
+
+- How should power delivery decoupling look?  My C41 via is kind of stupid looking...
+
+- Conclusion:  Can't do these wiring 'improvements' because they add two resistors AND DON'T WORK:
+	x We don't need GPIO as a register 'back-door'.  We can write to 8xxx to disable the ROM image
+		x At 9 48MHz cycles per 5.319MHz bus cycle, we can handle FIFO and register I/O in 1 data port
+		x PWM is probably outputting 8MHz -- this is simplest/safest -- I/O on low edge, delay on high
+		x Worst case:    WWWXXXAAAXXXAAAXXXRRRXXXAAAXXXWWW
+			       F--------C--------R--------F--------
+	x Can we use SPI for Microwire/E2DATA?
+		SCK slaves on GPIO so it is an input
+		MISO writes to E2DATA so it is a safe output
+		MOSI reads from D0 so it is a safe input
+		We must ground nSSI or it all gets ignored (can't use GPIOL1 -- Microwire CS is active high)
+	-> BUT -- we are going to drive GPIO-0 and D0 during EZ boot...
+		D0 is easy to handle -- EZ-HOST exits reset at the Jag's whim, so the Jag can stay off the bus
+	SCK and nSSI are not so easy -- driving these could be quite destructive...
+		It appears that EZ-HOST writes C03A on the external bus during bootup (i.e., D9+D10 driven low)
+		It also looks like arena_init_find_mem writes aa55 to the first external address...
+			But it probably does this in 8-bit mode only, so D10 is not driven low at this point
+		D9+D10 goes low for 166ns within 10us of boot-up (verify with logic analyzer)
+			-> This is only safe with two resistors in series
+		GPIO-0 is an input during reset... but this DOES NOT WORK because it is very brief
+			Confirmed in jerry.net/jclk.net that cfgen only tri-states GPIO-O briefly
+	-> FORGET ELECTRICAL, THE LOGIC ISN'T FAST ENOUGH!
+		We only have 360 EZ-HOST cycles from the last bit of the address to the expected reply
+	x The current approach is 'good enough'...  Can't use serial and EEPROM at once, but... who cares?
+		Note that the complexity around 'status bits' and 'start bits' is easier to implement here
+		The only crappy part is stealing the 'private bus' to send a completed 'word' (byte really)
+		The completed byte goes into the HPI mailbox on the same cycle that the last bit arrives
+			This gives us bus time -- since the Jaguar memory cycle > HPI memory cycle
+			The EZ-HOST has ~384T to pick up the HPI interrupt -- might not be enough time
+			-> Remember, the EZ-HOST is basically idle when not in CD/mass storage mode
+			Still, this is an argument for reusing the 'register access' mode to give DMA...
+
+x TPS 2149 open issues:
+	x OverCurrent signal is an open-drain output
+		Do we need a pull-up to read it via GPIO?
+			x Scary idea:  Use the built-in pull-ups on USB 2B to detect OverCurrent
+				Why not?  We're not using the pins for anything else...
+		It needs software debounce...  Give it at least 100ms of registered highs before prompting
+		Note that steady state is not achieved -- due to external caps and hysterisis it will cycle
+	x VBUS cap needs ESR between 200 milli-ohm and 10 ohm... does our aluminum electrolytic meet that?
+		ESR = DF / (2 * pi * f * C)
+		Our 150 uF 10V EMVA100ADA151MF55G has a DF (tangent) of 0.30
+		0.30 / (2 * pi * 100 * 0.00015) = 3.2 Ohms?  This is consistent with typical caps!
+	x They recommend 100mA total for startup current draw...  Holding EZ-HOST in reset helps this
+		We have a max current of 200ma -- this should be enough, but check the datasheets!
+		Hopefully our funky VPP wiring will help limit current during programming...
+			Programming is very intensive with EZ-HOST and USB bus at full use, Flash burning, etc
+
+x CY4640 has the ability to detect VBUS on USB B...  Do we need that to enumerate as a device?
+	Yes, but we can use OTGVBUS without extra components according to the datasheet
+
+EMI experts warn that unconnected copper planes become transmission lines...  Like shield ground?  :(
+
+-> Shield ground must be connected to solder points using web or snake vias, especially vias to internal ground
+	Otherwise thermal transfer on PTH components will kill the board  :-(
+
+x How do you prevent shorting out the UART when you use the JTAG cable?  You must put GPIO in tri-state...
+	x I AM SO GLAD I FOUND THIS!  AGH!
+
+- Why do the holes from my USB connectors look different in the inner layer view?
+	Who cares... they render right.
+
+x Most people put VCC under signals on surface mount boards... but lots recommend GND... why?
+	Depends on where your fast signals run...  But both arrangements work okay.
+
+x Typical advice says all ground pins should be via'd separately...
+
+x USB trace spacing must be kept constant at all times -- used 8 mil/8 mil
+
+x Distant from via and pad:
+	We are very tight in some places... is this a manufacturing limit?
+		-> It's an assembly limit!
+	Yes... if you're not careful, the via will suck the solder off the pad like a tiny straw in assembly
+	The board manufacturer could care less, but the assembler will hate you forever
+
+CD-ROM compatibility:
+	It _looks_ like EINT0 and EINT1 and 9V and RW are all hooked up in the CD schematics
+	But it's a little vague there...  It's worth doing a conductivity test on RW at least!
+
+- Thermal relief in SMT:
+	The CY4640 has little non-plated holes beneath everything that has a lot of solder
+	These could be to allow thermal relief in reflow soldering!  Or maybe not.
+	CONCLUSION:  Until somebody explains these to me, I'm leaving them out!
+
+- For assembly, what about RoHS?
+	x CONCLUSION:  For prototyping, we will not use RoHS
+	What is the risk of not being RoHS compliant?  Are all my parts RoHS ready?
+		-> In the EU, non-RoHS is now banned as of 1/1/2006
+	RoHS (lead-free) runs at higher temperatures -- so RoHS certified parts withstand higher temps
+		-> UNLESS ALL OF YOUR PARTS ARE RoHS, YOU HAVE TO USE LEAD -- OR THE PARTS WILL MELT!
+
+x Don't forget a JTAG stub for the prototype boards...
+	It is going to pay for itself very fast -- and is very easy to remove later
+	The only alternative is a USB-based JTAG controller via EZ-HOST
+		Maybe someday I'll be that talented, but not today
+
+x Cypress recommends the following layout guidelines for EZ-HOST:
+	Cypress technote "High-speed USB PCB Layout Recommendations”
+	90 ohm differential impedance
+
+x Too many unknowns about I2S to finish PCB layout...  So don't use EZ-HOST for that!
+	PWMs can generate clock enables plus word select on a 32 on/2 off rotation at any frequency...
+		SS is /CS for SPI (Slave Select)
+		But it's not clear if it works in master mode... probably not?
+	MOSI/MISO -- we want to switch between slave (cart game) AND master (CD game)
+		But MOSI and MISO are miswired in one of the two modes -- since Jerry just has one wiring
+		Can we use 3wire mode in cart game to avoid swapping wiring?
+			Probably not -- that probably just tri-states
+	x Only solution -- screw EZ-HOST SPI and implement I2S in CPLD
+
+x Is it safe to tie lines directly to ground?
+	Most people use resistors to tie to CMOS chips to ground
+	I am looking at grounding several pins in the netlist...
+		Including some chip selects, WPs, etc
+	Do we need pull-downs or a spare pin on a CPLD to do this?
+
+	Google Groups:
+		"Older technologies didn't like having their inputs tied directly to the power rail."
+	Several posts agree that tying direct to ground on CMOS is 'fine'.  Some say:
+		"Pull the inputs up or down through resistors.  That way if you need a spare gate..."
+	One guy says:
+		"Typically you don't directly tie anything to any voltage rail, if just for current limiting..."
+	And somebody counters:
+		"Since the input impedance of a CMOS input is somewhere in the XXX megohms, I seriously 
+		doubt that a reasonable external resistor is going to make much difference."
+
+	-> Many many people say it is safe, even in the presence of severe ground bounce, to tie to ground!
+		Some people also say you might regret tying direct to ground if you need to hack the board
+		So they use resistors or clever pad and trace arrangements that are easily cut	
+
+	EZ-HOST schematic ties 'reserved' directly to ground and lets outputs float
+
+x Internal pull-ups on private bus:
+	Our private bus requires pull-ups when nobody is driving it...
+	Can we use the CPLD to generate these pull-ups?  Or can the CPLD just drive 0s?
+	-> CPLD has 'bus-hold' which probably supplies the needed pull-ups
+
+- RD strobe in Jag:
+	Confirm that RD strobes on blit so that A1 is not required in CPLD
+	No more RD strobe... we are going to rely on Jag cycle counting
+
+x Cap size:
+	0603s are tiny -- and 0402s are ridiculous
+	0805s are supposedly better for board rework
+
+	We should order new ferrite beads from Jameco for prototypes (not 0402!)
+	We should get a high end tantalum for 9V power...
+
+Drill sizes:
+	FreePCB lists the finish size -- some board houses expect drill size
+
+SMT support:
+	FreePCB makes SMT pads using a polygon fill in the Gerber
+	Apparently the software that BatchPCB uses doesn't like this
+	(I've found talk on here of other problems which seem related to this)
+
+Bulk caps:
+	We have a bulk cap on 5V and a bulk cap on 3V...
+	Don't we need a bulk cap for 9V VPP?  If we want reliable programming, probably!
+
+	9V only has a 10uF bulk cap inside the Jag, near the audio converter...
+	Heck, 5V has a bigger bulk cap than that!
+
+	One recommendation for VPP decoupling in a DC/DC converter:
+		The output capacitor should be chosen on the basis of its
+		equivalent series resistance (ESR) and capacitance value.
+		Low ESR tantalum surface-mountable capacitors such as
+		those made by AVX are well-suited for DC/DC converter
+		applications. Inexpensive aluminum electrolytics may have
+		excessive ESR, resulting in high output ripple. These
+		should be avoided.
+
+	Since we have a DC/DC converter for 3.3V, we need a good output tantalum...
+	But, theoretically we just need decoupling on the input, since the Jag has big caps
+
+	A bulk cap on the input should help smoothe things out too...
+
+	All that's left is the 9V bulk cap...
+		We can use our 16V decouple ceramic cap no problem here...
+		But what about bulk?  Maybe it's time to give up on that.
+
+Ferrite beads:
+	EZ-HOST has 1 $0.04 bead on each V-BUS...  Sounds like cheap insurance!
+	Intel and TPS2149 notes recommend a bead on ground as well, to reduce EMI?  Hm...
+	Research more!
+
+	Do we need anything to protect us against hot plug in our power supply?
+
+x nReset on EZ-HOST -- if driven via CPLD, can we trust unprogrammed?
+	Unprogrammed CPLD pulls nReset up -- so there is no POR...
+	Maybe we are better off doing initial CPLD program via jumper cable?
+	Reset must be routed into TSOP as well, so WP bits are cleared...
+	x Need to make a hole in the solder mask 
+
+x The great cap debate:
+
+	Tantalums explode -- derate them if cheap/possible... 3x peak V is good
+		Ceramics are the only option for decoupling/bypass
+		Tantalums are used for 'bulk' decoupling (large values, low khz)
+		But some people say they can be 'bad news across a power rail'
+		Tantalums fail into a short circuit -- blows the fuse, bricks the Jag
+		DO NOT USE WITHOUT RESISTORS (they say)
+	Electrolytics have terrible life...
+		And poor ESR -- Tantalums are better for bulk decoup
+	High value ceramics are cheap -- like 11 cents/each for our 10uF bulk caps
+		But they are narrower bandwidth
+
+	-> USE Electrolytics for USB power drive...
+		They are cheaper, but bigger too...  Careful placement is the rule
+		And their short lifetime may matter less for USB power delivery...
+		Everybody else does it this way...
+
+	Decoupling advice says run power to cap pad, then cap pad to VCC
+	I seem to be doing it wrong in places... Power to VCC, then cap pad...
+	-> This advice is repeated everywhere -- gotta find a way to do it
+	Not everybody likes caps-on-bottom -- though they are an easy way to do this
+
+	They warn about DC signal lines -- all lines tied to VCC I'm guessing
+
+	The TPS2149 app note uses tantalums for bulk decoupling without resistors...
+
+	Actually, the EZ-HOST uses tantalums for all bulk decoupling
+
+	They should have better long term reliability with the occasional explosion...
+
+x Benefits of 4 layers:
+	Smaller PCBs -- can fit 18 vs 15
+		18 is about as small as we can go -- assuming 33mm high boards
+
+	Cost difference:
+		21 panels @ 21 @ 4L = 408 + 11 * 34 + 50 + 21 * 16 = $1168/441 2.65
+		24 panels @ 18 @ 4L = 408 + 14 * 34 + 50 + 24 * 16 = $1318/432 3.05
+		29 panels @ 15 @ 2L = 238 + 19 * 17 + 50 + 29 * 16 = $1075/435 2.47
+		(This assumes CNC mill + dual soldermask + >2000 hole fee)
+
+	Dual layers cost 'only' 58 cents per part (18 vs 15)!  Or maybe less...
+
+	This is totally worth it...
+		Routing becomes a cakewalk and the PCB can be very dense
+		EMI and correct bypassing is taken care of
+		Makes it easier to declare FCC conformity...
+
+	Note that we are likely to exceed 2000 holes per board... 
+		You need < 110 vias per part -- seems tough to hit
+		We have at least 50 signals coming up from bottom of board...
+
+	If we exceed 2000 holes we've added at least 45 cents/part (@ 18/board)...
+		We can save 32 holes by granting direct EZ-HOST bus access
+		That screws up the DMA window locking feature -- no good
+
+	Naw, just let the holes overflow...  Maybe we can get 21/board!
+		Top-route D0-D7 and bottom-route D8-D15 for crazy density...
+
+x One way to save on holes is to mount the electronics 'backwards':
+	Data/address lines are easy to route -- so put them on the chip side
+	Control lines are harder to route -- so more backside space is an advantage
+
+	This approach also adds more clearance for bigger USB dongles
+
+	But the USB B port is .431 inches high and we have .125 inches clearance!
+		We would have to extend the cart outward in back to fit that...
+
+	And the front side only has .250 inches of clearance... can't grow that!
+		The USB A ports need .275 inches of clearance...
+
+	An extra 0.3 inches overhang means A ports are close to centered
+		We have 0.250 clearance + 0.275 port + 0.225 space + edge of cart
+
+	So we absolutely HAVE to mount backwards...
+		And the back side needs to stick out .3 inches
+
+	This also makes sense in some small way since the dongle labels point out...
+
+x Super-compact edition:
+	The back-side bulge begins at the base of the front-side label?
+		This means we have a Level III mold -- not a flat parting line
+
+	-> YOU CAN'T DO THAT!
+		The console doesn't have room until about .25" under Atari logo
+		That sucks because these sockets are like .55" long
+
+	WE NEED A MINI-B PLUG (like $0.48/each for Molex pure SMT style)
+		These are only 4mm/.157 inches tall
+
+	Of course, shorter/SMT style plugs need a longer PCB...
+		You could also drop the plastic on that side -- but it's cheesy
+		The top of the SMT mini-B plug _barely_ reaches the top of the Jag
+
+	So we end up with the mini-B in the center and As on the sides...
+		The center dips down flush with the top of the console for mini-B
+		Two A-posts to either side give you minimal grip to insert/remove
+
+	The front piece has the usual Jaguar sides and top
+		On the inside back we have our logo (in plastic)
+		And labeled grooves for the three ports (in plastic)
+			HOST, LINK, DISK
+
+	Usual cartridge depth is about .675 inches
+		We only have to 'bulge out' to about 0.8 inches on the back
+		There is already a slight bulge on the cart there -- just grow it
+
+	-> We need to make sure our max component clearance is < 0.2 inches
+
+x 0603 vs 0402:
+	Most people suggest 0603 -- the via area uses up most of the space anyway
+
+x Are tantalums safe?
+	They explode and they are very sensitive to peakiness...
+	The EZ-HOST uses electrolytic... maybe for a reason?
+
+x Is Flash programming safe?
+	It says all commands have a don't care on the address bus...
+	This means the CPLD should be able to safely poll status even though the A bus is going crazy!
+	-> Worst case we can force GPU to help with bus polling, so we are safe!
+
+- Full Type B versus Mini-B:
+	I'VE TRIED EVERYTHING... IT DOES NOT WORK
+		I wasted two hours and realized we need 1.375" clearance
+		That puts us at 43mm high and it means very generous
+
+	The cartridge doesn't clear the back of the Jaguar until 1.25" high/31.75mm from bottom of the board
+	A full type B connector needs 7mm clearance to the edge of the PCB
+		Thus, a 38.75mm/1.525" board to just clear the back of the PCB (pre-plastic)
+		Right now, our packed design is 35mm/1.3" tall
+	At the dead center of the cart, we have only 0.5"/12.7mm clearance from back of PCB
+	A full Type B connector needs 11 mm clearance from back of PCB
+
+	-> At the moment the Type B connector starts at 1.125"
+		That doesn't fit at all... there is not a half inch back there -- even then it would be scraping
+	
+	The big disadvantage of a Full Type B connector is that it doesn't fit!
+		And the plastic case might be very curvy/funky to support this kind of clearance
+
+	IT DOESN'T FIT.  FORGET ADVANTAGES.  IT DOESN'T FIT.
+
+	The big advantage is that it can be PTH soldered with the type A connectors after scoring
+		So we get manufacturing flexibility
+
+	Some houses may not appreciate the Mini-B... but I don't see how Full-B fits!
+		They could try scoring boards before SMT part placement anyway -- then break them apart later?
+		Really clever manufacturers might use tab routing, leaving a mouse-bitten tab beneath the mini-B
+			Very easy to snap apart then
+
+	Scoring could play into our hands because our PCB edge could use a slope -- V-scoring is double-sided
+
+- Other (crappy) options:
+	You could do a mini-B through-hole that pokes straight out from the board...  That could be post-mounted
+	You could use a type A connector and just miswire -- other devices do this (boo, hiss)
+
+x Surface mount it is... hopefully scoring+pick-and-place+snapping saves the day
+
+x AT49BV320D vs AT49BV322D -- cost the same, perform the same, sector lock the same
+	The only small advantage of the 322D is its 'RDY' line (no longer needed with CPLD)
+	The chip erase feature in the 322D is convenient but sector erase lets us clear just 2MB
+		This could hasten boot-up for Tempest  :D

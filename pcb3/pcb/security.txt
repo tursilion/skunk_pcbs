@@ -1,0 +1,248 @@
+Protection schemes:
+	Cart images rely on RC4, MD5, watermarks, and a block-based MD5 blacklist
+	CD and BJL images rely on RC4 and watermarks
+		This means code modifications are possible... ew!
+		Code modification detection requires out-of-band CRCs...
+		We can probably afford the occasional 256 byte header containing CRCs -- maybe every 16KB
+			That makes sense since we reinit IV every 16KB and it is a seek boundary
+			We must CRC at least every 2KB -- larger than that and we can't see the end
+			1KB is a good size...  A 256 byte header fits both the IV and 16 8-byte hashes
+
+Watermarks:
+	These are easily discovered and removed using binary search:
+		Even if there are 10 or 20 of them, you can narrow it down to a few dozen passes, right?
+		It would be nice to bury them in 1KB blocks -- then make them dependent on block info
+		This sucks because it takes out some of the expected ease of including for developers...
+
+	These are easily defeated using XOR with some bit pattern...
+		Although some sneakiness in IV mixing might compensate for this (see below)
+
+	The XOR/watermark defeating approach is hard with cartridge ROMs, but is very easy for CDs/BJLs...
+		After all, they all load from a fixed pipe!
+		Although it's slightly harder to hack DSP code for that...
+
+	These are the last defense against pirates...
+		Pirates can easily rip the plaintext CD/BJL images
+		So we have to stop those from playing
+
+	One way is to embed tiny watermarks among the random data in the image
+		You help developers by giving them a 'sheet' of watermarks for their product
+		Each sheet contains the developer serial code to prevent one developer from hacking another
+		The sheets contain 16368 16-byte quantities -- each byte-aligned to cover a 16KB window
+		Developers then insert 'pad' symbols into their program at random locations
+		The developer provides a sym file to the signing JAR, which stores the watermarks over the pads
+		Watermarks are hard to distinguish from random data, so a hacker may not find all of them
+
+	I haven't a clue how to make a good watermark, though
+		The RC4 'random' generator is a good approach but it's slow
+		And you can't use a single RC4 for both purposes... you need different keys
+	
+	One plausible approach is via the CPLD...
+		If we have a good random number generator in the CPLD used for bootup already...
+		A fairly potent LFSR might fit, and might hold enough state to detect watermarks
+
+	WAIT!  Any streaming cipher is unsafe...
+		Developers can just XOR their sheets together and figure out practically all of the key...
+
+	So we need a block cipher... which means 16-byte boundaries only... which means CPLD decodes block?
+		The CPLD doesn't have enough state for that!
+
+	Or, we need a detection mechanism that looks for 16-byte boundaries and scrambles subsequent bits...
+		In other words, a random IV is the first word...
+		All following words are scrambled differently as a result
+		In effect, all subsequent words become checksums on the first
+		So we have 22-bits of 'free' data, 10-bits of 'match' data, and 96-bits of 'checksum data'
+		The match data contains the current address (10 bits)
+		The 'free' data contains 20 bits of IV followed by 2 bits of sense data
+		The sense data can be used to indicate publisher preferences or contain key bits
+		The IVs are assigned randomly -- no fixed publisher code exists
+		However, IVs are always unique per publisher, making it possible to find out who did what
+
+	This still makes an obvious pattern on the first word but everything after that could be pretty random
+
+	The most important thing is to ensure that watermarks are hard to find
+
+	This makes a creepy amount of sense...
+		But it would have to be done inline with downloading -- are we fast enough for that?
+		Also, it wastes CPLD resources we were going to use for other purposes...
+		Finally, it won't really work with SPI... will it?
+
+	CPLD watermark detect can be really nasty...
+		The watermarks can be 16 bytes long and arbitrarily aligned on word boundaries
+		The EZ-HOST can shift out pieces of the key to the CPLD...
+		If watermarks do not appear in the expected pattern, the CPLD can set the 'kill' bit
+		The EZ-HOST can randomly poll the kill bit (sometime later), and force a reset
+		On seeks, the EZ-HOST can reset the key toggle pattern appropriately...
+
+Security risks in EZ-HOST:
+	Rumor has it that GPIO 28:27 are always in UART/debug mode on startup, even in HPI mode
+		Scan records sent via UART can take over the chip
+	Fortunately, P1A and P2A are only enabled in standalone mode -- not HPI mode!
+
+Safest approach:
+	Only on first reset...
+	Set address pointer to 0x0000
+	Write 0xCF00, 0xCF00, 0x2000, 0x2000, 0x0000, 0x0000
+		This disables the UART (any reads/writes cause inf-loop)
+	Read next value -- if not equal to HSS_Done_ISR, wait 4096 cycles and start again at 0x0000
+	Set address pointer to 0x2000
+	Write each word to EZ-HOST as it is decrypted
+	Reset boot flag at 2048 words -- can only be set by power off
+	If CRC residue is 0 when boot flag is reset, trigger GPIO IRQ
+	EZ-HOST code boots from here...
+	After boot, EZ-HOST sets CPLD status reg, allowing memory access
+	At this point the 68K can start to read its boot code from EZ-HOST 'safe' window (0x1000)
+
+Most plausible attack vector:
+	Pull up GPIO31/30 and boot into standalone mode (or just hold CPLD in RESET -- possible?)
+	Inject code via USB to enable HPI mode
+	Wait for program transfer via HPI
+	Read back private keys
+
+Next most plausible attack vector:
+->	Reset EZ-HOST, holding GPIO config lines high to force debug mode
+	Or just reset EZ-HOST and use the UART
+	Read back private keys
+
+	Cheap way to defeat this is to store private keys in memory initialized on reset...
+		For example, there are 20 bytes available for SIE2 endpoints...
+
+	A stronger way is to store part of the RSA key in the CPLD, but how?
+		If the CPLD helps with RSA multiplies, this is possible, but...
+			It's pretty easy to observe the CPLD in operation and figure out the underlying key
+		So this is just minor obfuscation, not really protection
+
+Only defense:
+	Additional RC4 decrypt pass based on key built via SRAM contents
+		This frustrates any changes to default post-boot config or code
+->	Looks like memory is not zeroed by BIOS, so we can't tell!
+	But an additional RC4 pass is probably required anyway since we read the Flash ROM OTP key
+
+	Another approach tries to access HPI repeatedly post-reset
+		If it is available too fast or too slow, we can refuse to key properly
+		This is a little risky but can probably be made to work 100% reliably
+			As long as there is lots of timing clearance confirmed by the analyzer...
+
+Watermarking:
+	The Flash firmware moves 400KB/second, executing in parallel:
+		USB streaming blocklist from bulk endpoint
+		RC4 decrypt
+		CRC/MD5 calculation on 8KB chunks -- stores 2KB of calculations
+		Watermark detection -- checks for 8-byte aligned watermarks
+	After the calculation:
+		Stream checksum blocklist from bulk endpoint
+		Compare CRC blacklist against calculated CRCs
+	If all is good, tell the CPLD to enable read access to Flash
+		
+RC4 on CY16:
+
+; Initialize state... clear the state
+	mov r1, ff00	; i
+	mov r8, state	; S
+@@:
+7	mov b[r8++], r8
+
+4	inc r1
+3	jnz @b		; 14, or 10.5/8.75 unrolled
+
+; Initialize state... scramble state based on key
+	mov r1, ff00	; i
+	mov r8, state	; S[i] (1024 bytes aligned)
+	mov r9, key	; 512-bit key (128 bytes aligned)
+	mov r10, state	; S[j] (1024 bytes aligned)
+
+@@:
+7	mov r2, b[r8+]	; t = s[i]
+5	add r10, r2	; j = j + s[i]
+7	add r10, b[r9+]	; .. + key
+5	and r9, ffbf	; .. [i mod keylength]
+5	and r10, fcff	; .. mod 256
+7	mov b[r8], b[r10]	; s[i] = s[j]
+6	mov b[r10], r2	; s[j] = t
+4	inc r1
+4	jnz @b		; 50*256 = 12800
+
+; Reg-modifying version...
+7	mov r2, b[r8++]		; t = s[i]
+6	add b[lb10], r2		; j = j + s[i]
+8	add b[lb10], b[r9++]	; .. + key
+7	mov b[r8], b[r10]	; s[i] = s[j]
+6	mov b[r10], r2		; s[j] = t
+
+5	and r9, ffbf		; .. [i mod keylength]
+4	inc r1
+3	jnz @b		; 34+12 = 46, or 40/37 unrolled
+
+; Decrypt 256 bytes at a time (avoiding r8 mod 256 overflow)
+	mov r8, state+1	; S[i]
+	mov r9, state	; S[j]
+	mov r10, state	; S[S[i] + S[j]]
+	mov r11, source	; Source data to be decrypted
+
+@@:
+6	mov r10, b[r8]	; t = S[i]
+5	add r9, r10	; j = j + S[i]
+5	and r9, fcff	; .. mod 256
+7	mov b[r8], b[r9]; S[i] = S[j]
+6	mov b[r9], r10	; S[j] = t
+7	add r10, b[r8+]	; S[i] + S[j]
+5	and r10, fcff	; ...mod 256
+10	xor b[r11+], b[r10+state]	; *src++ ^= S[S[i] + S[j] mod 256]
+4	dec r1
+3	jnz @b		; 58*256 = 
+
+Self-modifying version:
+7	mov b[r10], b[r8]	; target = S[i]
+6	add r9, b[r10]		; j = j + S[i]
+5	and r9, fcff		; .. mod 256
+7	mov b[r8], b[r9]	; S[i] = S[j]
+7	mov b[r9], b[r10]	; S[j] = target
+8	add b[r10], b[r8++]	; target = S[i] + S[j] mod 256
+8	xor b[r11++], b[target]	; *src++ ^= S[target]
+4	dec r1
+3	jnz @b		; 55*256 = 
+
+Reg-modifying version (should work!):
+7	mov b[lb10], b[r8]	; t = S[i]
+6	add b[lb9], r10		; j = j + S[i] mod 256
+7	mov b[r8], b[r9]	; S[i] = S[j]
+6	mov b[r9], r10		; S[j] = t
+8	add b[lb10], b[r8++]	; S[i] + S[j] mod 256; i = i + 1
+8	xor b[r11++], b[r10]	; *src++ ^= S[S[i] + S[j] mod 256]
+4	dec r1
+3	jnz @b		; 49 or 45.5/43.75 unrolled
+
+Fast bypass version (for first 256 bytes and seek):
+6	mov r10, b[r8]		; target = S[i]
+6	add b[lb9], r10		; j = j + S[i] mod 256
+8	mov b[r8++], b[r9]	; S[i] = S[j]; i = i + 1
+6	mov b[r9], r10		; S[j] = target
+4	dec r1
+3	jnz @b		; 33 or 29.5/27.75 unrolled
+
+This is in the right ballpark...
+
+	Re-initializing the key takes 75 cycles/byte, or 19.2Kcyc, when unrolled 4 times
+		This is because we must discard the first 256 bytes of RC4
+		However, the discard process is faster than decrypt!
+	In streaming mode, we can amortize this cost by having two state buffers
+	With 16KB seek granularity:
+		'Seek times' are from 0.05ms to 10ms (best case to worst case)
+		This means all 'seeks' are done by the next frame
+		Streaming can amortize the cost with only 3.6% reduction
+			This gets us around 900KB/second (at 45M cycles)
+		Without amortization, the buffer runs dry at 2KB, a 20% hit...
+			This means 704KB/second peak... still not bad!
+			And with SPI, we can cover a full 4KB -- a 10% hit
+
+It looks like we can stream at 704KB/second (4x CD speed) via SPI
+And bulk copy can get up to 900KB/second on a very happy day...
+
+Of course, these theoretical peaks are forgetting everything else going on...
+	We have wait states for DMA...
+		At least 700,000 of them (for HPI word reads and USB word writes)
+	And some interrupt activity
+
+Actually, as long as they are not running audio it should work fine...
+	704KB sustained is a nice goal that may be achievable with all stops pulled...
+

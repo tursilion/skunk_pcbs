@@ -1,0 +1,16 @@
+Practical problems with controller emulation:
+	The keypad...  It would be nice if you could use the plugged-in keypad.
+	But this requires quite extensive game patching
+
+	Some games certainly have more complex controller read routines
+		After all, at least Missile Command knows about analog controllers
+
+	Nobody is going to remember all the eccentric mappings on their favorite controller
+
+We need a good controller mapping screen:
+
+	We should probably establish 'sequences' and 'auto-fire' rates
+	Sequences let you hold down a button and cycle through weapons in Doom
+	Or, hold down a button and cycle through special moves in your favorite fighter
+
+	

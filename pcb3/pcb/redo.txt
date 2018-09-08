@@ -1,0 +1,387 @@
+FINAL WORD:
+	We can't trust plane capacitance in this stack-up -- we must stick to sequence capacitor routing
+	It is safest and least likely to have issues -- and that's all that matters for this board
+	ONE FLAW and I am going to give up -- so I can't afford any errors
+
+	We can probably do without the bypass on BoostVCC though.  :-P
+
+Some express PCB tips for 4-layer boards:
+	.014" and .020" are finished hole sizes -- only .014 are solder-filled vias
+	.021" is the minimum hole-to-hole spacing -- thus 0.035" center to center for vias
+	They don't support inner routing -- all you get inside is holes from .1" - .25"
+	They have .012" spacing from signal to power, and .028" from power to power
+		Batch PCB is exactly the same:  12 mils, 28 mils, 12 mils
+		-> This helps crosstalk and EMI a lot -- but kills plane capacitance
+	So, we have decoupling 'issues' and need really tight spacing
+
+	Many people recommend 25 mils to board edge (0.635mm)
+
+Lessons learned in first routing:
+
+	Space on the back is not unlimited
+		Route your data bus as low as you can
+		Make thicker, less snakey, power transmission lines
+		-> Bubble up control signals low on the board -- interleave with data lines!
+
+	Capacitor placement is critical
+		Place near ground pins?  (So says sigcon/HoJo guy.)
+		Accept more vias for power delivery -- we're only adding 10 tops, right?
+		Move traces off back of board that don't need to be there
+			That may include JTAG (experiment)
+		Most suggestions are that you are within 1.2" of both ground and VCC
+			Sigcon suggests that you are no further than the distance between ground and VCC
+			->	That's around 250 mils
+
+
+	
+	Try out 8 mil/8 mil routing on front and back -- everybody's doing it!
+		Thicker power lines are a fair trade for denser surface lines
+		Vias will be placed much more consistently -- very nice looking
+
+	Via size and placement
+		Don't pack your vias tightly except when you really need to -- you will chop up your power plane
+		Think about larger vias too -- not everybody does 16/30 (although it sure looks nice!)
+			AP Circuits does 25 mil vias
+			5 mil is pretty much the minimum ring -- i.e., 25+5+5 = 35 or 16+7+7 = 30
+		The EZ-HOST has minimum 15 mils from via _ring_ to pad -- that's 30 mils from via center
+			This is consistent with others' advice -- DFM site says 15 mils from via to pad
+			'Rule of thumb' is about 25 mils
+		The EZ-HOST has very nicely spaced vias -- not all packed in like we do
+
+	No silk on pads -- causes tombstoning
+	Thermal vias help to prevent tombstoning too... but direct connects help power inductance
+
+	SMT tombstoning is a real problem -- especially for little capacitors
+		Having different sized/different number of traces will cause one pad to cool faster than the other
+		This even affects chip alignment!
+
+	Some people recommend 50 mil spacing between resistor to SOIC and resistor to resistor
+
+	Deduct .75 inches on all sides of a panel -- then remove 0.1 inches for tab routing
+
+	Gold fingers add .2 inches at the bottom for the plating bar
+
+Lessons learned in research:
+
+	Don't route critical signals through vias!  Ugh... no clue how to avoid this for USB...
+	-> It is frequently stated that power plane separation under 10 mils makes cap placement non-critical
+		Conversely, distant power planes require very close cap placement
+
+	Of course, the EMC guys recommend distant power planes for better microstrip performance
+	
+	Typical boards are 0.062" thick
+
+More efficient wiring part II:
+
+	Of our 52, we are using:
+		32 for data buses
+		4 for Jag addressing (A22, RW, ROM, CLK)
+		6 for EZ Host control (30, 31, RD, WR, A0, A1)
+		2 for Flash addressing (OE, WE)
+		7 for Jag peripherals (JCD, JAUDIO, WS, SCK, GPIO0, E2DATA, EINT0)
+		1 for system reset (RESET)
+
+	We could kill the separate Flash WE/OE if we relied on a data latch in the CPLD
+		Flash OE/WE could be tied to A0/A1 and Flash CE could be a separate signal
+		This is probably tough to route on the PCB...
+	We could overlap 30/31 and RD/WR in interesting ways...
+		The PWM is intended to control the bus after all...  It could trigger reads?
+		Probably kind of ugly because we'd want chip select in the CPLD...
+	We could theoretically double up Flash WE and EINT0
+		This makes sense since we can always trigger a dummy Flash command write on EINT0
+			This fits perfectly with programming Flash
+			This is less convenient when tripping FIFO interrupts, but 'okay'
+		EINT0 works on a rising edge...  Much like WE I guess?
+	-> We could double up A0 and 31, assuming we don't do mailbox writes frequently
+		The idea here is that 31 is a rare 'mailbox read' signal
+			So we want the mailbox bit high when we do this anyway
+		This can work in conjunction with the PWM on 30...
+			When 30 is low, 31/A0 can be driven by the CPLD
+			When 30 is high, 31/A0 can be driven by the EZ-HOST
+		This lets EZ-HOST safely interject by stopping the PWM first
+			This is very safe!
+			We could even stop interrupts and trip the other PWM
+		Is this even possible to wire?
+	E2DATA and JCD of course can go together...
+	Can we just run Flash WE off the EZ-HOST?
+		Yes, but... it will slow down programming
+	Can we just run EINT0 off the EZ-HOST?
+		Yes, and it makes life _way_ easier for FIFO management
+		But, it slows down programming a little... or a lot
+		The problem is that we need the GPU to start a program every 250 cycles or so
+		The GPU has a built-in timer that will happily do this for us
+		And we can readjust the GPU timer dynamically to match the programming speed
+	-> Verdict:  EINT0 should run off EZ-HOST
+
+	Can we run EINT0 off the data bus?  Yes, via nSSI (73)
+		We can put nSSI in SS manual mode
+
+	Rewire plan:
+		A0 hooks to a nearby PWM
+		EINT0 goes to nSSI (73)
+		GPIO1 is removed from netlist
+		Top CPLD lines are re-defined, leaving one extra line at top
+		TMS/TMI are liberated -- routed through JTAG connector
+		Right-side CPLD ground is moved right if possible
+		D5 via is moved left if possible
+		A22 is re-routed left/above power, to surface and connect at top
+		ERW is re-routed to connect to where A22 did -- moved left to tighten up inside
+		This frees pin 1 and 2 for UARTI and UARTO
+
+	Rewire clocks?
+		Global clocks are on pins 15, 16, 17
+		JCLK can reach pin 15 or 16 without a reroute -- but right-hand traces need to move down
+		We can route two PMWs to 15 and 16, but that opens up a top trace
+			And requires RD and A1 to handle 30 and 31
+			WR works better than A1 if we want to ground CS
+		The top trace is probably JCLK going to 17 -- we can route that just above OVRCURL
+		These clocks may not help at all, but why not do it?  Cheap insurance!
+
+	Rewire output enables?
+		Lots of things cause writes on the private bus, so we can't use an OE there
+		Unfortunately, OE on the Jag bus is ROM+RW or GPIO+RW -- a product term!
+
+	What about GPIO1? KILL IT
+		This is really hard to route and only the CPLD really needs it...
+		Routing it to EZ-HOST does no good at all
+			The Jag can easily send interrupts via mailbox writes
+		So does the CPLD need to know, or can it count bit shifts?
+			It can safely count bit shifts -- sample EEPROM code uses same counts
+			Worst case, you can periodically reset the EEPROM state machine
+		-> GPIO1 is not needed
+
+	Can we do a better UART in EZ software?
+		Most games barely reach 115.2K anyway...
+		To achieve that rate via CPLD, we'd need big fat counters -- divide by 10K
+			That's 28-bits of precious state (14 for counter, 14 for reload)
+		Our bit-banging UART could transmit 01, 10, 11, or 00 between updates
+			This allows for about 900 EZ-HOST cycles between interrupts -- safe!
+		Receiving via polling is a non-starter
+			Using the built-in UART would be cool...
+			But how does it handle parity?
+			And PWMs overlap with HSS in the EZ-HOST
+
+	I can't believe it, but the CPLD is the best approach... and it's not so bad
+		115200 baud is '14' (4 bits) -- Doom runs this fast
+		9600 baud is '173' (8 bits)
+	So a 11 bit counter plus an 8-bit reload is plenty (3-bits are needed for 13.3M/8)
+
+	The CPLD UART works a lot better because there is no clock drift, ever
+		We may not even need to realign our clock
+			We can just pause the clock until the very first bit, then run free
+			Jerry has a separate transmit and receive clock
+			Once aligned, the transmit clock will stay aligned until a baud change
+		We can probably avoid the UART bug completely by staying in lock step...
+			No way to know until we experiment
+			Perfect lock step with the DX16 clock is probably the secret though
+			So we want our transmit clock to match our receive clock
+
+	
+
+More efficient wiring:
+
+	We can wire RD and A1 to GPIO30 and GPIO31 -- this reduces the amount of over-top wiring we have
+		Confirm RD/A1 are really inputs during standalone boot and we are good!
+		The EZ-HOST would no longer initiate mode switches -- but that's okay
+		The 68K can happily control all mode switches -- it's the data we protect, not the mode!
+		One exception is interrupts targetted at the Jag...  We need a way to ask for those
+		Another exception is kicking off RSA state machine only when we are ready for it...
+	-> Conclusion: two TQ PWMs into CPLD -- one is usually clock, other is usually 'trigger mode update'
+		And this gives us flexibility for dual clocks in the future
+
+	The toughest part is pushing all those vias down under the CPLD so we can route behind it
+		One approach I didn't try was to terminate data lines under the CPLD -- should be easy
+		With lines ending under the CPLD, we have room to the right for all the SPI/EEPROM stuff
+		This sounds really tough to route -- I guess we can try if needed
+
+	This should leave room for front-side JTAG wiring, once we find a way around the decoupling cap
+	This clears up a big chunk of all routing on the back of the PCB...
+
+	The Flash address bus wiring is pretty efficient -- the main help would be in routing /WE from CPLD
+		We should look at routing CPLD reset too -- it's cleaner to reset EZ+TSOP together
+		It is possible to route CPLD reset to both places... but probably adds vias elsewhere
+
+	We could theoretically share JTAG pins with EZ-HOST data bus pins
+		This would simplify wiring a _lot_, but makes in-circuit-debug harder
+		TDO can safely route to D8/MISO -- we can use external memory reads to poll it
+		GPIO30+31 are great candidates for TDI/TMS -- since they are treated as CPLD inputs
+	
+	We could probably run overcurrent into the CPLD (say pin GPIO30) and use bus hold pull-up
+		The problem with/advantage of bus-hold pull-up is that we must explicitly 'reset'
+		Of course, the GPIO could be the one to reset it by pushing high...
+		Pushing high could short out the whole line, of course, and blow everything
+		And this is probably horribly noisy
+
+Rewire the CPLD:
+
+           32 31 30 29 28 27 26 25 24 23 22 21 20 19 18 17
+    C11 33 C  C  T  T  T  C  V  C  C  A  C  G  A  A  A  G  16 GCK2/A11
+     C6 34 4  3  C  M  D  9  C  8  5  1  2  N  1  1  1  C  15 GCK1/A9
+    C14 35       K  S  I     I        2     D  7  5  0  K  14 GND
+    C15 36                                              3  13 A4
+    VCC 37                                              /  12 A3
+    C17 38                                              A  11 A8
+    C10 39                                              1  10 A6
+    C12 40                                              4   9 A5
+    GND 41                                                  8 A2
+    C16 42                                                  7 B17
+     D2 43                                              B   6 B15
+     D5 44                                              9   5 GTS1/B14
+     D8 45                                              /   4 B12
+     D3 46    D  D  D  T  G  V  D  D                    G   3 VCC
+     D4 47 D  1  1  1  D  N  C  1  1  B  B  B  B  B  B  S   2 GTS2/B11
+    D11 48 6  4  0  2  O  D  I  5  7  3  4  2  5  6  8  R   1 B10
+           49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64
+
+TDO splits CPLD diagonally -- makes reset routing 'fun'.  :P
+	Reset can split from pin 52 and exit in top right with TDO
+	It can exit with WE on the top left (requires TSOP reroute)
+	This is better for high resets too
+
+RESET = U2.52
+FLWE = U2.36
+
+Leftover:	35 34 32 31 27 25 24
+
+We can route reset/TDO along the bottom/right to make room for vias
+for all of the following signals:
+
+	E2DATA	J1.B40	U2.
+	GPIO0	J1.B42	U2.
+	GPIO1	J1.B43	U1.45
+	SCK	J1.B47	U2.
+	WS	J1.B48	U2.
+	JAUDIO	J1.B49	U2.
+	JCDATA	J1.B50  U2.
+	JCLK	J1.B52	U2.
+
+We need to route those vias to bottom-right corner...
+	Then we need to pick up some of the D8+ data line vias here
+	That way we can route the remaining lines low enough...
+	Should work
+
+TSOP side:
+	FLOE	U3.28	U2.46
+	D0	U3.29	U2.45	U1.94
+	D1	U3.30	U2.44	U1.93
+	D2	U3.31	U2.43	U1.92
+	D3	U3.32	U2.42	U1.91
+	D4	U3.39	U2.40	U1.90
+	D5	U3.40	U2.39	U1.89
+	D6	U3.41	U2.38	U1.87
+	D7	U3.42	U2.33	U1.86
+
+Jaguar side:
+
+	EA22	J1.B4	U2.47
+	ROM1	J1.A20	U2.48	
+	ERW	J1.B21	U2.49
+	ED15	J1.A22	U2.50
+	ED0	J1.A23	U2.51
+	ED7	J1.A24	U2.56
+	ED8	J1.A25	U2.57
+	EINT0	J1.B25	U2.58
+	ED14	J1.A26	U2.59
+	ED1	J1.A27	U2.60
+B27=9V
+	ED6	J1.A28	U2.61
+	ED9	J1.A29	U2.62
+	ED13	J1.A30	U2.63	
+	UARTI	J1.B30	U1.70
+	ED2	J1.A31	U2.64
+	UARTO	J1.B31	U1.71
+	ED5	J1.A32	U2.1
+	ED10	J1.A33	U2.2
+	RESETIL J1.B33	U1.54
+	ED12	J1.A34	U2.4
+	ED3	J1.A35	U2.5
+	ED4	J1.A36	U2.6
+	ED11	J1.A37	U2.7
+B36-38=5V
+
+	A20 ROM1->47
+	A22 ED15->48
+	A23 ED0-->52	Reach-through
+	A24 ED7-->51	Reach-through
+	A25 ED8-->49
+	A26 ED14->50
+
+Split by capacitor...
+
+	A27 ED1-->56
+	A28 ED6-->57
+	A29 ED9-->58
+
+Split by pin density...
+
+	A30 ED13->60
+	A31 ED2-->61
+	A32 ED5-->62
+	A33 ED10->63
+	A34 ED12->64
+	A35 ED3-->59	Reach-through
+	A36 ED4-->4	Reach-through
+	A37 ED11->1
+
+
+EZ side:
+
+	At 4 mil we can route two traces under EZ-HOST
+
+	TCK U2.30 U1.41
+	TMS U2.29 U1.42
+	TDI U2.28 U1.43
+		-> LEFT 27, 25, 24 OPEN
+		We have to leave something in the top row...
+	RESETIL J1.B33 U1.44
+	GPIO1 J1.B43 U1.45
+	EZRD30 U2.22 U1.47 U1.40
+	EZWR U2.20 U1.48
+	EZA131 U2.19 U1.50 U1.39
+	EZA0 U2.18 U1.52
+	PWM2 U2.17 U1.53
+	PWM1 U2.23 U1.54
+	TDO U2.53 U1.55
+	D15 U2.16 U1.56
+	D14 U2.15 U1.57
+	D13 U2.13 U1.58
+	D12 U2.12 U1.59
+	D11 U2.11 U1.60
+	D10 U2.10 U1.61
+	D9 U2.9 U1.65
+	D8 U2.8 U1.66
+
+TSOP reroute:
+	EA2-EA12 	A1-A11
+	EA13-EA21 	A12-A20 (A12-A14 are special)
+
+        A1 EA10		A7
+        A2 EA9		A6
+        A3 EA11		A5
+        A4 EA8		A4
+        A5 EA12		A3
+        A6 EA7		A2
+        A7 EA13 	A13	THRU
+        A8 EA6		A1
+        A9 EA14		A17
+        A10 EA5		A8
+        A11 EA15	A19	THRU
+        A12 EA4		A9
+        A15 EA16	A16	THRU
+        A16 EA3		A10
+        A17 EA17	A15
+        A18 EA2		A11
+        A19 EA18	A20
+
+These mappings come from below:
+        B5 EA21		A18
+        B6 EA20		A12
+        B7 EA19		A14
+        B15 EA1		A0
+
+This could be done with two thrus, but it would cut off access to WE/RESET:
+	A6/A5/A4/A3/A2/A1/A17/A8(T)/A18/A9(T)/A19/A10/A15/A11/A20/A7/A16
+
+This mapping still makes erasing easy...
+	Just count by 16KB blocks instead... 1552KB-2.5MB for both halves
+		Boot block is 0, 8, 512, 520, 1024, 1032, 1536, 1544

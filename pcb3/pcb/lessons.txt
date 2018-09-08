@@ -1,0 +1,35 @@
+PUT IN POWER PORTS
+	Put headers for _anything_ you plan to do during bring-up (external power, clock measurement, etc)
+	I have no idea how I'm going to test power input...
+
+Trace geometry is no big deal -- 8mil/8mil is very safe no matter how you do it
+Hole geometry is a _huge_ deal -- check clearances against ACTUAL hole sizes  :-(
+	Be very conservative with vias and pads -- add extra clearance if you can
+
+Get your footprints exactly right, with courtyards, before you get very far.
+	Learned again on capacitors and very painfully on crystals...
+
+Route the important signals (clocks, USB, etc) FIRST -- do not wait until the end.
+Route multipoint signals next, including power and reset.
+
+Then it's time to play...
+
+Don't bother routing traces end-to-end as you 'explore' a design space
+	Just getting them roughly where they go -- overlapping vias and all, is fine
+		You can easily select and move them this way without wasting time
+	Pen and paper is the most productive way -- just draw out _every_ signal
+	Watch out for the ones that cross/block -- and then pay special attention
+
+Spend lots of time getting the schematic right -- and maintain it in PADS form
+	FreePCB will happily flag duplicate assignments and ratlines really help
+
+Explore minor part alterations -- missing out on the 322 was really bad
+	Part placement would be tighter with a 322, with faster programming, less caps
+
+Maintain your BOM with Digikey part numbers all the way from the early what-if stages
+	This makes it easy to get quotes at any point
+Also, it makes it obvious when your BOM is getting too big...
+	Unique components are the biggest cost in prototype assembly... keep BOM short!
+
+Drop ship direct from Digikey to assembler -- lots less work and no double-checking
+	And Digikey is fast -- they ship faster than the PCB house

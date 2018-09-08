@@ -1,0 +1,68 @@
+The OS is a 68K kernel image plus a large static XIP binary
+	The XIP binary is written in C, and links in network/bluetooth/any other library
+	The kernel handles framebuffer and audio
+	Jag-specific bits like blits, Flash load, In-Game configuration, are done in the binary
+
+Do we protect the OS?  YES!
+	With all security features controlled by the firmware, could the OS be open source?
+	The OS has to frustrate people trying to dump game images unencrypted...
+	The only way to do that is to lock decryption access until Jaguar reset
+
+How do we make the OS extensible, then?
+	Patch files...  Little config files that control behavior for devices, games, etc...
+
+Boot process:
+	BOOT initializes the EZ-HOST (with keys)
+	BOOT shows Jaguar logo from ROM with status bar (grows from center?)
+	BOOT waits for EZ-HOST to come online, showing appropriate errors
+	EZ-HOST first loads new firmware (signature check)
+	EZ-HOST then sends BOOT.IMG to RAM (BIOS, Linux, menu binary, other ROM FS stuff)
+	EZ-HOST performs a signature check on BOOT.IMG -- on success, BOOT transfers control
+	Linux boots, transfers control to 'init' (menu binary)
+	Menu binary scans directory structure, loads patch files, prepares graphical menu while fading Jag logo
+
+Debug strategies:
+	The Jaguar needs low level debugging support via parallel cable...
+		This is the _only_ way to debug the real hardware until USB is online
+		Best approach is a customized BJL ROM combined with customized BJL Windows binary
+		The customized Windows binary should have a TCP stack for GDB
+		The 68K can interrupt at 60Hz, then drop into polling if there is a new command present
+		BJL-style two-way handshaking and CRCs ensure data is not lost
+		The best BJL approach is to socket the boot ROM -- develop it via EPROM emulator
+
+	The USB device port might be useful for Jaguar debugging with a simple COM port driver
+		BJL will do for a while, but once Linux is working, a USB serial console is the next step
+		Once we have OHCI enumerating (confirmed via GDBJL), a console running busybox is nice
+			Then again, we might get an OHCI keyboard working about as fast
+
+	The 68K ucLinux kernel should be runnable on a Jag emulator
+		The open source Jaguar emulators should have decent 68K cores borrowed from other places
+		This would be better with a hacked-in pipe for GDB
+			This is plausible using a C-based TCP listener hacked into the 68K core
+		Adding extra RAM can make debugging easier
+
+	The whole C binary can be executed on a real OHCI ucLinux box with framebuffer/audio/HID control
+		The Jag-specific bits are just stubs to printf...
+		Everything is cross-compiled on Windows/Eclipse, debugged remotely with GDB on x86 box
+		This is the best way to analyze and debug real USB issues
+		We can launch the C binary via HTTP and run GDB via TCP -- all by Ethernet
+
+	Can we use virtual hardware instead of real?
+		VMWare USB might also be able to do this...
+		Virtual PC USB can do an OCHI hub!
+		Using real hardware could be even easier...
+
+	The EZ-HOST kernels can be debugged via USB scan mode by USB cable
+		But this means we must choose between EZ-HOST debug and UART debug... should be easy I guess!
+			It's probably possible to enable both at different endpoints
+		We probably will need a USB protocol analyzer at some distant point...
+
+	The CY USB driver is probably a waste of time...
+		The 68K is not fast enough to execute the code as it currently stands
+		So if it's going to be rewritten, may as well go straight to OHCI
+
+OHCI bringup:
+	This is going to be a pain in the ass because it requires working GPU and EZ-HOST code
+		Although it could be stubbed out in 68K code initially... probably not much easier though
+	Also, the OHCI driver in Linux needs lots of adjustment -- it assumes PCI which we don't have
+		Starting with the SA1111 driver might be best...

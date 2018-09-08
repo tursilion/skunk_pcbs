@@ -1,0 +1,503 @@
+[options]
+
+version: 1.334
+file_version: 1.332
+project_name: "jagwave"
+full_library_folder: "c:\jag\freepcb\projects\lib"
+CAM_folder: "c:\jag\pcb\areatest"
+ses_file_path: ""
+dsn_bounds_poly: "0"
+dsn_signals_poly: "0"
+autosave_interval: 0
+netlist_import_flags: 23
+units: MM
+
+visible_grid_spacing: 100000000.000000
+  visible_grid_item: 100MIL
+  visible_grid_item: 125MIL
+  visible_grid_item: 200MIL
+  visible_grid_item: 250MIL
+  visible_grid_item: 400MIL
+  visible_grid_item: 500MIL
+  visible_grid_item: 1000MIL
+  visible_grid_item: 1MM
+  visible_grid_item: 2MM
+  visible_grid_item: 2.5MM
+  visible_grid_item: 4MM
+  visible_grid_item: 5MM
+  visible_grid_item: 10MM
+  visible_grid_item: 20MM
+  visible_grid_item: 25MM
+  visible_grid_item: 40MM
+  visible_grid_item: 50MM
+  visible_grid_item: 100MM
+
+placement_grid_spacing: 200000.000000
+  placement_grid_item: 10MIL
+  placement_grid_item: 20MIL
+  placement_grid_item: 25MIL
+  placement_grid_item: 40MIL
+  placement_grid_item: 50MIL
+  placement_grid_item: 100MIL
+  placement_grid_item: 200MIL
+  placement_grid_item: 250MIL
+  placement_grid_item: 400MIL
+  placement_grid_item: 500MIL
+  placement_grid_item: 1000MIL
+  placement_grid_item: 0.1MM
+  placement_grid_item: 0.2MM
+  placement_grid_item: 0.25MM
+  placement_grid_item: 0.4MM
+  placement_grid_item: 0.5MM
+  placement_grid_item: 1MM
+  placement_grid_item: 2MM
+  placement_grid_item: 2.5MM
+  placement_grid_item: 4MM
+  placement_grid_item: 5MM
+  placement_grid_item: 10MM
+
+routing_grid_spacing: 200000.000000
+  routing_grid_item: 1MIL
+  routing_grid_item: 2MIL
+  routing_grid_item: 2.5MIL
+  routing_grid_item: 3.33330709MIL
+  routing_grid_item: 4MIL
+  routing_grid_item: 5MIL
+  routing_grid_item: 10MIL
+  routing_grid_item: 12.5MIL
+  routing_grid_item: 16.665MIL
+  routing_grid_item: 20MIL
+  routing_grid_item: 25MIL
+  routing_grid_item: 40MIL
+  routing_grid_item: 50MIL
+  routing_grid_item: 0.01MM
+  routing_grid_item: 0.02MM
+  routing_grid_item: 0.04MM
+  routing_grid_item: 0.05MM
+  routing_grid_item: 0.1MM
+  routing_grid_item: 0.2MM
+  routing_grid_item: 8MIL
+  routing_grid_item: 0.25MM
+  routing_grid_item: 0.4MM
+  routing_grid_item: 0.5MM
+  routing_grid_item: 1MM
+  routing_grid_item: 2MM
+  routing_grid_item: 2.5MM
+  routing_grid_item: 4MM
+  routing_grid_item: 5MM
+  routing_grid_item: 10MM
+
+snap_angle: 45
+
+fp_visible_grid_spacing: 5080000.000000
+  fp_visible_grid_item: 100MIL
+  fp_visible_grid_item: 125MIL
+  fp_visible_grid_item: 200MIL
+  fp_visible_grid_item: 250MIL
+  fp_visible_grid_item: 400MIL
+  fp_visible_grid_item: 500MIL
+  fp_visible_grid_item: 1000MIL
+  fp_visible_grid_item: 1MM
+  fp_visible_grid_item: 2MM
+  fp_visible_grid_item: 2.5MM
+  fp_visible_grid_item: 4MM
+  fp_visible_grid_item: 5MM
+  fp_visible_grid_item: 10MM
+  fp_visible_grid_item: 20MM
+  fp_visible_grid_item: 25MM
+  fp_visible_grid_item: 40MM
+  fp_visible_grid_item: 50MM
+  fp_visible_grid_item: 100MM
+
+fp_placement_grid_spacing: 200000.000000
+  fp_placement_grid_item: 10MIL
+  fp_placement_grid_item: 20MIL
+  fp_placement_grid_item: 25MIL
+  fp_placement_grid_item: 40MIL
+  fp_placement_grid_item: 50MIL
+  fp_placement_grid_item: 100MIL
+  fp_placement_grid_item: 200MIL
+  fp_placement_grid_item: 250MIL
+  fp_placement_grid_item: 400MIL
+  fp_placement_grid_item: 500MIL
+  fp_placement_grid_item: 1000MIL
+  fp_placement_grid_item: 0.1MM
+  fp_placement_grid_item: 0.2MM
+  fp_placement_grid_item: 0.25MM
+  fp_placement_grid_item: 0.4MM
+  fp_placement_grid_item: 0.5MM
+  fp_placement_grid_item: 1MM
+  fp_placement_grid_item: 2MM
+  fp_placement_grid_item: 2.5MM
+  fp_placement_grid_item: 4MM
+  fp_placement_grid_item: 5MM
+  fp_placement_grid_item: 10MM
+
+fp_snap_angle: 45
+
+fill_clearance: 254000
+mask_clearance: 199999
+thermal_width: 304800
+min_silkscreen_width: 152400
+board_outline_width: 254000
+hole_clearance: 444500
+pilot_diameter: 254000
+annular_ring_for_pins: 177800
+annular_ring_for_vias: 127000
+shrink_paste_mask: 0
+cam_flags: 160
+cam_layers: 7340287
+cam_drill_file: 1
+cam_units: 2
+cam_n_x: 1
+cam_n_y: 1
+cam_space_x: 0
+cam_space_y: 0
+
+drc_check_unrouted: 1
+drc_trace_width: 199999
+drc_pad_pad: 199999
+drc_pad_trace: 199999
+drc_trace_trace: 199999
+drc_hole_copper: 406400
+drc_annular_ring_pins: 177800
+drc_annular_ring_vias: 177800
+drc_board_edge_copper: 596900
+drc_board_edge_hole: 596900
+drc_hole_hole: 635000
+drc_copper_copper: 254000
+
+default_trace_width: 200000
+default_via_pad_width: 965200
+default_via_hole_width: 508000
+n_width_menu: 1
+  width_menu_item: 1 200000 965200 508000
+
+n_copper_layers: 4
+  layer_info: "selection" 0 255 255 255 1
+  layer_info: "background" 1 0 0 0 1
+  layer_info: "visible grid" 2 255 255 255 1
+  layer_info: "highlight" 3 255 255 255 1
+  layer_info: "DRC error" 4 255 128 64 1
+  layer_info: "board outline" 5 0 0 255 1
+  layer_info: "rat line" 6 255 0 255 1
+  layer_info: "top silk" 7 255 255 0 1
+  layer_info: "bottom silk" 8 255 192 192 1
+  layer_info: "top sm cutout" 9 160 160 160 1
+  layer_info: "bot sm cutout" 10 95 95 95 1
+  layer_info: "thru pad" 11 0 0 255 1
+  layer_info: "top copper" 12 0 255 0 1
+  layer_info: "bottom copper" 13 255 0 0 1
+  layer_info: "inner 1" 14 64 128 64 1
+  layer_info: "inner 2" 15 128 64 64 1
+
+[footprints]
+
+name: "C0805"
+author: "Ivex"
+source: "SURFACE MOUNT DESIGN AND LAND PATTERN STANDARD SUBSECTION 8.2 (PAGE 3 OF 4)"
+  units: NM
+  sel_rect: -1153200 -1303200 3053200 1303200
+  ref_text: 1270000 950000 2100000 0 177800
+  outline_polyline: 177800 -950000 1100000
+    next_corner: 2850000 1100000 0
+    next_corner: 2850000 -1100000 0
+    next_corner: -950000 -1100000 0
+    close_polyline: 0
+  n_pins: 2
+    pin: "1" 0 0 0 0
+      top_pad: 3 1600000 650000 650000 0
+    pin: "2" 0 1900000 0 0
+      top_pad: 3 1600000 650000 650000 0
+
+name: "6X2HDR-100"
+author: "Ivex"
+source: "PRINTED CIRCUIT DESIGN METHODS PAGE 411"
+  units: MIL
+  sel_rect: -33 -33 533 133
+  ref_text: 50 250 160 0 7
+  n_pins: 12
+    pin: "1" 28 0 0 0
+      top_pad: 2 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 2 50 25 25 0
+    pin: "2" 28 0 100 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "3" 28 100 0 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "4" 28 100 100 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "5" 28 200 0 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "6" 28 200 100 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "7" 28 300 0 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "8" 28 300 100 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "9" 28 400 0 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "10" 28 400 100 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "11" 28 500 0 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+    pin: "12" 28 500 100 0
+      top_pad: 1 50 25 25 0
+      inner_pad: 1 50 25 25 0
+      bottom_pad: 1 50 25 25 0
+
+[board]
+
+outline: 6 0
+  corner: 1 0 0 0
+  corner: 2 19126200 0 0
+  corner: 3 20853400 0 0
+  corner: 4 82000000 0 0
+  corner: 5 82000000 37500000 0
+  corner: 6 0 37500000 0
+
+[solder_mask_cutouts]
+
+
+[parts]
+
+part: L1
+  ref_text: 1000000 100000 270 -1200000 -600000
+  package: ""
+  shape: "C0805"
+  pos: 20400000 32800000 0 90 0
+
+part: J2
+  ref_text: 1270000 177800 0 6350000 4064000
+  package: ""
+  shape: "6X2HDR-100"
+  pos: 23600000 32800000 0 0 0
+
+[nets]
+
+net: "EA15" 0 0 0 0 965200 508000 1
+
+net: "ED12" 0 0 0 0 965200 508000 1
+
+net: "ED2" 0 0 0 0 965200 508000 1
+
+net: "D11" 0 0 0 0 965200 508000 1
+
+net: "D3" 0 0 0 0 965200 508000 1
+
+net: "D4" 0 0 0 0 965200 508000 1
+
+net: "EA16" 0 0 0 0 965200 508000 1
+
+net: "ED3" 0 0 0 0 965200 508000 1
+
+net: "ED13" 0 0 0 0 965200 508000 1
+
+net: "VCC5" 0 0 0 200000 965200 508000 1
+
+net: "D12" 0 0 0 0 965200 508000 1
+
+net: "PWM" 0 0 0 0 0 0 1
+
+net: "EA17" 0 0 0 0 965200 508000 1
+
+net: "ED4" 0 0 0 0 965200 508000 1
+
+net: "ED14" 0 0 0 0 965200 508000 1
+
+net: "D13" 0 0 0 0 965200 508000 1
+
+net: "EA1" 0 0 0 0 0 0 1
+
+net: "D5" 0 0 0 0 965200 508000 1
+
+net: "EA18" 0 0 0 0 965200 508000 1
+
+net: "EA2" 0 0 0 0 965200 508000 1
+
+net: "ED5" 0 0 0 0 965200 508000 1
+
+net: "ED15" 0 0 0 0 965200 508000 1
+
+net: "ROM1" 0 0 0 0 965200 508000 1
+
+net: "OTGVBUS" 0 0 0 0 965200 508000 1
+
+net: "VBUS1" 1 0 0 508000 965200 508000 1
+  pin: 1 L1.1
+
+net: "D6" 0 0 0 0 965200 508000 1
+
+net: "D14" 0 0 0 0 965200 508000 1
+
+net: "EA3" 0 0 0 0 965200 508000 1
+
+net: "ED6" 0 0 0 0 965200 508000 1
+
+net: "EINT0" 0 0 0 0 965200 508000 1
+
+net: "RESETIL" 0 0 0 0 965200 508000 1
+
+net: "D7" 0 0 0 0 965200 508000 1
+
+net: "EZA0" 0 0 0 0 965200 508000 1
+
+net: "D15" 0 0 0 0 965200 508000 1
+
+net: "EA19" 0 0 0 0 0 0 1
+
+net: "TDI" 0 0 0 0 0 0 1
+
+net: "EZRD30" 0 0 0 0 0 0 1
+
+net: "EA4" 0 0 0 0 965200 508000 1
+
+net: "FLWE" 0 0 0 0 965200 508000 1
+
+net: "ED7" 0 0 0 0 965200 508000 1
+
+net: "VCC9" 0 0 0 508000 965200 508000 1
+
+net: "EZA1" 0 0 0 0 965200 508000 1
+
+net: "D8" 0 0 0 0 965200 508000 1
+
+net: "TMS" 0 0 0 0 0 0 1
+
+net: "EA5" 0 0 0 0 965200 508000 1
+
+net: "ED8" 0 0 0 0 965200 508000 1
+
+net: "ERW" 0 0 0 0 965200 508000 1
+
+net: "UARTI" 0 0 0 0 965200 508000 1
+
+net: "D9" 0 0 0 0 965200 508000 1
+
+net: "SCK" 0 0 0 0 0 0 1
+
+net: "EA6" 0 0 0 0 965200 508000 1
+
+net: "ED9" 0 0 0 0 965200 508000 1
+
+net: "CLKSEL" 0 0 0 0 965200 508000 1
+
+net: "DM2A" 0 0 0 0 965200 508000 1
+
+net: "TCK" 0 0 0 0 965200 508000 1
+
+net: "EA7" 0 0 0 0 965200 508000 1
+
+net: "DM1A" 0 0 0 0 965200 508000 1
+
+net: "EA8" 0 0 0 0 965200 508000 1
+
+net: "RESET" 0 0 0 0 965200 508000 1
+
+net: "DM1B" 0 0 0 0 965200 508000 1
+
+net: "JCLK" 0 0 0 0 0 0 1
+
+net: "EA9" 0 0 0 0 965200 508000 1
+
+net: "GND" 0 0 0 965200 965200 508000 1
+
+net: "XTALOUT" 0 0 0 0 965200 508000 1
+
+net: "DP2A" 0 0 0 0 965200 508000 1
+
+net: "TDO" 0 0 0 0 965200 508000 1
+
+net: "E2DATA" 0 0 0 0 0 0 1
+
+net: "CSENSE" 0 0 0 0 965200 508000 1
+
+net: "DP1A" 0 0 0 0 965200 508000 1
+
+net: "SHIELD" 0 0 1 0 965200 508000 1
+  area: 1 4 12 0
+    corner: 1 16800000 33800000 0 0
+    corner: 2 800000 33800000 0 0
+    corner: 3 800000 36600000 0 0
+    corner: 4 16800000 36600000 0 1
+
+net: "EA20" 0 0 0 0 0 0 1
+
+net: "EA10" 0 0 0 0 965200 508000 1
+
+net: "UARTO" 0 0 0 0 965200 508000 1
+
+net: "XTALIN" 0 0 0 0 965200 508000 1
+
+net: "DP1B" 0 0 0 0 965200 508000 1
+
+net: "VBUS" 1 0 0 0 965200 508000 1
+  pin: 1 L1.2
+
+net: "OVRCURL" 0 0 0 0 965200 508000 1
+
+net: "EA21" 0 0 0 0 0 0 1
+
+net: "JCDIN" 0 0 0 0 0 0 1
+
+net: "EA11" 0 0 0 0 965200 508000 1
+
+net: "FLOE" 0 0 0 0 965200 508000 1
+
+net: "EA22" 0 0 0 0 965200 508000 1
+
+net: "WS" 0 0 0 0 0 0 1
+
+net: "D0" 0 0 0 0 965200 508000 1
+
+net: "EA12" 0 0 0 0 965200 508000 1
+
+net: "JAUDIO" 0 0 0 0 0 0 1
+
+net: "EZWR31" 0 0 0 0 0 0 1
+
+net: "EA13" 0 0 0 0 965200 508000 1
+
+net: "ED10" 0 0 0 0 965200 508000 1
+
+net: "ED0" 0 0 0 0 965200 508000 1
+
+net: "D1" 0 0 0 0 965200 508000 1
+
+net: "D2" 0 0 0 0 965200 508000 1
+
+net: "EA14" 0 0 0 0 965200 508000 1
+
+net: "ED11" 0 0 0 0 965200 508000 1
+
+net: "ED1" 0 0 0 0 965200 508000 1
+
+net: "VCC3" 0 0 0 279400 965200 508000 1
+
+net: "D10" 0 0 0 0 965200 508000 1
+
+net: "GPIO0" 0 0 0 0 0 0 1
+
+[texts]
+
+[end]

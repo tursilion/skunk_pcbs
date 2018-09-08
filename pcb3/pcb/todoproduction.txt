@@ -1,0 +1,5 @@
+Before going into production:
+
+o Remove J9 and TDO trace
+o Remove Reserved via on U1
+o Move bottom decoup cap on U1 back into place

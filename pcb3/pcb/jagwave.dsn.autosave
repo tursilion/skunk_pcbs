@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--This file was written by TinyCAD version 2.60.01
+If you wish to view this file go to http://tinycad.sourceforge.net to
+download a copy.-->
+<TinyCADSheets><TinyCAD><NAME>Sheet 1</NAME>
+<DETAILS><Size width='1485' height='1050'/>
+<GUIDES horiz='7' vert='5'/>
+<TITLE></TITLE>
+<AUTHOR></AUTHOR>
+<REVISION>1.0</REVISION>
+<DOCNUMBER></DOCNUMBER>
+<ORGANISATION></ORGANISATION>
+<SHEETS>1 of 1</SHEETS>
+<SHOWS>1</SHOWS>
+<DATE></DATE>
+<GRID spacing='100' snap='0'/>
+</DETAILS>
+<FONT id='1'><HEIGHT>-10</HEIGHT>
+<WIDTH>0</WIDTH>
+<WEIGHT>400</WEIGHT>
+<ITALIC>0</ITALIC>
+<UNDERLINE>0</UNDERLINE>
+<STRIKEOUT>0</STRIKEOUT>
+<CHARSET>0</CHARSET>
+<FACENAME>Arial</FACENAME>
+</FONT>
+<FONT id='3'><HEIGHT>-21</HEIGHT>
+<WIDTH>9</WIDTH>
+<WEIGHT>400</WEIGHT>
+<ITALIC>0</ITALIC>
+<UNDERLINE>0</UNDERLINE>
+<STRIKEOUT>0</STRIKEOUT>
+<CHARSET>0</CHARSET>
+<FACENAME>Arial</FACENAME>
+</FONT>
+<FONT id='4'><HEIGHT>-19</HEIGHT>
+<WIDTH>8</WIDTH>
+<WEIGHT>400</WEIGHT>
+<ITALIC>0</ITALIC>
+<UNDERLINE>0</UNDERLINE>
+<STRIKEOUT>0</STRIKEOUT>
+<CHARSET>0</CHARSET>
+<FACENAME>Arial</FACENAME>
+</FONT>
+<STYLE id='2'><STYLE>0</STYLE>
+<COLOR>000000</COLOR>
+<THICKNESS>5</THICKNESS>
+</STYLE>
+<FILL id='0'><INDEX>-1</INDEX>
+<COLOR>000000</COLOR>
+</FILL>
+<SYMBOLDEF id='6'><NAME type='0'>SN74CBTD3384</NAME>
+<REF type='0'>U?</REF>
+<DESCRIPTION>SN74CBTD3384 Level Shifter</DESCRIPTION>
+<PPP>1</PPP>
+<FIELD><NAME>$$SPICE_PROLOG_PRIORITY</NAME>
+<DEFAULT>5</DEFAULT>
+<FT>000002</FT>
+<VALUE></VALUE>
+<POS>0,0</POS>
+</FIELD>
+<FIELD><NAME>$$SPICE_EPILOG_PRIORITY</NAME>
+<DEFAULT>5</DEFAULT>
+<FT>000002</FT>
+<VALUE></VALUE>
+<POS>0,0</POS>
+</FIELD>
+<FIELD><NAME>Package</NAME>
+<DEFAULT>package name for PCB layout</DEFAULT>
+<FT>000001</FT>
+<VALUE></VALUE>
+<POS>0,0</POS>
+</FIELD>
+<REF_POINT power='0' part='0' pos='83,70'/>
+<TinyCAD><RECTANGLE a='61,22' b='78,70' style='2' fill='0'/>
+<PIN pos='55,24' which='0' elec='0' direction='3' part='0' number='1' show='3' length='30' number_pos='0' centre_name='0'>1*OE</PIN>
+<PIN pos='55,28' which='0' elec='2' direction='3' part='0' number='2' show='3' length='30' number_pos='0' centre_name='0'>1B1</PIN>
+<PIN pos='55,32' which='0' elec='2' direction='3' part='0' number='3' show='3' length='30' number_pos='0' centre_name='0'>1A1</PIN>
+<PIN pos='55,36' which='0' elec='2' direction='3' part='0' number='4' show='3' length='30' number_pos='0' centre_name='0'>1A2</PIN>
+<PIN pos='55,40' which='0' elec='2' direction='3' part='0' number='5' show='3' length='30' number_pos='0' centre_name='0'>1B2</PIN>
+<PIN pos='55,44' which='0' elec='2' direction='3' part='0' number='6' show='3' length='30' number_pos='0' centre_name='0'>1B3</PIN>
+<PIN pos='55,48' which='0' elec='2' direction='3' part='0' number='7' show='3' length='30' number_pos='0' centre_name='0'>1A3</PIN>
+<PIN pos='55,52' which='0' elec='2' direction='3' part='0' number='8' show='3' length='30' number_pos='0' centre_name='0'>1A4</PIN>
+<PIN pos='55,56' which='0' elec='2' direction='3' part='0' number='9' show='3' length='30' number_pos='0' centre_name='0'>1B4</PIN>
+<PIN pos='55,60' which='0' elec='2' direction='3' part='0' number='10' show='3' length='30' number_pos='0' centre_name='0'>1B5</PIN>
+<PIN pos='55,64' which='0' elec='2' direction='3' part='0' number='11' show='3' length='30' number_pos='0' centre_name='0'>1A5</PIN>
+<PIN pos='55,68' which='0' elec='0' direction='3' part='0' number='12' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='83,68' which='0' elec='0' direction='2' part='0' number='13' show='3' length='30' number_pos='0' centre_name='0'>2*OE</PIN>
+<PIN pos='83,64' which='0' elec='2' direction='2' part='0' number='14' show='3' length='30' number_pos='0' centre_name='0'>2A1</PIN>
+<PIN pos='83,60' which='0' elec='2' direction='2' part='0' number='15' show='3' length='30' number_pos='0' centre_name='0'>2B1</PIN>
+<PIN pos='83,56' which='0' elec='2' direction='2' part='0' number='16' show='3' length='30' number_pos='0' centre_name='0'>2B2</PIN>
+<PIN pos='83,52' which='0' elec='2' direction='2' part='0' number='17' show='3' length='30' number_pos='0' centre_name='0'>2A2</PIN>
+<PIN pos='83,24' which='0' elec='0' direction='2' part='0' number='24' show='3' length='30' number_pos='0' centre_name='0'>VCC</PIN>
+<PIN pos='83,28' which='0' elec='2' direction='2' part='0' number='23' show='3' length='30' number_pos='0' centre_name='0'>2B5</PIN>
+<PIN pos='83,32' which='0' elec='2' direction='2' part='0' number='22' show='3' length='30' number_pos='0' centre_name='0'>2A5</PIN>
+<PIN pos='83,48' which='0' elec='2' direction='2' part='0' number='18' show='3' length='30' number_pos='0' centre_name='0'>2A3</PIN>
+<PIN pos='83,44' which='0' elec='2' direction='2' part='0' number='19' show='3' length='30' number_pos='0' centre_name='0'>2B3</PIN>
+<PIN pos='83,40' which='0' elec='2' direction='2' part='0' number='20' show='3' length='30' number_pos='0' centre_name='0'>2B4</PIN>
+<PIN pos='83,36' which='0' elec='2' direction='2' part='0' number='21' show='3' length='30' number_pos='0' centre_name='0'>2A4</PIN>
+<LABEL pos='56,20' direction='3' font='4' color='208000' style='0'></LABEL>
+</TinyCAD>
+</SYMBOLDEF>
+<SYMBOLDEF id='7'><NAME type='0'>Jaguar Cart</NAME>
+<REF type='0'>K?</REF>
+<DESCRIPTION>Jaguar Edge Connector</DESCRIPTION>
+<PPP>1</PPP>
+<FIELD><NAME>$$SPICE_PROLOG_PRIORITY</NAME>
+<DEFAULT>5</DEFAULT>
+<FT>000002</FT>
+<VALUE></VALUE>
+<POS>0,0</POS>
+</FIELD>
+<FIELD><NAME>$$SPICE_EPILOG_PRIORITY</NAME>
+<DEFAULT>5</DEFAULT>
+<FT>000002</FT>
+<VALUE></VALUE>
+<POS>0,0</POS>
+</FIELD>
+<FIELD><NAME>Package</NAME>
+<DEFAULT>package name for PCB layout</DEFAULT>
+<FT>000001</FT>
+<VALUE></VALUE>
+<POS>0,0</POS>
+</FIELD>
+<REF_POINT power='0' part='0' pos='53,187'/>
+<TinyCAD><RECTANGLE a='25,22' b='46.2,186' style='2' fill='0'/>
+<PIN pos='19,25' which='0' elec='1' direction='3' part='0' number='1B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,28' which='0' elec='1' direction='3' part='0' number='2B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,31' which='0' elec='1' direction='3' part='0' number='3B' show='3' length='30' number_pos='0' centre_name='0'>A23</PIN>
+<PIN pos='19,34' which='0' elec='1' direction='3' part='0' number='4B' show='3' length='30' number_pos='0' centre_name='0'>A22</PIN>
+<PIN pos='19,37' which='0' elec='1' direction='3' part='0' number='5B' show='3' length='30' number_pos='0' centre_name='0'>A21</PIN>
+<PIN pos='19,40' which='0' elec='1' direction='3' part='0' number='6B' show='3' length='30' number_pos='0' centre_name='0'>A20</PIN>
+<PIN pos='19,43' which='0' elec='0' direction='3' part='0' number='7B' show='3' length='30' number_pos='0' centre_name='0'>A19</PIN>
+<PIN pos='19,46' which='0' elec='1' direction='3' part='0' number='8B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,49' which='0' elec='6' direction='3' part='0' number='9B' show='3' length='30' number_pos='0' centre_name='0'>N/C</PIN>
+<PIN pos='19,52' which='0' elec='1' direction='3' part='0' number='10B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,55' which='0' elec='6' direction='3' part='0' number='11B' show='3' length='30' number_pos='0' centre_name='0'>N/C</PIN>
+<PIN pos='19,58' which='0' elec='1' direction='3' part='0' number='12B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,61' which='0' elec='6' direction='3' part='0' number='13B' show='3' length='30' number_pos='0' centre_name='0'>KEY</PIN>
+<PIN pos='19,64' which='0' elec='6' direction='3' part='0' number='14B' show='3' length='30' number_pos='0' centre_name='0'>KEY</PIN>
+<PIN pos='19,67' which='0' elec='1' direction='3' part='0' number='15B' show='3' length='30' number_pos='0' centre_name='0'>A1</PIN>
+<PIN pos='19,70' which='0' elec='1' direction='3' part='0' number='16B' show='3' length='30' number_pos='0' centre_name='0'>A0</PIN>
+<PIN pos='19,73' which='0' elec='0' direction='3' part='0' number='17B' show='3' length='30' number_pos='0' centre_name='0'>*WAIT</PIN>
+<PIN pos='19,76' which='0' elec='1' direction='3' part='0' number='18B' show='3' length='30' number_pos='0' centre_name='0'>*RESET</PIN>
+<PIN pos='19,79' which='0' elec='1' direction='3' part='0' number='19B' show='3' length='30' number_pos='0' centre_name='0'>*WE0</PIN>
+<PIN pos='19,82' which='0' elec='1' direction='3' part='0' number='20B' show='3' length='30' number_pos='0' centre_name='0'>*WE2</PIN>
+<PIN pos='19,85' which='0' elec='1' direction='3' part='0' number='21B' show='3' length='30' number_pos='0' centre_name='0'>RW</PIN>
+<PIN pos='19,88' which='0' elec='1' direction='3' part='0' number='22B' show='3' length='30' number_pos='0' centre_name='0'>*OE1</PIN>
+<PIN pos='19,91' which='0' elec='0' direction='3' part='0' number='23B' show='3' length='30' number_pos='0' centre_name='0'>*OE2</PIN>
+<PIN pos='19,94' which='0' elec='1' direction='3' part='0' number='24B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,97' which='0' elec='0' direction='3' part='0' number='25B' show='3' length='30' number_pos='0' centre_name='0'>*INT0</PIN>
+<PIN pos='19,100' which='0' elec='0' direction='3' part='0' number='26B' show='3' length='30' number_pos='0' centre_name='0'>*INT1</PIN>
+<PIN pos='19,103' which='0' elec='1' direction='3' part='0' number='27B' show='3' length='30' number_pos='0' centre_name='0'>9V</PIN>
+<PIN pos='19,106' which='0' elec='6' direction='3' part='0' number='28B' show='3' length='30' number_pos='0' centre_name='0'>N/C</PIN>
+<PIN pos='19,109' which='0' elec='1' direction='3' part='0' number='29B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,112' which='0' elec='0' direction='3' part='0' number='30B' show='3' length='30' number_pos='0' centre_name='0'>UARTI</PIN>
+<PIN pos='19,115' which='0' elec='1' direction='3' part='0' number='31B' show='3' length='30' number_pos='0' centre_name='0'>UARTO</PIN>
+<PIN pos='19,118' which='0' elec='1' direction='3' part='0' number='32B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='52,25' which='0' elec='1' direction='2' part='0' number='1A' show='3' length='30' number_pos='0' centre_name='0'>A10</PIN>
+<PIN pos='52,28' which='0' elec='1' direction='2' part='0' number='2A' show='3' length='30' number_pos='0' centre_name='0'>A9</PIN>
+<PIN pos='52,31' which='0' elec='1' direction='2' part='0' number='3A' show='3' length='30' number_pos='0' centre_name='0'>A11</PIN>
+<PIN pos='52,34' which='0' elec='1' direction='2' part='0' number='4A' show='3' length='30' number_pos='0' centre_name='0'>A8</PIN>
+<PIN pos='52,37' which='0' elec='1' direction='2' part='0' number='5A' show='3' length='30' number_pos='0' centre_name='0'>A12</PIN>
+<PIN pos='52,40' which='0' elec='1' direction='2' part='0' number='6A' show='3' length='30' number_pos='0' centre_name='0'>A7</PIN>
+<PIN pos='52,43' which='0' elec='1' direction='2' part='0' number='7A' show='3' length='30' number_pos='0' centre_name='0'>A13</PIN>
+<PIN pos='52,46' which='0' elec='1' direction='2' part='0' number='8A' show='3' length='30' number_pos='0' centre_name='0'>A6</PIN>
+<PIN pos='52,49' which='0' elec='1' direction='2' part='0' number='9A' show='3' length='30' number_pos='0' centre_name='0'>A14</PIN>
+<PIN pos='52,52' which='0' elec='1' direction='2' part='0' number='10A' show='3' length='30' number_pos='0' centre_name='0'>A5</PIN>
+<PIN pos='52,55' which='0' elec='1' direction='2' part='0' number='11A' show='3' length='30' number_pos='0' centre_name='0'>A15</PIN>
+<PIN pos='52,58' which='0' elec='1' direction='2' part='0' number='12A' show='3' length='30' number_pos='0' centre_name='0'>A4</PIN>
+<PIN pos='52,61' which='0' elec='6' direction='2' part='0' number='13A' show='3' length='30' number_pos='0' centre_name='0'>KEY</PIN>
+<PIN pos='52,64' which='0' elec='6' direction='2' part='0' number='14A' show='3' length='30' number_pos='0' centre_name='0'>KEY</PIN>
+<PIN pos='52,67' which='0' elec='1' direction='2' part='0' number='15A' show='3' length='30' number_pos='0' centre_name='0'>A16</PIN>
+<PIN pos='52,70' which='0' elec='1' direction='2' part='0' number='16A' show='3' length='30' number_pos='0' centre_name='0'>A3</PIN>
+<PIN pos='52,73' which='0' elec='1' direction='2' part='0' number='17A' show='3' length='30' number_pos='0' centre_name='0'>A17</PIN>
+<PIN pos='52,76' which='0' elec='1' direction='2' part='0' number='18A' show='3' length='30' number_pos='0' centre_name='0'>A2</PIN>
+<PIN pos='52,79' which='0' elec='1' direction='2' part='0' number='19A' show='3' length='30' number_pos='0' centre_name='0'>A18</PIN>
+<PIN pos='52,82' which='0' elec='1' direction='2' part='0' number='20A' show='3' length='30' number_pos='0' centre_name='0'>*ROM1</PIN>
+<PIN pos='52,85' which='0' elec='1' direction='2' part='0' number='21A' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='52,88' which='0' elec='2' direction='2' part='0' number='22A' show='3' length='30' number_pos='0' centre_name='0'>D15</PIN>
+<PIN pos='52,91' which='0' elec='2' direction='2' part='0' number='23A' show='3' length='30' number_pos='0' centre_name='0'>D0</PIN>
+<PIN pos='52,94' which='0' elec='2' direction='2' part='0' number='24A' show='3' length='30' number_pos='0' centre_name='0'>D7</PIN>
+<PIN pos='52,97' which='0' elec='2' direction='2' part='0' number='25A' show='3' length='30' number_pos='0' centre_name='0'>D8</PIN>
+<PIN pos='51.8,103' which='0' elec='2' direction='2' part='0' number='27A' show='3' length='30' number_pos='0' centre_name='0'>D1</PIN>
+<PIN pos='51.8,106' which='0' elec='2' direction='2' part='0' number='28A' show='3' length='30' number_pos='0' centre_name='0'>D6</PIN>
+<PIN pos='51.8,112' which='0' elec='2' direction='2' part='0' number='30A' show='3' length='30' number_pos='0' centre_name='0'>D13</PIN>
+<PIN pos='51.8,115' which='0' elec='2' direction='2' part='0' number='31A' show='3' length='30' number_pos='0' centre_name='0'>D2</PIN>
+<PIN pos='51.8,118' which='0' elec='2' direction='2' part='0' number='32A' show='3' length='30' number_pos='0' centre_name='0'>D5</PIN>
+<PIN pos='51.8,121' which='0' elec='2' direction='2' part='0' number='33A' show='3' length='30' number_pos='0' centre_name='0'>D10</PIN>
+<PIN pos='51.8,124' which='0' elec='2' direction='2' part='0' number='34A' show='3' length='30' number_pos='0' centre_name='0'>D12</PIN>
+<LABEL pos='25,20' direction='3' font='3' color='208000' style='0'></LABEL>
+<PIN pos='51.8,109' which='0' elec='2' direction='2' part='0' number='29A' show='3' length='30' number_pos='0' centre_name='0'>D9</PIN>
+<PIN pos='51.8,127' which='0' elec='2' direction='2' part='0' number='35A' show='3' length='30' number_pos='0' centre_name='0'>D3</PIN>
+<PIN pos='51.8,130' which='0' elec='2' direction='2' part='0' number='36A' show='3' length='30' number_pos='0' centre_name='0'>D4</PIN>
+<PIN pos='51.8,133' which='0' elec='2' direction='2' part='0' number='37A' show='3' length='30' number_pos='0' centre_name='0'>D11</PIN>
+<PIN pos='51.8,136' which='0' elec='1' direction='2' part='0' number='38A' show='3' length='30' number_pos='0' centre_name='0'>VCC</PIN>
+<PIN pos='51.8,142' which='0' elec='2' direction='2' part='0' number='40A' show='3' length='30' number_pos='0' centre_name='0'>D16</PIN>
+<PIN pos='51.8,145' which='0' elec='2' direction='2' part='0' number='41A' show='3' length='30' number_pos='0' centre_name='0'>D23</PIN>
+<PIN pos='51.8,148' which='0' elec='2' direction='2' part='0' number='42A' show='3' length='30' number_pos='0' centre_name='0'>D24</PIN>
+<PIN pos='51.8,151' which='0' elec='2' direction='2' part='0' number='43A' show='3' length='30' number_pos='0' centre_name='0'>D30</PIN>
+<PIN pos='51.8,154' which='0' elec='2' direction='2' part='0' number='44A' show='3' length='30' number_pos='0' centre_name='0'>D17</PIN>
+<PIN pos='51.8,139' which='0' elec='2' direction='2' part='0' number='39A' show='3' length='30' number_pos='0' centre_name='0'>D31</PIN>
+<PIN pos='51.8,157' which='0' elec='2' direction='2' part='0' number='45A' show='3' length='30' number_pos='0' centre_name='0'>D22</PIN>
+<PIN pos='51.8,160' which='0' elec='2' direction='2' part='0' number='46A' show='3' length='30' number_pos='0' centre_name='0'>D25</PIN>
+<PIN pos='51.8,163' which='0' elec='2' direction='2' part='0' number='47A' show='3' length='30' number_pos='0' centre_name='0'>D29</PIN>
+<PIN pos='51.8,166' which='0' elec='2' direction='2' part='0' number='48A' show='3' length='30' number_pos='0' centre_name='0'>D18</PIN>
+<PIN pos='51.8,172' which='0' elec='2' direction='2' part='0' number='50A' show='3' length='30' number_pos='0' centre_name='0'>D26</PIN>
+<PIN pos='51.8,175' which='0' elec='2' direction='2' part='0' number='51A' show='3' length='30' number_pos='0' centre_name='0'>D28</PIN>
+<PIN pos='51.8,178' which='0' elec='2' direction='2' part='0' number='52A' show='3' length='30' number_pos='0' centre_name='0'>D19</PIN>
+<PIN pos='51.8,181' which='0' elec='2' direction='2' part='0' number='53A' show='3' length='30' number_pos='0' centre_name='0'>D20</PIN>
+<PIN pos='51.8,184' which='0' elec='2' direction='2' part='0' number='54A' show='3' length='30' number_pos='0' centre_name='0'>D27</PIN>
+<PIN pos='51.8,169' which='0' elec='2' direction='2' part='0' number='49A' show='3' length='30' number_pos='0' centre_name='0'>D21</PIN>
+<PIN pos='51.8,100' which='0' elec='2' direction='2' part='0' number='26A' show='3' length='30' number_pos='0' centre_name='0'>D14</PIN>
+<PIN pos='19,121' which='0' elec='0' direction='3' part='0' number='33B' show='3' length='30' number_pos='0' centre_name='0'>*RESETI</PIN>
+<PIN pos='19,124' which='0' elec='0' direction='3' part='0' number='34B' show='3' length='30' number_pos='0' centre_name='0'>CART_IN</PIN>
+<PIN pos='19,127' which='0' elec='1' direction='3' part='0' number='35B' show='3' length='30' number_pos='0' centre_name='0'>CART_OUT</PIN>
+<PIN pos='19,130' which='0' elec='1' direction='3' part='0' number='36B' show='3' length='30' number_pos='0' centre_name='0'>VCC</PIN>
+<PIN pos='19,133' which='0' elec='1' direction='3' part='0' number='37B' show='3' length='30' number_pos='0' centre_name='0'>VCC</PIN>
+<PIN pos='19,136' which='0' elec='1' direction='3' part='0' number='38B' show='3' length='30' number_pos='0' centre_name='0'>PLL</PIN>
+<PIN pos='19,139' which='0' elec='6' direction='3' part='0' number='39B' show='3' length='30' number_pos='0' centre_name='0'>N/C</PIN>
+<PIN pos='19,142' which='0' elec='0' direction='3' part='0' number='40B' show='3' length='30' number_pos='0' centre_name='0'>E2DATA</PIN>
+<PIN pos='19,145' which='0' elec='6' direction='3' part='0' number='41B' show='3' length='30' number_pos='0' centre_name='0'>N/C</PIN>
+<PIN pos='19,148' which='0' elec='1' direction='3' part='0' number='42B' show='3' length='30' number_pos='0' centre_name='0'>*GPIO0</PIN>
+<PIN pos='19,151' which='0' elec='1' direction='3' part='0' number='43B' show='3' length='30' number_pos='0' centre_name='0'>*GPIO1</PIN>
+<PIN pos='19,154' which='0' elec='1' direction='3' part='0' number='44B' show='3' length='30' number_pos='0' centre_name='0'>*GPIO2</PIN>
+<PIN pos='19,157' which='0' elec='1' direction='3' part='0' number='45B' show='3' length='30' number_pos='0' centre_name='0'>*GPIO3</PIN>
+<PIN pos='19,160' which='0' elec='1' direction='3' part='0' number='46B' show='3' length='30' number_pos='0' centre_name='0'>*GPIO4</PIN>
+<PIN pos='19,163' which='0' elec='2' direction='3' part='0' number='47B' show='3' length='30' number_pos='0' centre_name='0'>SCK</PIN>
+<PIN pos='19,166' which='0' elec='2' direction='3' part='0' number='48B' show='3' length='30' number_pos='0' centre_name='0'>WS</PIN>
+<PIN pos='19,169' which='0' elec='1' direction='3' part='0' number='49B' show='3' length='30' number_pos='0' centre_name='0'>TXD</PIN>
+<PIN pos='19,172' which='0' elec='0' direction='3' part='0' number='50B' show='3' length='30' number_pos='0' centre_name='0'>RXD</PIN>
+<PIN pos='19,175' which='0' elec='1' direction='3' part='0' number='51B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,178' which='0' elec='1' direction='3' part='0' number='52B' show='3' length='30' number_pos='0' centre_name='0'>CPUCLK</PIN>
+<PIN pos='19,181' which='0' elec='1' direction='3' part='0' number='53B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+<PIN pos='19,184' which='0' elec='1' direction='3' part='0' number='54B' show='3' length='30' number_pos='0' centre_name='0'>GND</PIN>
+</TinyCAD>
+</SYMBOLDEF>
+<OPTIONS><GRID>0</GRID>
+<UNITS>0</UNITS>
+<COLOR_WIRE>FF0000</COLOR_WIRE>
+<COLOR_BUS>0000FF</COLOR_BUS>
+<COLOR_JUNCTION>000000</COLOR_JUNCTION>
+<COLOR_NOCONNECT>000000</COLOR_NOCONNECT>
+<COLOR_LABEL>208000</COLOR_LABEL>
+<COLOR_POWER>000000</COLOR_POWER>
+<COLOR_PIN>4040C0</COLOR_PIN>
+<COLOR_HIDDEN_PIN>208020</COLOR_HIDDEN_PIN>
+<COLOR_BACKGROUND>FFFFFF</COLOR_BACKGROUND>
+</OPTIONS>
+<SYMBOL id='7' pos='172,200' part='0' rotate='3' can_scale='0' show_power='0' scale_x='1' scale_y='1'><FIELD type='0' description='Ref' value='K1' show='1' pos='-168,2'/>
+<FIELD type='0' description='Name' value='Jaguar Cart' show='1' pos='-168.16,-34.48'/>
+<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0,0'/>
+<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0,0'/>
+<FIELD type='1' description='Package' value='package name for PCB layout' show='0' pos='-168,4.4'/>
+</SYMBOL>
+<SYMBOL id='6' pos='106,156' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1' scale_y='1'><FIELD type='0' description='Ref' value='U?' show='1' pos='1,-45.6'/>
+<FIELD type='0' description='Name' value='SN74CBTD3384' show='1' pos='1,-48'/>
+<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0,0'/>
+<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0,0'/>
+<FIELD type='1' description='Package' value='package name for PCB layout' show='0' pos='1,-43.2'/>
+</SYMBOL>
+<SYMBOL id='6' pos='146,50' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1' scale_y='1'><FIELD type='0' description='Ref' value='U?' show='1' pos='1,-45.6'/>
+<FIELD type='0' description='Name' value='SN74CBTD3384' show='1' pos='1,-48'/>
+<FIELD type='2' description='$$SPICE_PROLOG_PRIORITY' value='5' show='0' pos='0,0'/>
+<FIELD type='2' description='$$SPICE_EPILOG_PRIORITY' value='5' show='0' pos='0,0'/>
+<FIELD type='1' description='Package' value='package name for PCB layout' show='0' pos='1,-43.2'/>
+</SYMBOL>
+<WIRE a='178,206' b='178,154'/>
+<WIRE a='106,154' b='104,154'/>
+<JUNCTION pos='106,154'/>
+<WIRE a='178,154' b='106,154'/>
+<WIRE a='178,206' b='109,206'/>
+<WIRE a='109,206' b='109,199'/>
+<WIRE a='10,198.48' b='10,198.8'/>
+</TinyCAD>
+</TinyCADSheets>
