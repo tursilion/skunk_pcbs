@@ -1,3 +1,5 @@
+20180908
+
 These are is the PCB layouts for the Skunkboard. PCB3 seems to contain multiple revisions as well, but I'm not well versed in the contents of these folders, so you get them all! I can't even tell you what software they belong to. (Maybe FreePCB?)
 
 I have the Rev4 layout which was done for SillyVenture (not by me), but I don't know if I'm allowed to add it.
