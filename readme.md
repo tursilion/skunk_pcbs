@@ -14,3 +14,7 @@ https://zadig.akeo.ie/
 
 JCP and all original SKUNKBOARD properties (source, binary, design, etc) are released to the PUBLIC DOMAIN. No support is available, no warranty is possible, and you can do whatever you like with it, except claim ownership. :)
 
+If you are interested in this, you will also be interested in this: https://github.com/cubanismo/skunk_pcb
+
+This is an upgraded version by cubanismo that includes a couple of EEPROMs and other updates.
+
